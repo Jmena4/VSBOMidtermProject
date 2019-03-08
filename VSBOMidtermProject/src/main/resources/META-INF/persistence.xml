@@ -11,7 +11,7 @@
 		<!-- USE AS AN EXAMPLE -->
 		<!-- <class>com.skilldistillery.jpavideostore.entities.Address</class> -->
 
-		<!-- <class>com.skilldistillery.tudorjpa.entities.???????</class> -->
+		<class>com.skilldistillery.tudorjpa.entities.User</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
