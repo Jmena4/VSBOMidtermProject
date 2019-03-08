@@ -1,5 +1,7 @@
 package com.skilldistillery.tudorjpa.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -12,4 +14,13 @@ public class TutadvisorJpaImpl implements TutDAO {
 
 	@PersistenceContext
 	private EntityManager em;
+
+//	*************PLACE HOLDER FOR ACTUAL IMPL**************
+	@Override
+	public Object findALL() {
+		List<Object> objects = null;
+		String querysql = "";
+		objects = em.createQuery(querysql, Object.class).getResultList();
+		return objects;
+	}
 }
