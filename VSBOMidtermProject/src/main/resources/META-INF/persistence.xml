@@ -12,6 +12,9 @@
 		<!-- <class>com.skilldistillery.jpavideostore.entities.Address</class> -->
 
 		<class>com.skilldistillery.tudorjpa.entities.User</class>
+		<class>com.skilldistillery.tudorjpa.entities.Address</class>
+		<class>com.skilldistillery.tudorjpa.entities.LearnableSkill</class>
+		<class>com.skilldistillery.tudorjpa.entities.TeachableSkill</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"

@@ -15,14 +15,14 @@ public class TeachableSkill {
 	@Column(name = "teachable_id")
 	private int id;
 
-	@Column(name = "user_id")
-	private User user;
+//	@Column(name = "user_id")
+//	private User user;
 
 //    @Column(name="skill_name_id")
 //    private Skill skill;
 
-	@Column(name = "skill_level_id")
-	private SkillLevel skillLevel;
+//	@Column(name = "skill_level_id")
+//	private SkillLevel skillLevel;
 
 	@Column(name = "comment")
 	private String comment;
