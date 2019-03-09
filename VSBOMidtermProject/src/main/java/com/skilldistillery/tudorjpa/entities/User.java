@@ -1,46 +1,55 @@
 package com.skilldistillery.tudorjpa.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
 	private int id;
 
-	@Column(name = "")
+	@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name = "")
+	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "")
+	@Column(name = "email")
 	private String email;
 
-	@Column(name = "")
+	@Column(name = "phone")
 	private String phone;
 
-//	@OneToOne
-//	@JoinColumn(name="")
-//	private Address address;
+	@OneToOne
+	@JoinColumn(name = "address_id")
+	private Address address;
 
-//	@OneToMany(mappedBy="")
-//	private List<Learnable Skill> skills;
+//	@OneToMany(mappedBy="learnable_skill")
+//	private List<LearnableSkill> skills;
 
-//	@OneToMany(mappedBy="")
-//	private List<Teachable Skill> skills;
+//	@OneToMany(mappedBy="teachable_skill")
+//	private List<TeachableSkill> skills;
 
+	@Column(name = "user_name")
 	private String username;
 
+	@Column(name = "password")
 	private String password;
-
+	@Column(name = "is_admin")
 	private Boolean isAdmin;
 
+	@Column(name = "is_active")
 	private Boolean isActive;
 
 	public int getId() {
