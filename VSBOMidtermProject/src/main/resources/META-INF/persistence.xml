@@ -18,6 +18,7 @@
 		<class>com.skilldistillery.tudorjpa.entities.TeachableSkill</class>
 		<class>com.skilldistillery.tudorjpa.entities.User</class>
 		<class>com.skilldistillery.tudorjpa.entities.Proposal</class>
+		<class>com.skilldistillery.tudorjpa.entities.ProposalStatus</class>
 
 
 		<properties>
