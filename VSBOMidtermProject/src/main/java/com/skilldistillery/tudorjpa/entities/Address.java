@@ -12,16 +12,17 @@ public class Address {
 //	DB columns
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "address_id")
 	private int id;
-	@Column
+	@Column(name = "street")
 	private String address;
-	@Column
+	@Column(name = "street2")
 	private String address2;
 	@Column
 	private String city;
 	@Column
 	private String state;
-	@Column(name = "postal_code")
+	@Column(name = "zip")
 	private String postalCode;
 
 	public int getId() {
