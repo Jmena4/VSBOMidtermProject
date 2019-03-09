@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Proposal {
@@ -37,14 +39,18 @@ public class Proposal {
 	@Column(name = "duration")
 	private Integer duration;
 
+	@OneToOne
+	@JoinColumn(name = "address_id")
+	private Address addressId;
+
 	@Column(name = "comment")
 	private String comment;
 
 	@Column(name = "proposal_status_id")
 	private Integer proposalStatusId;
 
-	@Column(name = "rounting")
-	private int rounting;
+	@Column(name = "routing")
+	private int routing;
 
 	@Column(name = "date_time_created")
 	private Date dateTimeCreated;
@@ -113,6 +119,14 @@ public class Proposal {
 		this.duration = duration;
 	}
 
+	public Address getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Address addressId) {
+		this.addressId = addressId;
+	}
+
 	public String getComment() {
 		return comment;
 	}
@@ -129,12 +143,12 @@ public class Proposal {
 		this.proposalStatusId = proposalStatusId;
 	}
 
-	public int getRounting() {
-		return rounting;
+	public int getRouting() {
+		return routing;
 	}
 
-	public void setRounting(int rounting) {
-		this.rounting = rounting;
+	public void setRouting(int routing) {
+		this.routing = routing;
 	}
 
 	public Date getDateTimeCreated() {
@@ -146,9 +160,43 @@ public class Proposal {
 	}
 
 	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Proposal [id=");
+		builder.append(id);
+		builder.append(", teacherId=");
+		builder.append(teacherId);
+		builder.append(", studentId=");
+		builder.append(studentId);
+		builder.append(", learnableId=");
+		builder.append(learnableId);
+		builder.append(", teachableId=");
+		builder.append(teachableId);
+		builder.append(", offerAmount=");
+		builder.append(offerAmount);
+		builder.append(", dateTimeProposed=");
+		builder.append(dateTimeProposed);
+		builder.append(", duration=");
+		builder.append(duration);
+		builder.append(", addressId=");
+		builder.append(addressId);
+		builder.append(", comment=");
+		builder.append(comment);
+		builder.append(", proposalStatusId=");
+		builder.append(proposalStatusId);
+		builder.append(", routing=");
+		builder.append(routing);
+		builder.append(", dateTimeCreated=");
+		builder.append(dateTimeCreated);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((dateTimeCreated == null) ? 0 : dateTimeCreated.hashCode());
 		result = prime * result + ((dateTimeProposed == null) ? 0 : dateTimeProposed.hashCode());
@@ -157,7 +205,7 @@ public class Proposal {
 		result = prime * result + learnableId;
 		result = prime * result + ((offerAmount == null) ? 0 : offerAmount.hashCode());
 		result = prime * result + ((proposalStatusId == null) ? 0 : proposalStatusId.hashCode());
-		result = prime * result + rounting;
+		result = prime * result + routing;
 		result = prime * result + studentId;
 		result = prime * result + teachableId;
 		result = prime * result + teacherId;
@@ -173,6 +221,11 @@ public class Proposal {
 		if (getClass() != obj.getClass())
 			return false;
 		Proposal other = (Proposal) obj;
+		if (addressId == null) {
+			if (other.addressId != null)
+				return false;
+		} else if (!addressId.equals(other.addressId))
+			return false;
 		if (comment == null) {
 			if (other.comment != null)
 				return false;
@@ -207,7 +260,7 @@ public class Proposal {
 				return false;
 		} else if (!proposalStatusId.equals(other.proposalStatusId))
 			return false;
-		if (rounting != other.rounting)
+		if (routing != other.routing)
 			return false;
 		if (studentId != other.studentId)
 			return false;
@@ -216,37 +269,6 @@ public class Proposal {
 		if (teacherId != other.teacherId)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Proposal [id=");
-		builder.append(id);
-		builder.append(", teacherId=");
-		builder.append(teacherId);
-		builder.append(", studentId=");
-		builder.append(studentId);
-		builder.append(", learnableId=");
-		builder.append(learnableId);
-		builder.append(", teachableId=");
-		builder.append(teachableId);
-		builder.append(", offerAmount=");
-		builder.append(offerAmount);
-		builder.append(", dateTimeProposed=");
-		builder.append(dateTimeProposed);
-		builder.append(", duration=");
-		builder.append(duration);
-		builder.append(", comment=");
-		builder.append(comment);
-		builder.append(", proposalStatusId=");
-		builder.append(proposalStatusId);
-		builder.append(", rounting=");
-		builder.append(rounting);
-		builder.append(", dateTimeCreated=");
-		builder.append(dateTimeCreated);
-		builder.append("]");
-		return builder.toString();
 	}
 
 	public Proposal() {
