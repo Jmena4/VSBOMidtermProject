@@ -43,12 +43,12 @@ class AddressTest {
 
 	@Test
 	void test_address_mapping() {
-		assertEquals("XXX", address.getId());
-		assertEquals("XXX", address.getAddress());
-		assertEquals("XXX", address.getAddress2());
-		assertEquals("XXX", address.getCity());
-		assertEquals("XXX", address.getState());
-		assertEquals("XXX", address.getPostalCode());
+		assertEquals(1, address.getId());
+		assertEquals("111 Test St", address.getAddress());
+		assertEquals(null, address.getAddress2());
+		assertEquals("Starbase 11", address.getCity());
+		assertEquals("ID", address.getState());
+		assertEquals("89654", address.getPostalCode());
 	}
 
 }

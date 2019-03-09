@@ -1,17 +1,16 @@
 package com.skilldistillery.tudorjpa.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user")
 public class User {
 
 	@Id
@@ -33,7 +32,7 @@ public class User {
 
 	@OneToOne
 	@JoinColumn(name = "address_id")
-	private Address address;
+	private Address addressId;
 
 //	@OneToMany(mappedBy="learnable_skill")
 //	private List<LearnableSkill> skills;
@@ -124,6 +123,14 @@ public class User {
 		this.isActive = isActive;
 	}
 
+	public Address getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Address addressId) {
+		this.addressId = addressId;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -137,6 +144,8 @@ public class User {
 		builder.append(email);
 		builder.append(", phone=");
 		builder.append(phone);
+		builder.append(", addressId=");
+		builder.append(addressId);
 		builder.append(", username=");
 		builder.append(username);
 		builder.append(", password=");
@@ -161,6 +170,82 @@ public class User {
 		this.password = password;
 		this.isAdmin = isAdmin;
 		this.isActive = isActive;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
+		result = prime * result + ((isAdmin == null) ? 0 : isAdmin.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (addressId == null) {
+			if (other.addressId != null)
+				return false;
+		} else if (!addressId.equals(other.addressId))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (id != other.id)
+			return false;
+		if (isActive == null) {
+			if (other.isActive != null)
+				return false;
+		} else if (!isActive.equals(other.isActive))
+			return false;
+		if (isAdmin == null) {
+			if (other.isAdmin != null)
+				return false;
+		} else if (!isAdmin.equals(other.isAdmin))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
 	}
 
 	public User() {
