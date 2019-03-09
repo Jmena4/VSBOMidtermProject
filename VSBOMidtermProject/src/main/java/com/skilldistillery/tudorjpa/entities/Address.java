@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Address {
-	
+
 //	DB columns
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,49 +21,58 @@ public class Address {
 	private String city;
 	@Column
 	private String state;
-	@Column(name="postal_code")
+	@Column(name = "postal_code")
 	private String postalCode;
+
 	public int getId() {
 		return id;
 	}
-	
-	
+
 //	getters & setters
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public String getAddress2() {
 		return address2;
 	}
+
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
+
 	public String getCity() {
 		return city;
 	}
+
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 	public String getState() {
 		return state;
 	}
+
 	public void setState(String state) {
 		this.state = state;
 	}
+
 	public String getPostalCode() {
 		return postalCode;
 	}
+
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-	
-	
+
 //	Hash & Equals. No fields omitted, as there are no lists to cause cascade testing failure
 	@Override
 	public int hashCode() {
@@ -77,6 +86,7 @@ public class Address {
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -115,8 +125,5 @@ public class Address {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }
