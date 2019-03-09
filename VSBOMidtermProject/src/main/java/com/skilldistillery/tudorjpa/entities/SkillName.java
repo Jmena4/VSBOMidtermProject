@@ -8,18 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="skill_level")
-public class SkillLevel {
+@Table(name="skill_name")
+public class SkillName {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "skill_level_id")
+	@Column(name = "skill_name_id")
 	private int id;
-
-	@Column(name = "name")
+	
+	@Column(name="name")
 	private String name;
-	
-	
-	
 
 	public int getId() {
 		return id;
@@ -54,7 +52,7 @@ public class SkillLevel {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SkillLevel other = (SkillLevel) obj;
+		SkillName other = (SkillName) obj;
 		if (id != other.id)
 			return false;
 		if (name == null) {
@@ -67,8 +65,10 @@ public class SkillLevel {
 
 	@Override
 	public String toString() {
-		return "SkillLevel [id=" + id + ", name=" + name + "]";
+		return "SkillName [id=" + id + ", name=" + name + "]";
 	}
 	
 	
+	
+
 }
