@@ -17,10 +17,12 @@
 		<class>com.skilldistillery.tudorjpa.entities.SkillName</class>
 		<class>com.skilldistillery.tudorjpa.entities.TeachableSkill</class>
 		<class>com.skilldistillery.tudorjpa.entities.User</class>
+		<class>com.skilldistillery.tudorjpa.entities.Proposal</class>
+
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
-	value="jdbc:mysql://localhost:3306/tutadvisordb?useSSL=false" />
+				value="jdbc:mysql://localhost:3306/tutadvisordb?useSSL=false" />
 			<property name="javax.persistence.jdbc.user" value="tutuser" />
 			<property name="javax.persistence.jdbc.password"
 				value="tutword" />

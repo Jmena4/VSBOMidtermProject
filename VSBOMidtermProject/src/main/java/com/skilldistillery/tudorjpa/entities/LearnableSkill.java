@@ -7,8 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="learnable_skill")
 public class LearnableSkill {
 
 //  DB columns
@@ -24,11 +26,11 @@ public class LearnableSkill {
 
 	@OneToOne
     @JoinColumn(name="skill_name_id")
-    private SkillName skill;
+    private SkillName skillName;
 
     @OneToOne
     @JoinColumn(name="skill_level_id")
-    private SkillLevel level;
+    private SkillLevel skillLevel;
 
 	@Column(name = "comment")
 	private String comment;
@@ -51,20 +53,20 @@ public class LearnableSkill {
 		this.user = user;
 	}
 
-	public SkillName getSkill() {
-		return skill;
+	public SkillName getSkillName() {
+		return skillName;
 	}
 
-	public void setSkill(SkillName skill) {
-		this.skill = skill;
+	public void setSkillName(SkillName skill) {
+		this.skillName = skill;
 	}
 
-	public SkillLevel getLevel() {
-		return level;
+	public SkillLevel getSkillLevel() {
+		return skillLevel;
 	}
 
-	public void setLevel(SkillLevel level) {
-		this.level = level;
+	public void setSkillLevel(SkillLevel level) {
+		this.skillLevel = level;
 	}
 
 	public String getComment() {
@@ -74,6 +76,7 @@ public class LearnableSkill {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
 
 //	Hash & Equals
 
@@ -83,8 +86,8 @@ public class LearnableSkill {
 		int result = 1;
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((level == null) ? 0 : level.hashCode());
-		result = prime * result + ((skill == null) ? 0 : skill.hashCode());
+		result = prime * result + ((skillLevel == null) ? 0 : skillLevel.hashCode());
+		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -105,15 +108,15 @@ public class LearnableSkill {
 			return false;
 		if (id != other.id)
 			return false;
-		if (level == null) {
-			if (other.level != null)
+		if (skillLevel == null) {
+			if (other.skillLevel != null)
 				return false;
-		} else if (!level.equals(other.level))
+		} else if (!skillLevel.equals(other.skillLevel))
 			return false;
-		if (skill == null) {
-			if (other.skill != null)
+		if (skillName == null) {
+			if (other.skillName != null)
 				return false;
-		} else if (!skill.equals(other.skill))
+		} else if (!skillName.equals(other.skillName))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -126,7 +129,7 @@ public class LearnableSkill {
 //	To String
 	@Override
 	public String toString() {
-		return "LearnableSkill [id=" + id + ", user=" + user + ", skill=" + skill + ", level=" + level + ", comment="
+		return "LearnableSkill [id=" + id + ", user=" + user + ", skill=" + skillName + ", level=" + skillLevel + ", comment="
 				+ comment + "]";
 	}
 	
