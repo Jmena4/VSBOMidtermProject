@@ -5,21 +5,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class LearnableSkill {
 
+//  DB columns
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="learnable_id")
 	private int id;
-	@Column
-	private String name;
-//    @OneToOne
-//    @JoinColumn(name="")
-//    private Level level;
+	
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
-	// getters, setters, hash & equals
+	@OneToOne
+    @JoinColumn(name="skill_name_id")
+    private SkillName skill;
 
+    @OneToOne
+    @JoinColumn(name="skill_level_id")
+    private SkillLevel level;
+
+	@Column(name = "comment")
+	private String comment;
+
+	
+// getters, setters, hash & equals
 	public int getId() {
 		return id;
 	}
@@ -28,20 +43,49 @@ public class LearnableSkill {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public User getUser() {
+		return user;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUser(User user) {
+		this.user = user;
 	}
+
+	public SkillName getSkill() {
+		return skill;
+	}
+
+	public void setSkill(SkillName skill) {
+		this.skill = skill;
+	}
+
+	public SkillLevel getLevel() {
+		return level;
+	}
+
+	public void setLevel(SkillLevel level) {
+		this.level = level;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+//	Hash & Equals
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((level == null) ? 0 : level.hashCode());
+		result = prime * result + ((skill == null) ? 0 : skill.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -54,19 +98,37 @@ public class LearnableSkill {
 		if (getClass() != obj.getClass())
 			return false;
 		LearnableSkill other = (LearnableSkill) obj;
+		if (comment == null) {
+			if (other.comment != null)
+				return false;
+		} else if (!comment.equals(other.comment))
+			return false;
 		if (id != other.id)
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (level == null) {
+			if (other.level != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!level.equals(other.level))
+			return false;
+		if (skill == null) {
+			if (other.skill != null)
+				return false;
+		} else if (!skill.equals(other.skill))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
 
+//	To String
 	@Override
 	public String toString() {
-		return "LearnableSkill [id=" + id + ", name=" + name + "]";
+		return "LearnableSkill [id=" + id + ", user=" + user + ", skill=" + skill + ", level=" + level + ", comment="
+				+ comment + "]";
 	}
-
+	
+	
 }
