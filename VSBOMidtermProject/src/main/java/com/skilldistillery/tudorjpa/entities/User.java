@@ -37,11 +37,11 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address addressId;
 
-	@OneToMany(mappedBy="learnable_skill")
-	private List<LearnableSkill> learnableSkills;
+//	@OneToMany(mappedBy="learnable_skill")
+//	private List<LearnableSkill> learnableSkills;
 
-	@OneToMany(mappedBy="teachable_skill")
-	private List<TeachableSkill> teachableSkills;
+//	@OneToMany(mappedBy="teachable_skill")
+//	private List<TeachableSkill> teachableSkills;
 
 	@Column(name = "user_name")
 	private String username;
@@ -134,21 +134,21 @@ public class User {
 		this.addressId = addressId;
 	}
 
-	public List<LearnableSkill> getLearnableSkills() {
-		return learnableSkills;
-	}
-
-	public void setLearnableSkills(List<LearnableSkill> learnableSkills) {
-		this.learnableSkills = learnableSkills;
-	}
-
-	public List<TeachableSkill> getTeachableSkills() {
-		return teachableSkills;
-	}
-
-	public void setTeachableSkills(List<TeachableSkill> teachableSkills) {
-		this.teachableSkills = teachableSkills;
-	}
+//	public List<LearnableSkill> getLearnableSkills() {
+//		return learnableSkills;
+//	}
+//
+//	public void setLearnableSkills(List<LearnableSkill> learnableSkills) {
+//		this.learnableSkills = learnableSkills;
+//	}
+//
+//	public List<TeachableSkill> getTeachableSkills() {
+//		return teachableSkills;
+//	}
+//
+//	public void setTeachableSkills(List<TeachableSkill> teachableSkills) {
+//		this.teachableSkills = teachableSkills;
+//	}
 
 	@Override
 	public String toString() {

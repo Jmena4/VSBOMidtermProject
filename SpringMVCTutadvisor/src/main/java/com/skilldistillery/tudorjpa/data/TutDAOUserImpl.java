@@ -58,8 +58,8 @@ public class TutDAOUserImpl implements TutDAOUser {
 		managed.setPassword(user.getPassword());
 		managed.setIsAdmin(user.getIsAdmin());
 		managed.setIsActive(user.getIsActive());
-		managed.setLearnableSkills(user.getLearnableSkills());
-		managed.setTeachableSkills(user.getTeachableSkills());
+//		managed.setLearnableSkills(user.getLearnableSkills());
+//		managed.setTeachableSkills(user.getTeachableSkills());
 
 		return managed;
 	}
