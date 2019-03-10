@@ -15,12 +15,14 @@ public class TutadvisorController {
 	private TutDAO tutDAO;
  
 //	*************PLACE HOLDER FOR ACTUAL CONTROLLER**************
-	@RequestMapping(path = { "/", "home.do" }, method = RequestMethod.GET)
+//	@RequestMapping(path = { "/", "home.do" }, method = RequestMethod.GET)
+	
+	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 
-		model.addAttribute("addTudors", tutDAO.findALL());
+//		model.addAttribute("addTudors", tutDAO.findALL());
 
-		return "WEB-INF/index.jsp";
+		return "WEB-INF/landing.jsp";
 	}
 
 }
