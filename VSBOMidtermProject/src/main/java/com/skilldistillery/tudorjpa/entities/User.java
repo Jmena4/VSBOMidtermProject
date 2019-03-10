@@ -1,11 +1,14 @@
 package com.skilldistillery.tudorjpa.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,11 +37,11 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address addressId;
 
-//	@OneToMany(mappedBy="learnable_skill")
-//	private List<LearnableSkill> skills;
+	@OneToMany(mappedBy="learnable_skill")
+	private List<LearnableSkill> learnableSkills;
 
-//	@OneToMany(mappedBy="teachable_skill")
-//	private List<TeachableSkill> skills;
+	@OneToMany(mappedBy="teachable_skill")
+	private List<TeachableSkill> teachableSkills;
 
 	@Column(name = "user_name")
 	private String username;
@@ -129,6 +132,22 @@ public class User {
 
 	public void setAddressId(Address addressId) {
 		this.addressId = addressId;
+	}
+
+	public List<LearnableSkill> getLearnableSkills() {
+		return learnableSkills;
+	}
+
+	public void setLearnableSkills(List<LearnableSkill> learnableSkills) {
+		this.learnableSkills = learnableSkills;
+	}
+
+	public List<TeachableSkill> getTeachableSkills() {
+		return teachableSkills;
+	}
+
+	public void setTeachableSkills(List<TeachableSkill> teachableSkills) {
+		this.teachableSkills = teachableSkills;
 	}
 
 	@Override
