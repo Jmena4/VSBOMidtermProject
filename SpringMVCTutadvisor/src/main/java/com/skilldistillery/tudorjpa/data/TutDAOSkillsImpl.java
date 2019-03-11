@@ -14,13 +14,13 @@ import com.skilldistillery.tudorjpa.entities.LearnableSkill;
 import com.skilldistillery.tudorjpa.entities.SkillLevel;
 import com.skilldistillery.tudorjpa.entities.SkillName;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
+
 @Transactional
 @Service
 public class TutDAOSkillsImpl implements TutDaoSkills {
 
 	@PersistenceContext
 	private EntityManager em;
-
 
 //	***SkillLevel methods***
 	@Override
@@ -151,8 +151,8 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		TeachableSkill managed = em.find(TeachableSkill.class, id);
 		managed.setId(teachableSkill.getId());
 		managed.setComment(teachableSkill.getComment());
-		managed.setLevel(teachableSkill.getLevel());
-		managed.setSkill(teachableSkill.getSkill());
+		managed.setSkillName(teachableSkill.getSkillName());
+		managed.setSkillLevel(teachableSkill.getSkillLevel());
 		managed.setUser(teachableSkill.getUser());
 		em.flush();
 		em.getTransaction().commit();
