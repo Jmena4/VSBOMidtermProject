@@ -42,5 +42,92 @@ label {
 #VSBO {
   text-align: center;
   font-style: italic;
+}
 
+#show-cards {
+  font-size: 18px;
+    }
+
+#card-type {
+  font-size: 18px;
+}
+
+#home-button {
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: orange;
+}
+
+#profile-button {
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: orange;
+}
+
+#logout-button {
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: orange;
+}
+
+#card-container {
+  overflow: scroll;
+  background-color: lightgray;
+  width: 80%;
+  height: 500px;
+  border-style: solid;
+  border-width: medium;
+  border-color: black;
+  padding-top: 5px;
+}
+
+#suggestion-card {
+  padding-top:5px;
+  padding-left:5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  background-color: #f4be41;
+  border-style: solid;
+  border-width: medium;
+  border-color: black;
+}
+
+#card-column {
+  margin-left: 20px;
+}
+
+.card-title {
+  font-size: 24px;
+  text-decoration: underline;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-text {
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: normal;
+  text-align: left;
+}
+
+.card-comment {
+  font-size: 16px;
+  text-decoration: none;
+  font-style: italic;
+  text-align: left;
+}
+
+#div-photo {
+  width: 120px;
+}
+
+#col-photo {
+  width: 150px;
+}
+
+#card-button {
+  width: 100%
 }
