@@ -19,22 +19,33 @@ public class TutDAOMetricsImpl implements TutDAOMetrics {
 
 
 	@Override
-	public List<User> findAllActiveTutors() {
-		String query = "SELECT u from User u where u.isActive = true and where u.teachableSkills is not null.";
-		List<User> results = em.createQuery(query, User.class).getResultList();
+	public Long findActiveTutorCount() {
+		String query = "SELECT count(distinct ts.user) from TeachableSkill ts";
+		Long results =  (Long) em.createQuery(query).getSingleResult();
 		return results;
 	}
 
 	@Override
-	public List<User> findAllActiveStudents() {
-		// TODO Auto-generated method stub
-		return null;
+	public Long findActiveStudentCount(){
+		String query = "SELECT count(distinct ls.user) from LearnableSkill ls";
+		Long results =  (Long) em.createQuery(query).getSingleResult();
+		return results;
 	}
 
 	@Override
-	public List<User> findAllTeachableSkillsFromActiveUsers() {
-		// TODO Auto-generated method stub
-		return null;
+	public Long findTeachableSkillCount() {
+		String query = "SELECT count(distinct ts) from TeachableSkill ts";
+		Long results =  (Long) em.createQuery(query).getSingleResult();
+		return results;
 	}
+
+	@Override
+	public Long findLearnableSkillCount() {
+		String query = "SELECT count(distinct ls) from LearnableSkill ls";
+		Long results =  (Long) em.createQuery(query).getSingleResult();
+		return results;
+	}
+
+	
 
 }
