@@ -6,36 +6,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="learnable_skill")
+@Table(name = "learnable_skill")
 public class LearnableSkill {
 
 //  DB columns
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="learnable_id")
+	@Column(name = "learnable_id")
 	private int id;
-	
-	@OneToOne
+
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
 	@OneToOne
-    @JoinColumn(name="skill_name_id")
-    private SkillName skillName;
+	@JoinColumn(name = "skill_name_id")
+	private SkillName skillName;
 
-    @OneToOne
-    @JoinColumn(name="skill_level_id")
-    private SkillLevel skillLevel;
+	@OneToOne
+	@JoinColumn(name = "skill_level_id")
+	private SkillLevel skillLevel;
 
 	@Column(name = "comment")
 	private String comment;
 
-	
 // getters, setters, hash & equals
 	public int getId() {
 		return id;
@@ -76,7 +76,6 @@ public class LearnableSkill {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
 
 //	Hash & Equals
 
@@ -129,9 +128,8 @@ public class LearnableSkill {
 //	To String
 	@Override
 	public String toString() {
-		return "LearnableSkill [id=" + id + ", user=" + user + ", skill=" + skillName + ", level=" + skillLevel + ", comment="
-				+ comment + "]";
+		return "LearnableSkill [id=" + id + ", user=" + user + ", skill=" + skillName + ", level=" + skillLevel
+				+ ", comment=" + comment + "]";
 	}
-	
-	
+
 }
