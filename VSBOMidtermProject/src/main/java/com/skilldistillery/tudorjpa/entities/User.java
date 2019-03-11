@@ -155,6 +155,14 @@ public class User {
 		this.teachableSkills = teachableSkills;
 	}
 
+	public String getPictureURL() {
+		return pictureURL;
+	}
+
+	public void setPictureURL(String pictureURL) {
+		this.pictureURL = pictureURL;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -1,4 +1,4 @@
-package com.skilldistillery.tudorjpa.data;
+package com.skilldistillery.tudorjpa.Data;
 
 import java.util.List;
 
