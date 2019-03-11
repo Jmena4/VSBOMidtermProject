@@ -1,12 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Tütadvisor</title>
+<title>TÃ¼tadvisor</title>
 <!-- Bootstrap core CSS -->
 <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"
@@ -29,7 +30,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="navbar-nav ml-auto">
-				<form>
+				<form action="login.do" method="POST">
 					<span class="login-fields"> <label for="username">username
 							<input name="username">
 					</label> &nbsp; &nbsp; <label for="password">password <input
@@ -57,7 +58,7 @@
 						<p>Thousands of Skilled Tutors.</p>
 						<div class="join-button">
 							<a id="join-button" href="register.do"
-								class="btn btn-light btn-lg"> Join TütAdvisor Now!</a>
+								class="btn btn-light btn-lg"> Join TÃ¼tAdvisor Now!</a>
 						</div>
 					</div>
 				</div>
@@ -67,7 +68,7 @@
 						<p>Ready to teach you any subject.</p>
 						<div class="join-button">
 							<a id="join-button" href="register.do"
-								class="btn btn-light btn-lg"> Join TütAdvisor Now!</a>
+								class="btn btn-light btn-lg"> Join TÃ¼tAdvisor Now!</a>
 						</div>
 					</div>
 				</div>
@@ -77,7 +78,7 @@
 						<p>Start learning today!</p>
 						<div class="join-button">
 							<a id="join-button" href="register.do"
-								class="btn btn-light btn-lg"> Join TütAdvisor Now!</a>
+								class="btn btn-light btn-lg"> Join TÃ¼tAdvisor Now!</a>
 						</div>
 					</div>
 				</div>
@@ -85,7 +86,7 @@
 					<img src="/images/4.jpg" alt="4" style="width: 100%;">
 					<div class="carousel-caption d-none d-md-block">
 						<p>
-							TütAdvisor.<br> We're only in it for the money.
+							TÃ¼tAdvisor.<br> We're only in it for the money.
 						</p>
 					</div>
 				</div>
@@ -102,7 +103,7 @@
 		</div>
 	</div>
 	<div id="VSBO" class="container">
-		<p>© 2019 Vomit Sack Brain Overflow - A Family Company</p>
+		<p>Â© 2019 Vomit Sack Brain Overflow - A Family Company</p>
 	</div>
 	<!-- Bootstrap core JavaScript -->
 	<script src="vendor/jquery/jquery.min.js"></script>
