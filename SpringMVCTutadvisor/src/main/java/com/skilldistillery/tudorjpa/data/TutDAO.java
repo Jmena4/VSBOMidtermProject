@@ -1,4 +1,4 @@
-package com.skilldistillery.tudorjpa.Data;
+package com.skilldistillery.tudorjpa.data;
 
 public interface TutDAO {
 
