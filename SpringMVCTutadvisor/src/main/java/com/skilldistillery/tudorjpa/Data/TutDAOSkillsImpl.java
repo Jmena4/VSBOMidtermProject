@@ -1,21 +1,26 @@
-package com.skilldistillery.tudorjpa.data;
+package com.skilldistillery.tudorjpa.Data;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.tudorjpa.entities.LearnableSkill;
 import com.skilldistillery.tudorjpa.entities.SkillLevel;
 import com.skilldistillery.tudorjpa.entities.SkillName;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
-
+@Transactional
+@Service
 public class TutDAOSkillsImpl implements TutDaoSkills {
 
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TutAdvisor");
-	private EntityManager em = emf.createEntityManager();
+	@PersistenceContext
+	private EntityManager em;
+
 
 //	***SkillLevel methods***
 	@Override

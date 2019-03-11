@@ -1,4 +1,4 @@
-package com.skilldistillery.tudorjpa.data;
+package com.skilldistillery.tudorjpa.Data;
 
 import java.util.List;
 
@@ -8,14 +8,16 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.tudorjpa.entities.User;
-
+@Transactional
+@Service
 public class TutDAOMetricsImpl implements TutDAOMetrics {
 	
+	@PersistenceContext
+	private EntityManager em;
 
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TutAdvisor");
-	private EntityManager em = emf.createEntityManager();
 
 
 	@Override

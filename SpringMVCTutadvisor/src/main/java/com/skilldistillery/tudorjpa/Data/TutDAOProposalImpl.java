@@ -1,18 +1,21 @@
-package com.skilldistillery.tudorjpa.data;
+package com.skilldistillery.tudorjpa.Data;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.tudorjpa.entities.Proposal;
-
+@Transactional
+@Service
 public class TutDAOProposalImpl implements TutDAOProposal {
-
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TutAdvisor");
-	private EntityManager em = emf.createEntityManager();
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public List<Proposal> findAllProposals() {

@@ -15,13 +15,14 @@
 <title>My Profile</title>
 <!-- Bootstrap core CSS -->
 <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/profilecss.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
-
+	
 </script>
 <link rel="stylesheet" href="css/landing.css" />
 </head>
@@ -47,135 +48,87 @@
 		</div>
 	</nav>
 	<div class="container" style="width: 65%">
-	
-	first name
-	last name
-	email
-	phone 
-	username
-	Address:
-		street
-		street2
-		city
-		state
-		zip
-		
-		
-		<div class="folding-wrapper">
-        <div class="folding-content">
-            <!-- Profile Junk -->
-            <div>
-                <ul class="social">
-                
-                </ul>
-            </div>
-            <div class="profile">
-                &nbsp;
-       <img src="${user.pictureURL }" class="profile-photo">
-                <p>${user.firstName } ${user.lastName }</p>
-                <p class="job"></p>
-                <p class="phone"></p>
-            </div>
 
-            <div class="contact-form-container">
-                <form action="#" class="contact-form">
-                    <div>
-                        <label for="Name">
-                            <span class="entypo-user"></span>
-                        </label>
-                        <input type="text" name="Name" placeholder="Name" />
-                    </div>
+		<div id="w">
+    <div id="content" class="clearfix">
+      <div id="userphoto"><img src="${user.pictureURL }" alt="default avatar" width="100"></div>
+      <h1>${user.firstName } ${user.lastName } </h1>
 
-                    <div>
-                        <label for="Name">
-                            <span class="entypo-mail"></span>
-                        </label>
-                        <input type="email" name="Email" placeholder="Email" />
-                    </div>
+      <nav id="profiletabs">
+        <ul class="clearfix">
+          <li><a href="#bio" class="sel">Bio</a></li>
+          <li><a href="#activity">Activity</a></li>
+          <li><a href="#friends">Friends</a></li>
+          <li><a href="#settings">Settings</a></li>
+        </ul>
+      </nav>
+      
+      <section id="bio">
+        <p>Various content snippets courtesy of <a href="http://bluthipsum.com/">Bluth Ipsum</a>.</p>
+        
+        <p>Can't a guy call his mother pretty without it seeming strange? Amen. I think that's one of Mom's little fibs, you know, like I'll sacrifice anything for my children.</p>
+        
+        <p>She's always got to wedge herself in the middle of us so that she can control everything. Yeah. Mom's awesome. I run a pretty tight ship around here. With a pool table.</p>
+      </section>
+      
+      <section id="activity" class="hidden">
+        <p>Most recent actions:</p>
+        
+        <p class="activity">@10:15PM - Submitted a news article</p>
+        
+        <p class="activity">@9:50PM - Submitted a news article</p>
+        
+        <p class="activity">@8:15PM - Posted a comment</p>
+        
+        <p class="activity">@4:30PM - Added <strong>someusername</strong> as a friend</p>
+        
+        <p class="activity">@12:30PM - Submitted a news article</p>
+      </section>
+      
+      <section id="friends" class="hidden">
+        <p>Friends list:</p>
+        
+        <ul id="friendslist" class="clearfix">
+          <li><a href="#"><img src="images/avatar.png" width="22" height="22"> Username</a></li>
+          <li><a href="#"><img src="images/avatar.png" width="22" height="22"> SomeGuy123</a></li>
+          <li><a href="#"><img src="images/avatar.png" width="22" height="22"> PurpleGiraffe</a></li>
+        </ul>
+      </section>
+      
+      <section id="settings" class="hidden">
+        <p>Edit your user settings:</p>
+        
+        <p class="setting"><span>E-mail Address <img src="images/edit.png" alt="*Edit*" width="20"></span> ${user.email }</p>
+        
+        <p class="setting"><span>Language <img src="images/edit.png" alt="*Edit*"></span> English(US)</p>
+        
+        <p class="setting"><span>Profile Status <img src="images/edit.png" alt="*Edit*"></span> Public</p>
+        
+        <p class="setting"><span>Update Frequency <img src="images/edit.png" alt="*Edit*"></span> Weekly</p>
+        
+        <p class="setting"><span>Connected Accounts <img src="images/edit.png" alt="*Edit*"></span> None</p>
+      </section>
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+<script type="text/javascript">
+$(function(){
+  $('#profiletabs ul li a').on('click', function(e){
+    e.preventDefault();
+    var newcontent = $(this).attr('href');
+    
+    $('#profiletabs ul li a').removeClass('sel');
+    $(this).addClass('sel');
+    
+    $('#content section').each(function(){
+      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+    });
+    
+    $(newcontent).removeClass('hidden');
+  });
+});
+</script>
 
-                    <div>
-                        <label for="Name">
-                            <span class="entypo-phone"></span>
-                        </label>
-                        <input type="phone" name="Phone" placeholder="Phone Number" />
-                    </div>
 
-                    <div>
-                        <label for="message" class="textarea-label">
-                            <span class="entypo-pencil"></span>
-                        </label>
-                        <textarea name="Message" placeholder="Your Message"></textarea>
-                    </div>
-                    <div id="send">
-                        <span class="entypo-paper-plane"></span>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- /Wrapper -->
-    </div>
-	
-		
-	
-		<!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-			Indicators
-			<ol class="carousel-indicators">
-				<li data-target="#carousel" data-slide-to="0" class="active"></li>
-				<li data-target="#carousel" data-slide-to="1"></li>
-				<li data-target="#carousel" data-slide-to="2"></li>
-				<li data-target="#carousel" data-slide-to="3"></li>
-			</ol>
-			Wrapper for slides
-			<div class="carousel-inner">
-				<div class="item active">
-					<img src="/images/1.jpg" alt="1" style="width: 100%;">
-					<div class="carousel-caption d-none d-md-block">
-						<p>Thousands of Skilled Tutors.</p>
-						<div class="join-button">
-							<a id="join-button" href="register.do"
-								class="btn btn-light btn-lg"> Join TütAdvisor Now!</a>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<img src="/images/2.jpg" alt="2" style="width: 100%;">
-					<div class="carousel-caption d-none d-md-block">
-						<p>Ready to teach you any subject.</p>
-						<div class="join-button">
-							<a id="join-button" href="register.do"
-								class="btn btn-light btn-lg"> Join TütAdvisor Now!</a>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<img src="/images/3.jpg" alt="3" style="width: 100%;">
-					<div class="carousel-caption d-none d-md-block">
-						<p>Start learning today!</p>
-						<div class="join-button">
-							<a id="join-button" href="register.do"
-								class="btn btn-light btn-lg"> Join TütAdvisor Now!</a>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<img src="/images/4.jpg" alt="4" style="width: 100%;">
-					<div class="carousel-caption d-none d-md-block">
-						<p>
-							TütAdvisor.<br> We're only in it for the money.
-						</p>
-					</div>
-				</div>
-			</div>
-			Left and right controls
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="right carousel-control" href="#myCarousel"
-				data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right"></span> <span
-				class="sr-only">Next</span>
-			</a>
-		</div> -->
 	</div>
 	<div id="VSBO" class="container">
 		<p>© 2019 Vomit Sack Brain Overflow - A Family Company</p>
