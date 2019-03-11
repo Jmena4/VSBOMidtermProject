@@ -1,4 +1,4 @@
-package com.skilldistillery.tudorjpa.data;
+package com.skilldistillery.tudorjpa.Data;
 
 import java.util.List;
 
@@ -12,15 +12,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class TutadvisorJpaImpl implements TutDAO {
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-//	*************PLACE HOLDER FOR ACTUAL IMPL**************
-	@Override
-	public Object findALL() {
-		List<Object> objects = null;
-		String querysql = "";
-		objects = em.createQuery(querysql, Object.class).getResultList();
-		return objects;
-	}
+//    *************PLACE HOLDER FOR ACTUAL IMPL**************
+    @Override
+    public Object findALL() {
+        List<Object> objects = null;
+        String querysql = "";
+        objects = em.createQuery(querysql, Object.class).getResultList();
+        return objects;
+    }
 }
