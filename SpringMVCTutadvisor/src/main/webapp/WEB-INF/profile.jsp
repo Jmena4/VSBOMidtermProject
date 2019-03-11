@@ -104,12 +104,14 @@
 				</section>
 				<section id="teachableSkill" class="hidden">
 					<p>Skills you can teach</p>
+					<form>
 					<c:if test="${!empty user.teachableSkills}">
 						<c:forEach var="TeachableSkill" items="${user.teachableSkills }">
-							<p>${TeachableSkill.skill } at a "${TeachableSkill.level}"
+							<p><input type="checkbox" name="teachableSkillsUpdate" value="${TeachableSkill.id }" checked>${TeachableSkill.skill } at a "${TeachableSkill.level}"
 								level</p>
 						</c:forEach>
 					</c:if>
+					</form>
 				</section>
 
 				<section id="activity" class="hidden">
