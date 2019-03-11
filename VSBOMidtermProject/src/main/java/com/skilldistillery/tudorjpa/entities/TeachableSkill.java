@@ -6,11 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="teachable_skill")
+@Table(name = "teachable_skill")
 public class TeachableSkill {
 //    DB columns
 
@@ -18,23 +19,22 @@ public class TeachableSkill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "teachable_id")
 	private int id;
-	
-	@OneToOne
+
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
 	@OneToOne
-    @JoinColumn(name="skill_name_id")
-    private SkillName skill;
+	@JoinColumn(name = "skill_name_id")
+	private SkillName skill;
 
-    @OneToOne
-    @JoinColumn(name="skill_level_id")
-    private SkillLevel level;
+	@OneToOne
+	@JoinColumn(name = "skill_level_id")
+	private SkillLevel level;
 
 	@Column(name = "comment")
 	private String comment;
 
-	
 	// Getters and setters
 
 	public int getId() {
@@ -130,7 +130,5 @@ public class TeachableSkill {
 		return "TeachableSkill [id=" + id + ", user=" + user + ", skill=" + skill + ", level=" + level + ", comment="
 				+ comment + "]";
 	}
-	
-	
-	
+
 }

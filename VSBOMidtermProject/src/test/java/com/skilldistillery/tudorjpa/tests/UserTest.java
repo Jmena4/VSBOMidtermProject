@@ -52,6 +52,8 @@ class UserTest {
 		assertEquals("3347659876", user.getPhone());
 		assertEquals("Jimmy", user.getUsername());
 		assertEquals("enterprise", user.getPassword());
+		assertNotNull(user.getLearnableSkills());
+		assertNotNull(user.getTeachableSkills());
 		assertTrue(user.getIsAdmin());
 		assertTrue(user.getIsActive());
 	}
