@@ -37,11 +37,13 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address addressId;
 
-//	@OneToMany(mappedBy="learnable_skill")
-//	private List<LearnableSkill> learnableSkills;
+	@OneToMany
+	@JoinColumn(name = "learnable_id")
+	private List<LearnableSkill> learnableSkills;
 
-//	@OneToMany(mappedBy="teachable_skill")
-//	private List<TeachableSkill> teachableSkills;
+	@OneToMany
+	@JoinColumn(name = "teachable_id")
+	private List<TeachableSkill> teachableSkills;
 
 	@Column(name = "user_name")
 	private String username;
@@ -53,6 +55,9 @@ public class User {
 
 	@Column(name = "is_active")
 	private Boolean isActive;
+
+	@Column(name = "picture_url")
+	private String pictureURL;
 
 	public int getId() {
 		return id;
@@ -134,21 +139,29 @@ public class User {
 		this.addressId = addressId;
 	}
 
-//	public List<LearnableSkill> getLearnableSkills() {
-//		return learnableSkills;
-//	}
-//
-//	public void setLearnableSkills(List<LearnableSkill> learnableSkills) {
-//		this.learnableSkills = learnableSkills;
-//	}
-//
-//	public List<TeachableSkill> getTeachableSkills() {
-//		return teachableSkills;
-//	}
-//
-//	public void setTeachableSkills(List<TeachableSkill> teachableSkills) {
-//		this.teachableSkills = teachableSkills;
-//	}
+	public List<LearnableSkill> getLearnableSkills() {
+		return learnableSkills;
+	}
+
+	public void setLearnableSkills(List<LearnableSkill> learnableSkills) {
+		this.learnableSkills = learnableSkills;
+	}
+
+	public List<TeachableSkill> getTeachableSkills() {
+		return teachableSkills;
+	}
+
+	public void setTeachableSkills(List<TeachableSkill> teachableSkills) {
+		this.teachableSkills = teachableSkills;
+	}
+
+	public String getPictureURL() {
+		return pictureURL;
+	}
+
+	public void setPictureURL(String pictureURL) {
+		this.pictureURL = pictureURL;
+	}
 
 	@Override
 	public String toString() {
@@ -165,6 +178,10 @@ public class User {
 		builder.append(phone);
 		builder.append(", addressId=");
 		builder.append(addressId);
+		builder.append(", learnableSkills=");
+		builder.append(learnableSkills);
+		builder.append(", teachableSkills=");
+		builder.append(teachableSkills);
 		builder.append(", username=");
 		builder.append(username);
 		builder.append(", password=");
@@ -173,6 +190,8 @@ public class User {
 		builder.append(isAdmin);
 		builder.append(", isActive=");
 		builder.append(isActive);
+		builder.append(", pictureURL=");
+		builder.append(pictureURL);
 		builder.append("]");
 		return builder.toString();
 	}
@@ -202,8 +221,11 @@ public class User {
 		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + ((isAdmin == null) ? 0 : isAdmin.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((learnableSkills == null) ? 0 : learnableSkills.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((pictureURL == null) ? 0 : pictureURL.hashCode());
+		result = prime * result + ((teachableSkills == null) ? 0 : teachableSkills.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -249,6 +271,11 @@ public class User {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (learnableSkills == null) {
+			if (other.learnableSkills != null)
+				return false;
+		} else if (!learnableSkills.equals(other.learnableSkills))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -258,6 +285,16 @@ public class User {
 			if (other.phone != null)
 				return false;
 		} else if (!phone.equals(other.phone))
+			return false;
+		if (pictureURL == null) {
+			if (other.pictureURL != null)
+				return false;
+		} else if (!pictureURL.equals(other.pictureURL))
+			return false;
+		if (teachableSkills == null) {
+			if (other.teachableSkills != null)
+				return false;
+		} else if (!teachableSkills.equals(other.teachableSkills))
 			return false;
 		if (username == null) {
 			if (other.username != null)

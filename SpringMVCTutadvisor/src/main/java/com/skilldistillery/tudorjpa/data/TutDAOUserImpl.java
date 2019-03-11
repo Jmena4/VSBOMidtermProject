@@ -3,6 +3,8 @@ package com.skilldistillery.tudorjpa.data;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -13,7 +15,6 @@ import com.skilldistillery.tudorjpa.entities.User;
 @Transactional
 @Service
 public class TutDAOUserImpl implements TutDAOUser {
-
 	@PersistenceContext
 	private EntityManager em;
 

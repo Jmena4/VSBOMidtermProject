@@ -3,18 +3,17 @@ package com.skilldistillery.tudorjpa.data;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.tudorjpa.entities.Address;
 import com.skilldistillery.tudorjpa.entities.Proposal;
-
 @Transactional
 @Service
 public class TutDAOProposalImpl implements TutDAOProposal {
-
 	@PersistenceContext
 	private EntityManager em;
 
@@ -33,7 +32,7 @@ public class TutDAOProposalImpl implements TutDAOProposal {
 		return prop;
 	}
 
-//	TODO - cand to this till proposal pulls in objects rather than just IDs. 
+//	TODO - cant to this till proposal pulls in objects rather than just IDs. 
 	@Override
 	public Proposal updateProposal(int id, Proposal prop) {
 //		Proposal managed = em.find((Proposal.class), id);

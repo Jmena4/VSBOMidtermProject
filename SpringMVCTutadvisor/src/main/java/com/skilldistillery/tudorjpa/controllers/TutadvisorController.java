@@ -6,14 +6,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.skilldistillery.tudorjpa.data.TutDAO;
+import com.skilldistillery.tudorjpa.data.TutDAOUser;
+import com.skilldistillery.tudorjpa.entities.User;
+
+
 
 @Controller
 public class TutadvisorController {
 
+//	@Autowired
+//	private TutDAO tutDAO;
+	
 	@Autowired
 	private TutDAO tutDAO;
+	private TutDAOUser tutUser;
+ 
+//	*************PLACE HOLDER FOR ACTUAL CONTROLLER**************
+//	@RequestMapping(path = { "/", "home.do" }, method = RequestMethod.GET)
+	
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String index(Model model) {
@@ -21,6 +32,17 @@ public class TutadvisorController {
 //		model.addAttribute("addTudors", tutDAO.findALL());
 
 		return "WEB-INF/landing.jsp";
+	}
+	
+//	mock mapping to see the profile page:
+	@RequestMapping(path="profile.do", method = RequestMethod.GET)
+	public ModelAndView mockProfile() {
+		ModelAndView mv = new ModelAndView();
+		User user = tutUser.findUserById(1);
+
+		mv.setViewName("WEB-INF/profile.jsp");
+		mv.addObject("user", user);
+		return mv;
 	}
 
 	@RequestMapping(path = "home.do", method = RequestMethod.GET)
@@ -56,15 +78,15 @@ public class TutadvisorController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
-	public ModelAndView profileDo() {
-		ModelAndView mv = new ModelAndView();
-		
+//	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
+//	public ModelAndView profileDo() {
+//		ModelAndView mv = new ModelAndView();
+//		
 //		TODO: create method to get the user, address, teachable & learnable skills
-		
-		mv.setViewName("WEB-INF/profile.jsp");
-		return mv;
-	}
+//		
+//		mv.setViewName("WEB-INF/profile.jsp");
+//		return mv;
+//	}
 	
 	@RequestMapping(path = "modify_profile.do", method = RequestMethod.POST)
 	public ModelAndView modifyProfileDo(String first, String last, String email,
