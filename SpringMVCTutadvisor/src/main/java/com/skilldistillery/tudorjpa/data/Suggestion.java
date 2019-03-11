@@ -1,11 +1,15 @@
 package com.skilldistillery.tudorjpa.data;
 
+import java.util.List;
+
 import com.skilldistillery.tudorjpa.entities.Address;
+import com.skilldistillery.tudorjpa.entities.LearnableSkill;
 import com.skilldistillery.tudorjpa.entities.SkillLevel;
 import com.skilldistillery.tudorjpa.entities.SkillName;
+import com.skilldistillery.tudorjpa.entities.TeachableSkill;
 import com.skilldistillery.tudorjpa.entities.User;
 
-public class Recommendation {
+public class Suggestion {
 
 	private int id;
 
@@ -18,6 +22,10 @@ public class Recommendation {
 	private User studentUser;
 
 	private Address recommendationAddress;
+
+	private List<TeachableSkill> teachableSkills;
+
+	private List<LearnableSkill> learnableSkills;
 
 	public int getId() {
 		return id;
@@ -67,15 +75,33 @@ public class Recommendation {
 		this.recommendationAddress = recommendationAddress;
 	}
 
+	public List<TeachableSkill> getTeachableSkills() {
+		return teachableSkills;
+	}
+
+	public void setTeachableSkills(List<TeachableSkill> teachableSkills) {
+		this.teachableSkills = teachableSkills;
+	}
+
+	public List<LearnableSkill> getLearnableSkills() {
+		return learnableSkills;
+	}
+
+	public void setLearnableSkills(List<LearnableSkill> learnableSkills) {
+		this.learnableSkills = learnableSkills;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
+		result = prime * result + ((learnableSkills == null) ? 0 : learnableSkills.hashCode());
 		result = prime * result + ((recommendationAddress == null) ? 0 : recommendationAddress.hashCode());
 		result = prime * result + ((skillLevel == null) ? 0 : skillLevel.hashCode());
 		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
 		result = prime * result + ((studentUser == null) ? 0 : studentUser.hashCode());
+		result = prime * result + ((teachableSkills == null) ? 0 : teachableSkills.hashCode());
 		result = prime * result + ((teacherUser == null) ? 0 : teacherUser.hashCode());
 		return result;
 	}
@@ -88,8 +114,13 @@ public class Recommendation {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Recommendation other = (Recommendation) obj;
+		Suggestion other = (Suggestion) obj;
 		if (id != other.id)
+			return false;
+		if (learnableSkills == null) {
+			if (other.learnableSkills != null)
+				return false;
+		} else if (!learnableSkills.equals(other.learnableSkills))
 			return false;
 		if (recommendationAddress == null) {
 			if (other.recommendationAddress != null)
@@ -111,6 +142,11 @@ public class Recommendation {
 				return false;
 		} else if (!studentUser.equals(other.studentUser))
 			return false;
+		if (teachableSkills == null) {
+			if (other.teachableSkills != null)
+				return false;
+		} else if (!teachableSkills.equals(other.teachableSkills))
+			return false;
 		if (teacherUser == null) {
 			if (other.teacherUser != null)
 				return false;
@@ -122,7 +158,7 @@ public class Recommendation {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Recommendation [id=");
+		builder.append("Suggestion [id=");
 		builder.append(id);
 		builder.append(", skillName=");
 		builder.append(skillName);
@@ -134,11 +170,15 @@ public class Recommendation {
 		builder.append(studentUser);
 		builder.append(", recommendationAddress=");
 		builder.append(recommendationAddress);
+		builder.append(", teachableSkills=");
+		builder.append(teachableSkills);
+		builder.append(", learnableSkills=");
+		builder.append(learnableSkills);
 		builder.append("]");
 		return builder.toString();
 	}
 
-	public Recommendation() {
+	public Suggestion() {
 		super();
 	}
 

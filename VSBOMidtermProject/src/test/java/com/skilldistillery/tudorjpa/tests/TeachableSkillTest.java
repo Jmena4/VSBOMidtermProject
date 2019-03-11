@@ -40,13 +40,13 @@ class TeachableSkillTest {
 		ts = null;
 		em.close();
 	}
-	
+
 	@Test
 	void test_learnable_skill_mapping() {
 		assertEquals(1, ts.getId());
 		assertEquals("James", ts.getUser().getFirstName());
-		assertEquals("Tribble Husbandry", ts.getSkill().getName());
-		assertEquals("No Experience", ts.getLevel().getName());
+		assertEquals("Tribble Husbandry", ts.getSkillName().getName());
+		assertEquals("No Experience", ts.getSkillLevel().getName());
 		assertEquals("I grow my own", ts.getComment());
 	}
 }
