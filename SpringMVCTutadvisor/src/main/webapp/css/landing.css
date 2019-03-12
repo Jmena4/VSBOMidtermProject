@@ -1,46 +1,164 @@
-body{
-  background-color: orange;
+body {
+	background-color: orange;
+}
+
+#reg-form {
+	padding-left: 20px;
+	padding-left: 20px;
+	font-weight: normal;
+	color: black;
+	text-align: left;
+	font-size: 18px;
+	background-color: rgb(244, 190, 64, .9);
+	background-blend-mode: lighten;
+	font-size: 18px;
+	color: black;
+}
+
+#reg-submit {
+	text-align: center;
+	font-size: 24px;
+}
+
+#reg-header {
+	text-align: center;
+	font-size: 24px;
+}
+
+#submit-button {
+	background-color: orange;
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: lightgray;
+	border: 2px solid black;
 }
 
 .login-fields {
-  top: 25%;
-  color: white;
-  font-weight: normal;
+	top: 25%;
+	color: white;
+	font-weight: normal;
 }
 
 label {
-  font-weight: normal;
+	font-weight: normal;
 }
 
-
-
 #login-button {
-  color: black;
-  font-size: 18px;
-  font-weight: bold;
-  background-color: orange;
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: orange;
 }
 
 #join-button {
-  font-size: 25px;
-  font-weight: bold;
-  background-color: orange;
-  border: 2px solid black;
-  position:relative;
-  top: -30px;
+	font-size: 25px;
+	font-weight: bold;
+	background-color: orange;
+	border: 2px solid black;
+	position: relative;
+	top: -30px;
 }
 
-.carousel-caption {
-    top: 3%;
-    bottom: auto;
-
-    text-align: center;
-    font-size: 80px;
-    font-weight: bold;
+#carousel-caption {
+	top: 3%;
+	bottom: auto;
+	text-align: center;
+	font-size: 80px;
+	font-weight: bold;
 }
 
 #VSBO {
-  text-align: center;
-  font-style: italic;
+	width: 100%;
+	text-align: center;
+	font-style: italic;
+	text-align: center;
+}
 
+#show-cards {
+	font-size: 18px;
+}
+
+#card-type {
+	font-size: 18px;
+}
+
+#home-button {
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: orange;
+}
+
+#profile-button {
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: orange;
+}
+
+#logout-button {
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: orange;
+}
+
+#card-container {
+	overflow: scroll;
+	background-color: lightgray;
+	width: 80%;
+	height: 500px;
+	border-style: solid;
+	border-width: medium;
+	border-color: black;
+	padding-top: 5px;
+}
+
+#suggestion-card {
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	background-color: #f4be41;
+	border-style: solid;
+	border-width: medium;
+	border-color: black;
+}
+
+#card-column {
+	margin-left: 20px;
+}
+
+.card-title {
+	font-size: 24px;
+	text-decoration: underline;
+	font-weight: bold;
+	text-align: center;
+}
+
+.card-text {
+	font-size: 16px;
+	text-decoration: none;
+	font-weight: normal;
+	text-align: left;
+}
+
+.card-comment {
+	font-size: 16px;
+	text-decoration: none;
+	font-style: italic;
+	text-align: left;
+}
+
+#div-photo {
+	width: 120px;
+}
+
+#col-photo {
+	width: 150px;
+}
+
+#card-button {
+	width: 100%
 }

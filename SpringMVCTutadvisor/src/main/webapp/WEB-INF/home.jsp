@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <head>
 <meta name="viewport"
@@ -61,8 +62,19 @@
 	<br>
 	<br>
 	<div id="card-container" class="container">
-
-		<!-- card -->
+	
+	<!-- check for skills -->
+	<c:if test="${(empty learnable) and (empty teachable)}">
+	<span id="empty-warning">
+	You have not picked any skills to learn or teach!<br>
+	Edit your profile to receive suggestions.
+	</span>
+	</c:if>
+	
+	<!-- learnable suggestion card factory -->
+	
+	<c:if test="${not empty learnable}">
+		<c:forEach var="suggestion" items="${learnable}">
 		<form action="suggestion.do" method="GET">
 			<button id="card-button" type="submit">
 				<div id="suggestion-card" class="card">
@@ -70,18 +82,21 @@
 						<div id="col-photo" class="column">
 							<div id="div-photo" class="float-right">
 								<img class="card-img-top"
-									src="https://www.writeups.org/wp-content/uploads/James-Tiberius-Kirk-Star-Trek-William-Shatner.jpg">
+									src=${suggestion.url}>
 							</div>
 						</div>
 						<div id="card-column" class="column">
-							<div class="card-title">Jimmy K. can teach you Tribble
-								Husbandry!</div>
+							<div class="card-title">${suggestion.username} wants to teach you ${suggestion.name}</div>
 							<div class="card-text">
-								Name: James T. Kirk <br> Skill: Tribble Husbandry <br>
-								Skill Level: Master<br> Location: Starbase 11
-								<div class="card-comment">Comment: Tribbles get pregnant
-									just lookin' at me.</div>
-								<input type="hidden" name="id" value="${id}" />
+								Name: ${suggestion.userfirstname} &nbsp; ${suggestion.userlastname}
+								<br>
+								Skill: ${suggestion.skillname}
+								<br>
+								Skill Level: ${suggestion.level}
+								<br>
+								Location: ${suggestion.location}
+								<div class="card-comment">Comment: ${suggestion.comment}</div>
+								<input type="hidden" name="id" value="${suggestion.id}" />
 							</div>
 						</div>
 					</div>
@@ -89,7 +104,50 @@
 			</button>
 		</form>
 		<br>
-		<!-- end of card -->
+		</c:forEach>
+		</c:if>
+		
+		<!-- end learnable suggestion card factory -->
+		
+		
+	<!-- teachable suggestion card factory -->
+	
+	<c:if test="${not empty teachable}">
+		<c:forEach var="suggestion" items="${teachable}">
+		<form action="suggestion.do" method="GET">
+			<button id="card-button" type="submit">
+				<div id="suggestion-card" class="card">
+					<div class="row">
+						<div id="col-photo" class="column">
+							<div id="div-photo" class="float-right">
+								<img class="card-img-top"
+									src=${suggestion.url}>
+							</div>
+						</div>
+						<div id="card-column" class="column">
+							<div class="card-title">${suggestion.username} wants to teach you ${suggestion.name}</div>
+							<div class="card-text">
+								Name: ${suggestion.userfirstname} &nbsp; ${suggestion.userlastname}
+								<br>
+								Skill: ${suggestion.skillname}
+								<br>
+								Skill Level: ${suggestion.level}
+								<br>
+								Location: ${suggestion.location}
+								<div class="card-comment">Comment: ${suggestion.comment}</div>
+								<input type="hidden" name="id" value="${suggestion.id}" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</button>
+		</form>
+		<br>
+		</c:forEach>
+		</c:if>
+		
+		<!-- end teachable suggestion card factory -->	
+		
 
 	</div>
 	<div id="VSBO" class="container">
