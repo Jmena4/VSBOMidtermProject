@@ -65,7 +65,7 @@
 					</ul>
 				</nav>
 				<section id="info">
-					<form action="modify_profile.do" method="POST">
+					<form action="modify_profile.do" method="POST" name="">
 					<p>Your info:</p>
 					<p class="setting">
 						<span>First Name </span> <input class="text" name="firstName" value="${user.firstName }"/>
@@ -97,8 +97,8 @@
 						<input type="submit"  name="modify_profile.do"
 							value="Save Changes" />
 					</form>
-					<form action="profile.do" method="GET">
-						<input type="submit" name="My Profile"
+					<form action="home.do" method="GET">
+						<input type="submit" 
 							value="Ruturn Home" />
 					</form>
 
