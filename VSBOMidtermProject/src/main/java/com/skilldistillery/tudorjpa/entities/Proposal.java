@@ -1,6 +1,6 @@
 package com.skilldistillery.tudorjpa.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +33,7 @@ public class Proposal {
 	@Column(name = "offer_amount")
 	private Double offerAmount;
 
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_time_proposed")
 	private Date dateTimeProposed;
 
@@ -52,6 +53,7 @@ public class Proposal {
 	@Column(name = "routing")
 	private int routing;
 
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_time_created")
 	private Date dateTimeCreated;
 
