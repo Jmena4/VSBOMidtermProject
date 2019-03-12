@@ -47,8 +47,8 @@ class ProposalTest {
 	@Test
 	void test_proposal_mapping() {
 		assertEquals(1, proposal.getId());
-		assertEquals(3, proposal.getTeacherId());
-		assertEquals(1, proposal.getStudentId());
+		assertEquals(3, proposal.getTeacher().getId());
+		assertEquals(1, proposal.getStudent().getId());
 		assertEquals(3, proposal.getLearnableId());
 		assertEquals(3, proposal.getTeachableId());
 		assertEquals("8.0", proposal.getOfferAmount().toString());
