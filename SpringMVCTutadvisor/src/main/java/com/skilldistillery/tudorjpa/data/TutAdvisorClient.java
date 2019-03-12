@@ -26,23 +26,29 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 	private EntityManager em;
 
 	@Override
-	public List<Proposal> findAllProposal() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Proposal> findAllPendingProposal() {
+		List<Proposal> proposal = null;
+		String queryP = "SELECT p FROM Proposal p WHERE p.proposalStatusId = 1"; // Need to write the query statement
+		proposal = em.createQuery(queryP, Proposal.class).getResultList();
+		return proposal;
 	}
 
 	@Override
-	public List<Proposal> findAllHistory() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Proposal> findAllProposalHistory() {
+		List<Proposal> history = null;
+		String queryH = "SELECT h FROM Proposal h WHERE h.proposalStatusId != 1"; // Need to write the query statement
+																										// the query
+																										// statement
+		history = em.createQuery(queryH, Proposal.class).getResultList();
+		return history;
 	}
 
 	@Override
-	public Map<Integer, List<User>> findAllStudentSuggestion() {
+	public Map<Integer, List<User>> findAllTutorSuggestion() {
 		List<LearnableSkill> learnableSkills = null;
 		String queryS = "SELECT l FROM LearnableSkill l  WHERE l.user.id = 1 ";
-		System.out.println("***************");
-		System.out.println(em);
+		System.out.println("***************"); // For testing purpose
+		System.out.println(em); // For testing purpose
 		String querySDos = "SELECT t.user FROM TeachableSkill t WHERE t.skillName.id = :teachableSkill";
 		learnableSkills = em.createQuery(queryS, LearnableSkill.class).getResultList();
 		Map<Integer, List<User>> availableTutors = new HashMap<Integer, List<User>>();
@@ -63,10 +69,10 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 	}
 
 	@Override
-	public Map<Integer, List<User>> findAllTeacherSuggestion() {
+	public Map<Integer, List<User>> findAllStudentSuggestion() {
 		List<TeachableSkill> teachableSkills = null;
-		System.out.println("$$$$$$$$$$$$$$");
-		System.out.println(em);
+		System.out.println("$$$$$$$$$$$$$$");// For testing purpose
+		System.out.println(em);// For testing purpose
 		String queryT = "SELECT t FROM TeachableSkill t WHERE t.user.id = 3";
 		String queryTDos = "SELECT l.user FROM LearnableSkill l WHERE l.skillName.id = :learnableSkill";
 		teachableSkills = em.createQuery(queryT, TeachableSkill.class).getResultList();
