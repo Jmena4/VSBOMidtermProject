@@ -26,11 +26,11 @@ public class TeachableSkill {
 
 	@OneToOne
 	@JoinColumn(name = "skill_name_id")
-	private SkillName skill;
+	private SkillName skillName;
 
 	@OneToOne
 	@JoinColumn(name = "skill_level_id")
-	private SkillLevel level;
+	private SkillLevel skillLevel;
 
 	@Column(name = "comment")
 	private String comment;
@@ -53,20 +53,20 @@ public class TeachableSkill {
 		this.user = user;
 	}
 
-	public SkillName getSkill() {
-		return skill;
+	public SkillName getSkillName() {
+		return skillName;
 	}
 
-	public void setSkill(SkillName skill) {
-		this.skill = skill;
+	public void setSkillName(SkillName skillName) {
+		this.skillName = skillName;
 	}
 
-	public SkillLevel getLevel() {
-		return level;
+	public SkillLevel getSkillLevel() {
+		return skillLevel;
 	}
 
-	public void setLevel(SkillLevel level) {
-		this.level = level;
+	public void setSkillLevel(SkillLevel skillLevel) {
+		this.skillLevel = skillLevel;
 	}
 
 	public String getComment() {
@@ -84,8 +84,8 @@ public class TeachableSkill {
 		int result = 1;
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((level == null) ? 0 : level.hashCode());
-		result = prime * result + ((skill == null) ? 0 : skill.hashCode());
+		result = prime * result + ((skillLevel == null) ? 0 : skillLevel.hashCode());
+		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -106,15 +106,15 @@ public class TeachableSkill {
 			return false;
 		if (id != other.id)
 			return false;
-		if (level == null) {
-			if (other.level != null)
+		if (skillLevel == null) {
+			if (other.skillLevel != null)
 				return false;
-		} else if (!level.equals(other.level))
+		} else if (!skillLevel.equals(other.skillLevel))
 			return false;
-		if (skill == null) {
-			if (other.skill != null)
+		if (skillName == null) {
+			if (other.skillName != null)
 				return false;
-		} else if (!skill.equals(other.skill))
+		} else if (!skillName.equals(other.skillName))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -124,11 +124,10 @@ public class TeachableSkill {
 		return true;
 	}
 
-//	To String
 	@Override
 	public String toString() {
-		return "TeachableSkill [id=" + id + ", user=" + user + ", skill=" + skill + ", level=" + level + ", comment="
-				+ comment + "]";
+		return "TeachableSkill [id=" + id + ", user=" + user + ", skillName=" + skillName + ", skillLevel=" + skillLevel
+				+ ", comment=" + comment + "]";
 	}
 
 }
