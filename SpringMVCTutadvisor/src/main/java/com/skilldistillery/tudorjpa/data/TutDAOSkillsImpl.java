@@ -77,7 +77,7 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 
 	@Override
 	public List<SkillName> findAllSkillNames() {
-		String query = "SELECT sn from Skillname sn";
+		String query = "SELECT sn from SkillName sn";
 		List<SkillName> results = em.createQuery(query, SkillName.class).getResultList();
 
 		return results;
@@ -129,7 +129,7 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 //	***Teachable Skill methods***
 	@Override
 	public List<TeachableSkill> findAllTeachableSkills() {
-		String query = "SELECT sn from Skillname sn";
+		String query = "SELECT ts from TeachableSkill ts";
 		List<TeachableSkill> results = em.createQuery(query, TeachableSkill.class).getResultList();
 
 		return results;
@@ -185,7 +185,7 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 //	***Learnable Skill methods***
 	@Override
 	public List<LearnableSkill> findAllLearnableSkills() {
-		String query = "SELECT sn from Skillname sn";
+		String query = "SELECT ls from LearnableSkill ls";
 		List<LearnableSkill> results = em.createQuery(query, LearnableSkill.class).getResultList();
 
 		return results;

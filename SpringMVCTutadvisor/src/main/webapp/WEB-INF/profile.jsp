@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -67,75 +68,115 @@
 				</nav>
 				<section id="info">
 					<p>Your info:</p>
-					<form>
-						<p class="setting">
-							<span>First Name </span> ${user.firstName }
-						</p>
-						<p class="setting">
-							<span>Last Name </span> ${user.lastName }
-						</p>
-						<p class="setting">
-							<span>Phone Number </span> ${user.phone }
-						</p>
-						<p class="setting">
-							<span>E-mail Address </span> ${user.email }
-						</p>
-						<p class="setting">
-							<span>Street</span> ${user.addressId.address }
-						</p>
-						<p class="setting">
-							<span></span> ${user.addressId.address2 }
-						</p>
-						<br>
-						<p class="setting">
-							<span>City</span> ${user.addressId.city }
-						</p>
-						<p class="setting">
-							<span>State</span> ${user.addressId.state }
-						</p>
-						<p class="setting">
-							<span>Zip/Postal code</span> ${user.addressId.postalCode}
-						</p>
+					<p class="setting">
+						<span>First Name </span> ${user.firstName }
+					</p>
+					<p class="setting">
+						<span>Last Name </span> ${user.lastName }
+					</p>
+					<p class="setting">
+						<span>Phone Number </span> ${user.phone }
+					</p>
+					<p class="setting">
+						<span>E-mail Address </span> ${user.email }
+					</p>
+					<p class="setting">
+						<span>Street</span> ${user.addressId.address }
+					</p>
+					<p class="setting">
+						<span></span> ${user.addressId.address2 }
+					</p>
+					<br>
+					<p class="setting">
+						<span>City</span> ${user.addressId.city }
+					</p>
+					<p class="setting">
+						<span>State</span> ${user.addressId.state }
+					</p>
+					<p class="setting">
+						<span>Zip/Postal code</span> ${user.addressId.postalCode}
+					</p>
 
+					<form action="modify_profile.do" method="GET">
 
-						<input type="submit" class="btn btn-primary" value="edit" />
+						<input type="submit" action="modify_profile.do"
+							value="Edit Profile" />
 					</form>
 
 				</section>
 				<section id="teachableSkill" class="hidden">
 					<p>Skills you can teach</p>
 					<form>
-					<c:if test="${!empty user.teachableSkills}">
-						<c:forEach var="TeachableSkill" items="${user.teachableSkills }">
-							<p><input type="checkbox" name="teachableSkillsUpdate" value="${TeachableSkill.id }" checked>${TeachableSkill.skill } at a "${TeachableSkill.level}"
-								level</p>
-						</c:forEach>
-					</c:if>
+						<div
+							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+
+							<c:if test="${!empty user.teachableSkills}">
+								<c:forEach var="TeachableSkill" items="${user.teachableSkills }">
+									<p>
+										<input type="checkbox" name="teachableSkillsUpdate"
+											value="${TeachableSkill.id }" checked>
+										${TeachableSkill.skillName.name } at a <select>
+											<option value="1"
+												<c:if test="${TeachableSkill.skillLevel.id ==1 }"> selected="selcted"</c:if>>NoExperience</option>
+											<option value="2"
+												<c:if test="${TeachableSkill.skillLevel.id ==2 }"> selected="selcted"</c:if>>Novice</option>
+											<option value="3"
+												<c:if test="${TeachableSkill.skillLevel.id ==3 }"> selected="selcted"</c:if>>Intermediate</option>
+											<option value="4"
+												<c:if test="${TeachableSkill.skillLevel.id ==4 }"> selected="selcted"</c:if>>Expert</option>
+											<option value="5"
+												<c:if test="${TeachableSkill.skillLevel.id ==5 }"> selected="selcted"</c:if>>Master</option>
+										</select> level.
+									</p>
+								</c:forEach>
+							</c:if>
+						</div>
+						<div
+							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+							<c:if test="${!empty allTeachableSkills }">
+								
+							</c:if>
+						</div>
+						<input type="submit" value="Update Teachable Skills">
 					</form>
+					</br>
 				</section>
 
 				<section id="activity" class="hidden">
 					<p>Skills you want to learn</p>
-					<c:if test="${!empty user.learnableSkills}">
-						<c:forEach var="LearnableSkill" items="${user.learnableSkills }">
-							<p>${LearnableSkill.skillName } at a "${LearnableSkill.skillLevel}"
-								level</p>
-						</c:forEach>
-					</c:if>
+					<form>
+						<div
+							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+
+							<c:if test="${!empty user.learnableSkills}">
+								<c:forEach var="LearnableSkill" items="${user.learnableSkills }">
+									<p>
+										<input type="checkbox" name="learnableSkillsUpdate"
+											value=" ${LearnableSkill.id }" checked>
+										${LearnableSkill.skillName.name } at a <select>
+											<option value="1"
+												<c:if test="${LearnableSkill.skillLevel.id ==1 }"> selected="selcted"</c:if>>NoExperience</option>
+											<option value="2"
+												<c:if test="${LearnableSkill.skillLevel.id ==2 }"> selected="selcted"</c:if>>Novice</option>
+											<option value="3"
+												<c:if test="${LearnableSkill.skillLevel.id ==3 }"> selected="selcted"</c:if>>Intermediate</option>
+											<option value="4"
+												<c:if test="${LearnableSkill.skillLevel.id ==4 }"> selected="selcted"</c:if>>Expert</option>
+											<option value="5"
+												<c:if test="${LearnableSkill.skillLevel.id ==5 }"> selected="selcted"</c:if>>Master</option>
+										</select> level.
+									</p>
+								</c:forEach>
+							</c:if>
+						</div>
+						<div
+							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+						</div>
+						<input type="submit" value="Update Skills to Learn">
+					</form>
 				</section>
 
-				<section id="friends" class="hidden">
-					<p>Friends list:</p>
-
-					<ul id="friendslist" class="clearfix">
-						<li><a href="#"><img src="images/avatar.png" width="22"
-								height="22"> Username</a></li>
-						<li><a href="#"><img src="images/avatar.png" width="22"
-								height="22"> SomeGuy123</a></li>
-						<li><a href="#"><img src="images/avatar.png" width="22"
-								height="22"> PurpleGiraffe</a></li>
-					</ul>
-				</section>
+				<section id="friends" class="hidden"></section>
 
 
 			</div>
