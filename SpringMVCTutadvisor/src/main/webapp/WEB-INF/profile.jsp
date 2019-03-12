@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -47,86 +48,191 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container" style="width: 65%">
+	<div class="container" style="width: 75%">
 
 		<div id="w">
-    <div id="content" class="clearfix">
-      <div id="userphoto"><img src="${user.pictureURL }" alt="default avatar" width="100"></div>
-      <h1>${user.firstName } ${user.lastName } </h1>
+			<div id="content" class="clearfix">
+				<div id="userphoto">
+					<img src="${user.pictureURL }" alt="default avatar" width="100">
+				</div>
+				<h1>${user.firstName }${user.lastName }</h1>
 
-      <nav id="profiletabs">
-        <ul class="clearfix">
-          <li><a href="#bio" class="sel">Bio</a></li>
-          <li><a href="#activity">Activity</a></li>
-          <li><a href="#friends">Friends</a></li>
-          <li><a href="#settings">Settings</a></li>
-        </ul>
-      </nav>
-      
-      <section id="bio">
-        <p>Various content snippets courtesy of <a href="http://bluthipsum.com/">Bluth Ipsum</a>.</p>
-        
-        <p>Can't a guy call his mother pretty without it seeming strange? Amen. I think that's one of Mom's little fibs, you know, like I'll sacrifice anything for my children.</p>
-        
-        <p>She's always got to wedge herself in the middle of us so that she can control everything. Yeah. Mom's awesome. I run a pretty tight ship around here. With a pool table.</p>
-      </section>
-      
-      <section id="activity" class="hidden">
-        <p>Most recent actions:</p>
-        
-        <p class="activity">@10:15PM - Submitted a news article</p>
-        
-        <p class="activity">@9:50PM - Submitted a news article</p>
-        
-        <p class="activity">@8:15PM - Posted a comment</p>
-        
-        <p class="activity">@4:30PM - Added <strong>someusername</strong> as a friend</p>
-        
-        <p class="activity">@12:30PM - Submitted a news article</p>
-      </section>
-      
-      <section id="friends" class="hidden">
-        <p>Friends list:</p>
-        
-        <ul id="friendslist" class="clearfix">
-          <li><a href="#"><img src="images/avatar.png" width="22" height="22"> Username</a></li>
-          <li><a href="#"><img src="images/avatar.png" width="22" height="22"> SomeGuy123</a></li>
-          <li><a href="#"><img src="images/avatar.png" width="22" height="22"> PurpleGiraffe</a></li>
-        </ul>
-      </section>
-      
-      <section id="settings" class="hidden">
-        <p>Edit your user settings:</p>
-        
-        <p class="setting"><span>E-mail Address <img src="images/edit.png" alt="*Edit*" width="20"></span> ${user.email }</p>
-        
-        <p class="setting"><span>Language <img src="images/edit.png" alt="*Edit*"></span> English(US)</p>
-        
-        <p class="setting"><span>Profile Status <img src="images/edit.png" alt="*Edit*"></span> Public</p>
-        
-        <p class="setting"><span>Update Frequency <img src="images/edit.png" alt="*Edit*"></span> Weekly</p>
-        
-        <p class="setting"><span>Connected Accounts <img src="images/edit.png" alt="*Edit*"></span> None</p>
-      </section>
-    </div><!-- @end #content -->
-  </div><!-- @end #w -->
-<script type="text/javascript">
-$(function(){
-  $('#profiletabs ul li a').on('click', function(e){
-    e.preventDefault();
-    var newcontent = $(this).attr('href');
-    
-    $('#profiletabs ul li a').removeClass('sel');
-    $(this).addClass('sel');
-    
-    $('#content section').each(function(){
-      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
-    });
-    
-    $(newcontent).removeClass('hidden');
-  });
-});
-</script>
+				<nav id="profiletabs">
+					<ul class="clearfix">
+						<li><a href="#info" class="sel">Your Info</a></li>
+						<li><a href="#teachableSkill">Skills You Can Teach</a></li>
+						<li><a href="#activity">Skills You Wanted</a></li>
+					</ul>
+				</nav>
+				<section id="info">
+					<p>Your info:</p>
+					<p class="setting">
+						<span>First Name </span> ${user.firstName }
+					</p>
+					<p class="setting">
+						<span>Last Name </span> ${user.lastName }
+					</p>
+					<p class="setting">
+						<span>Phone Number </span> ${user.phone }
+					</p>
+					<p class="setting">
+						<span>E-mail Address </span> ${user.email }
+					</p>
+					<p class="setting">
+						<span>Street</span> ${user.addressId.address }
+					</p>
+					<p class="setting">
+						<span></span> ${user.addressId.address2 }
+					</p>
+					<br>
+					<p class="setting">
+						<span>City</span> ${user.addressId.city }
+					</p>
+					<p class="setting">
+						<span>State</span> ${user.addressId.state }
+					</p>
+					<p class="setting">
+						<span>Zip/Postal code</span> ${user.addressId.postalCode}
+					</p>
+
+					<form action="modify_profile.do" method="GET">
+
+						<input type="submit" action="modify_profile.do"
+							value="Edit Profile" />
+					</form>
+
+				</section>
+				<section id="teachableSkill" class="hidden">
+					<p>Skills you can teach</p>
+					<form>
+						<div
+							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+
+							<c:if test="${!empty user.teachableSkills}">
+								<c:forEach var="TeachableSkill" items="${user.teachableSkills }">
+									<p>
+										<input type="checkbox" name="teachableSkillsUpdate"
+											value="${TeachableSkill.id }" checked>
+										${TeachableSkill.skillName.name } at a <select>
+											<option value="1"
+												<c:if test="${TeachableSkill.skillLevel.id ==1 }"> selected="selcted"</c:if>>NoExperience</option>
+											<option value="2"
+												<c:if test="${TeachableSkill.skillLevel.id ==2 }"> selected="selcted"</c:if>>Novice</option>
+											<option value="3"
+												<c:if test="${TeachableSkill.skillLevel.id ==3 }"> selected="selcted"</c:if>>Intermediate</option>
+											<option value="4"
+												<c:if test="${TeachableSkill.skillLevel.id ==4 }"> selected="selcted"</c:if>>Expert</option>
+											<option value="5"
+												<c:if test="${TeachableSkill.skillLevel.id ==5 }"> selected="selcted"</c:if>>Master</option>
+										</select> level.
+									</p>
+								</c:forEach>
+							</c:if>
+						</div>
+						<br>
+						<p>Can you teach any of these skills?</p>
+						<div
+							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+							<c:if test="${!empty allTeachableSkills }">
+								<c:forEach var="newTeachableSkill"
+									items="${allTeachableSkills }">
+									<p>
+										<input type="checkbox" name="skillToAdd"
+											value="${newTeachableSkill.id }">
+										${newTeachableSkill.skillName.name } at a <select>
+											<option value="1">NoExperience</option>
+											<option value="2">Novice</option>
+											<option value="3">Intermediate</option>
+											<option value="4">Expert</option>
+											<option value="5">Master</option>
+										</select> level
+									</p>
+								</c:forEach>
+							</c:if>
+						</div>
+						<br> <input type="submit" value="Update Skills">
+					</form>
+					</br>
+				</section>
+
+				<section id="activity" class="hidden">
+					<p>Skills you want to learn</p>
+					<form action="">
+						<div
+							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+
+							<c:if test="${!empty user.learnableSkills}">
+								<c:forEach var="LearnableSkill" items="${user.learnableSkills }">
+									<p>
+										<input type="checkbox" name="learnableSkillsUpdate"
+											value=" ${LearnableSkill.id }" checked>
+										${LearnableSkill.skillName.name } at a <select>
+											<option value="1"
+												<c:if test="${LearnableSkill.skillLevel.id ==1 }"> selected="selcted"</c:if>>NoExperience</option>
+											<option value="2"
+												<c:if test="${LearnableSkill.skillLevel.id ==2 }"> selected="selcted"</c:if>>Novice</option>
+											<option value="3"
+												<c:if test="${LearnableSkill.skillLevel.id ==3 }"> selected="selcted"</c:if>>Intermediate</option>
+											<option value="4"
+												<c:if test="${LearnableSkill.skillLevel.id ==4 }"> selected="selcted"</c:if>>Expert</option>
+											<option value="5"
+												<c:if test="${LearnableSkill.skillLevel.id ==5 }"> selected="selcted"</c:if>>Master</option>
+										</select> level.
+									</p>
+								</c:forEach>
+							</c:if>
+						</div>
+						<br>
+						<p>What Skills are do you want to master?</p>
+						<div
+							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+
+
+							<c:if test="${!empty allLearnableSkills }">
+								<c:forEach var="newLearnableSkill"
+									items="${allLearnableSkills }">
+									<p>
+										<input type="checkbox" name="skillToAdd"
+											value="${newLearnableSkill.id }">
+										${newLearnableSkill.skillName.name } at a <select>
+											<option value="1">NoExperience</option>
+											<option value="2">Novice</option>
+											<option value="3">Intermediate</option>
+											<option value="4">Expert</option>
+											<option value="5">Master</option>
+										</select> level
+									</p>
+								</c:forEach>
+							</c:if>
+						</div>
+						<br> <input type="submit" value="Update skills to learn">
+					</form>
+				</section>
+
+
+			</div>
+			<!-- @end #content -->
+		</div>
+		<!-- @end #w -->
+		<script type="text/javascript">
+			$(function() {
+				$('#profiletabs ul li a').on('click', function(e) {
+					e.preventDefault();
+					var newcontent = $(this).attr('href');
+
+					$('#profiletabs ul li a').removeClass('sel');
+					$(this).addClass('sel');
+
+					$('#content section').each(function() {
+						if (!$(this).hasClass('hidden')) {
+							$(this).addClass('hidden');
+						}
+					});
+
+					$(newcontent).removeClass('hidden');
+				});
+			});
+		</script>
 
 
 	</div>
@@ -138,3 +244,5 @@ $(function(){
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<!-- modify_profile.do -->
