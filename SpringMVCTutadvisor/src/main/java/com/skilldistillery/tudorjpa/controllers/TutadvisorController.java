@@ -10,13 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.skilldistillery.tudorjpa.data.TutDAO;
 import com.skilldistillery.tudorjpa.data.TutDAOUser;
-<<<<<<< Updated upstream
 import com.skilldistillery.tudorjpa.data.TutDaoSkills;
-import com.skilldistillery.tudorjpa.entities.LearnableSkill;
-import com.skilldistillery.tudorjpa.entities.TeachableSkill;
-import com.skilldistillery.tudorjpa.entities.User;
-
-=======
 import com.skilldistillery.tudorjpa.entities.LearnableSkill;
 import com.skilldistillery.tudorjpa.entities.Proposal;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
@@ -25,7 +19,7 @@ import com.skilldistillery.tudorjpa.entities.User;
 
 
 
->>>>>>> Stashed changes
+
 @Controller
 public class TutadvisorController {
 
