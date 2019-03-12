@@ -104,7 +104,7 @@
 				</section>
 				<section id="teachableSkill" class="hidden">
 					<p>Skills you can teach</p>
-					<form>
+					<form action="updateTeachableSkills.do">
 						<div
 							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
 
@@ -157,7 +157,7 @@
 
 				<section id="activity" class="hidden">
 					<p>Skills you want to learn</p>
-					<form action="">
+					<form action="updateLearnableSkills.do">
 						<div
 							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
 
