@@ -112,26 +112,15 @@ public class TutadvisorController {
 //		TODO: create method to get list of learnable suggestions and
 //		list of teachable suggestions and add them to the model
 
-//		mv.addObject("sug_learnable", sugLearnable);
-//		mv.addObject("sug_teachable", sugTeachable);
+//		mv.addObject("learnable_list", learnableList);
+//		mv.addObject("teachable_list", teachableList);
 			
 			
 		} else if (type.equals("2")) {
-		List<Proposal> proposals = null;
+		List<Proposal> historyList = null;
 //		TODO: create method to get list of pending proposals and add it to the model
-		
-//		mv.addObject("prop_learnable", propLearnable);
-//		mv.addObject("prop_teachable", propTeachable);
+		mv.addObject("history_list", historyList);
 		}
-
-		else if (type.equals("3")) {
-		List<Proposal> history = null;
-//		TODO: create method to get list of actioned proposals (not pending) 
-//		and add it to the model
-		mv.addObject("history", history);
-			
-		}
-
 		mv.setViewName("WEB-INF/home.jsp");
 		return mv;
 	}
@@ -178,6 +167,19 @@ public class TutadvisorController {
 		ModelAndView mv = new ModelAndView();
 		session.invalidate();
 		mv.setViewName("WEB-INF/landing.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path = "suggestionPage.do", method = RequestMethod.POST)
+	public ModelAndView suggestionPage(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(session.getAttribute("id"));
+		System.out.println(session.getAttribute("teachableSkill"));
+		System.out.println(session.getAttribute("learnableSkill"));
+		System.out.println(session.getAttribute("skillLevel"));
+		System.out.println(session.getAttribute("teacherUser"));
+		System.out.println(session.getAttribute("studentUser"));
+		mv.setViewName("WEB-INF/suggestionPage.jsp");
 		return mv;
 	}
 
