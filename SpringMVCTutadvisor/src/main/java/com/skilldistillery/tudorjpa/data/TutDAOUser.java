@@ -13,5 +13,6 @@ public interface TutDAOUser {
 	public User updateUser(int id, User user);
 	public User findUserById(int id);
 	public boolean deleteUser(int id);
+	public User validateUsernameAndPassword(String userName, String password);
 
 }
