@@ -34,6 +34,9 @@ public class TeachableSkill {
 
 	@Column(name = "comment")
 	private String comment;
+	
+	@Column(name="is_active")
+	private boolean isActive;
 
 	// Getters and setters
 
@@ -76,14 +79,21 @@ public class TeachableSkill {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
 //	Hash & Equals
+
+	public boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		result = prime * result + id;
 		result = prime * result + ((skillLevel == null) ? 0 : skillLevel.hashCode());
 		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
@@ -99,13 +109,6 @@ public class TeachableSkill {
 		if (getClass() != obj.getClass())
 			return false;
 		TeachableSkill other = (TeachableSkill) obj;
-		if (comment == null) {
-			if (other.comment != null)
-				return false;
-		} else if (!comment.equals(other.comment))
-			return false;
-		if (id != other.id)
-			return false;
 		if (skillLevel == null) {
 			if (other.skillLevel != null)
 				return false;

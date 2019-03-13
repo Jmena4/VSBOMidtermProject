@@ -26,9 +26,7 @@ public class TutDAOProposalImpl implements TutDAOProposal {
 
 	@Override
 	public Proposal createProposal(Proposal prop) {
-		em.getTransaction().begin();
 		em.persist(prop);
-		em.getTransaction().commit();
 		return prop;
 	}
 
@@ -49,7 +47,6 @@ public class TutDAOProposalImpl implements TutDAOProposal {
 	@Override
 	public boolean deleteProposal(int id) {
 		boolean result = false;
-		em.getTransaction().begin();
 		try {
 			em.remove(em.find(Proposal.class, id));
 			result = true;

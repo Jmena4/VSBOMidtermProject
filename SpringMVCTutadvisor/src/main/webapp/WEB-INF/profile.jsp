@@ -104,7 +104,7 @@
 				</section>
 				<section id="teachableSkill" class="hidden">
 					<p>Skills you can teach</p>
-					<form action="updateTeachableSkills.do">
+					<form action="updateTeachableSkills.do" method="POST">
 						<div
 							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
 
@@ -113,17 +113,17 @@
 									<p>
 										<input type="checkbox" name="teachableSkillsUpdate"
 											value="${TeachableSkill.id }" checked>
-										${TeachableSkill.skillName.name } at a <select>
+										${TeachableSkill.skillName.name } at a <select name="level">
 											<option value="1"
-												<c:if test="${TeachableSkill.skillLevel.id ==1 }"> selected="selcted"</c:if>>NoExperience</option>
+												<c:if test="${TeachableSkill.skillLevel.id ==1 }"> selected="selected"</c:if>>NoExperience</option>
 											<option value="2"
-												<c:if test="${TeachableSkill.skillLevel.id ==2 }"> selected="selcted"</c:if>>Novice</option>
+												<c:if test="${TeachableSkill.skillLevel.id ==2 }"> selected="selected"</c:if>>Novice</option>
 											<option value="3"
-												<c:if test="${TeachableSkill.skillLevel.id ==3 }"> selected="selcted"</c:if>>Intermediate</option>
+												<c:if test="${TeachableSkill.skillLevel.id ==3 }"> selected="selected"</c:if>>Intermediate</option>
 											<option value="4"
-												<c:if test="${TeachableSkill.skillLevel.id ==4 }"> selected="selcted"</c:if>>Expert</option>
+												<c:if test="${TeachableSkill.skillLevel.id ==4 }"> selected="selected"</c:if>>Expert</option>
 											<option value="5"
-												<c:if test="${TeachableSkill.skillLevel.id ==5 }"> selected="selcted"</c:if>>Master</option>
+												<c:if test="${TeachableSkill.skillLevel.id ==5 }"> selected="selected"</c:if>>Master</option>
 										</select> level.
 									</p>
 								</c:forEach>

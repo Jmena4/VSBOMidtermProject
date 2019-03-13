@@ -1,5 +1,6 @@
 package com.skilldistillery.tudorjpa.entities;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,12 +38,10 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address addressId;
 
-	@OneToMany
-	@JoinColumn(name = "learnable_id")
+	@OneToMany(mappedBy = "user")
 	private List<LearnableSkill> learnableSkills;
 
-	@OneToMany
-	@JoinColumn(name = "teachable_id")
+	@OneToMany(mappedBy = "user")
 	private List<TeachableSkill> teachableSkills;
 
 	@Column(name = "user_name")
@@ -305,6 +304,15 @@ public class User {
 	}
 
 	public User() {
+	
+//		List<TeachableSkill> ts = this.getTeachableSkills();
+//		for (TeachableSkill teachableSkill : ts) {
+//			if(teachableSkill.getIsActive() == false) {
+//				ts.remove(teachableSkill);
+//			}
+//			this.setTeachableSkills(ts);
+//		}
 	}
+	
 
 }

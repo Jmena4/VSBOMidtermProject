@@ -33,22 +33,18 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 
 	@Override
 	public SkillLevel createSkillLevel(SkillLevel skilllevel) {
-		em.getTransaction().begin();
 		em.persist(skilllevel);
 		em.flush();
-		em.getTransaction().commit();
 
 		return skilllevel;
 	}
 
 	@Override
 	public SkillLevel updateSkillLevel(int id, SkillLevel skilllevel) {
-		em.getTransaction().begin();
 		SkillLevel managed = em.find(SkillLevel.class, id);
 		managed.setId(skilllevel.getId());
 		managed.setName(skilllevel.getName());
 		em.flush();
-		em.getTransaction().commit();
 		return managed;
 	}
 
@@ -61,7 +57,6 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 	@Override
 	public boolean deleteSkillLevel(int id) {
 		boolean result = false;
-		em.getTransaction().begin();
 
 		try {
 			em.remove(em.find(SkillLevel.class, id));
@@ -69,7 +64,6 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		} catch (Exception e) {
 
 		}
-		em.getTransaction().commit();
 
 		return result;
 	}
@@ -85,10 +79,8 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 
 	@Override
 	public SkillName createSkillName(SkillName skillname) {
-		em.getTransaction().begin();
 		em.persist(skillname);
 		em.flush();
-		em.getTransaction().commit();
 
 		return skillname;
 	}
@@ -113,7 +105,6 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 	@Override
 	public boolean deleteSkillName(int id) {
 		boolean result = false;
-		em.getTransaction().begin();
 
 		try {
 			em.remove(em.find(SkillName.class, id));
@@ -121,7 +112,6 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		} catch (Exception e) {
 
 		}
-		em.getTransaction().commit();
 
 		return result;
 	}
@@ -137,17 +127,14 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 
 	@Override
 	public TeachableSkill createTeachableSkill(TeachableSkill teachableSkill) {
-		em.getTransaction().begin();
 		em.persist(teachableSkill);
 		em.flush();
-		em.getTransaction().commit();
 
 		return teachableSkill;
 	}
 
 	@Override
 	public TeachableSkill updateTeachableSkill(int id, TeachableSkill teachableSkill) {
-		em.getTransaction().begin();
 		TeachableSkill managed = em.find(TeachableSkill.class, id);
 		managed.setId(teachableSkill.getId());
 		managed.setComment(teachableSkill.getComment());
@@ -155,9 +142,16 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		managed.setSkillLevel(teachableSkill.getSkillLevel());
 		managed.setUser(teachableSkill.getUser());
 		em.flush();
-		em.getTransaction().commit();
 		return managed;
 
+	}
+	@Override
+	public TeachableSkill updateTeachableToInactive( TeachableSkill teachableSkill) {
+		TeachableSkill managed = teachableSkill;
+		managed.setActive(false);
+		em.flush();
+		return managed;
+		
 	}
 
 	@Override
@@ -169,7 +163,6 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 	@Override
 	public boolean deleteTeachableSkill(int id) {
 		boolean result = false;
-		em.getTransaction().begin();
 
 		try {
 			em.remove(em.find(TeachableSkill.class, id));
@@ -177,7 +170,6 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		} catch (Exception e) {
 
 		}
-		em.getTransaction().commit();
 
 		return result;
 	}
@@ -193,17 +185,14 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 
 	@Override
 	public LearnableSkill createLearnableSkill(LearnableSkill learnableskill) {
-		em.getTransaction().begin();
 		em.persist(learnableskill);
 		em.flush();
-		em.getTransaction().commit();
 
 		return learnableskill;
 	}
 
 	@Override
 	public LearnableSkill updateLearnableSkill(int id, LearnableSkill learnableskill) {
-		em.getTransaction().begin();
 		LearnableSkill managed = em.find(LearnableSkill.class, id);
 		managed.setId(learnableskill.getId());
 		managed.setComment(learnableskill.getComment());
@@ -211,7 +200,6 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		managed.setSkillName(learnableskill.getSkillName());
 		managed.setUser(learnableskill.getUser());
 		em.flush();
-		em.getTransaction().commit();
 		return managed;
 
 	}
@@ -225,7 +213,6 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 	@Override
 	public boolean deleteLearnableSkill(int id) {
 		boolean result = false;
-		em.getTransaction().begin();
 
 		try {
 			em.remove(em.find(LearnableSkill.class, id));
@@ -233,7 +220,6 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		} catch (Exception e) {
 
 		}
-		em.getTransaction().commit();
 
 		return result;
 	}

@@ -28,9 +28,7 @@ public class TutDAOAddressImpl implements TutDAOAddress {
 
 	@Override
 	public Address createAddresses(Address add) {
-		em.getTransaction().begin();
 		em.persist(add);
-		em.getTransaction().commit();
 		return add;
 	}
 
@@ -55,7 +53,6 @@ public class TutDAOAddressImpl implements TutDAOAddress {
 	@Override
 	public boolean deleteAddresses(int id) {
 		boolean result = false;
-		em.getTransaction().begin();
 		try {
 			em.remove(em.find(Address.class, id));
 			result = true;
