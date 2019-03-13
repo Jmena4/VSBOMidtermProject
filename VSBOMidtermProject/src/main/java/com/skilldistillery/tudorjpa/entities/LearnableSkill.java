@@ -35,6 +35,9 @@ public class LearnableSkill {
 
 	@Column(name = "comment")
 	private String comment;
+	
+	@Column(name="is_active")
+	private boolean isActive;
 
 // getters, setters, hash & equals
 	public int getId() {
@@ -43,6 +46,14 @@ public class LearnableSkill {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public User getUser() {

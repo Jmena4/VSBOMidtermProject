@@ -26,8 +26,6 @@ import com.skilldistillery.tudorjpa.entities.User;
 @Controller
 public class TutadvisorController {
 
-//	@Autowired
-//	private TutDAO tutDAO;
 
 	@Autowired
 	private TutDAO tutDAO;
@@ -77,19 +75,20 @@ public class TutadvisorController {
 	
 
 //	mock mapping to see the profile page:
-	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
-	public ModelAndView mockProfile() {
-		ModelAndView mv = new ModelAndView();
-		User user = tutUser.findUserById(2);
-		List<TeachableSkill> allTeachableSkills = tutSkills.findAllTeachableSkills();
-		List<LearnableSkill> allLearnableSkills = tutSkills.findAllLearnableSkills();
-
-		mv.setViewName("WEB-INF/profile.jsp");
-		mv.addObject("user", user);
-		mv.addObject("allLearnableSkills", allLearnableSkills);
-		mv.addObject("allTeachableSkills", allTeachableSkills);
-		return mv;
-	}
+//	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
+//	public ModelAndView mockProfile(HttpSession session) {
+//		ModelAndView mv = new ModelAndView();
+//		User user = tutUser.findUserById(2);
+//		session.setAttribute("user", user);
+//		List<TeachableSkill> allTeachableSkills = tutSkills.findAllTeachableSkills();
+//		List<LearnableSkill> allLearnableSkills = tutSkills.findAllLearnableSkills();
+//
+//		mv.setViewName("WEB-INF/profile.jsp");
+//		mv.addObject("user", user);
+//		mv.addObject("allLearnableSkills", allLearnableSkills);
+//		mv.addObject("allTeachableSkills", allTeachableSkills);
+//		return mv;
+//	}
 
 	@RequestMapping(path = "home.do", method = RequestMethod.GET)
 	public ModelAndView homeDo() {
