@@ -16,7 +16,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">	
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
+	
 </script>
 <link rel="stylesheet" href="css/landing.css" />
 </head>
@@ -30,11 +31,14 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="navbar-nav ml-auto">
+				<c:if test="${not empty result}">
+					<span id="login-fail"> ${result}&nbsp;&nbsp; </span>
+				</c:if>
 				<form action="login.do" method="POST">
-					<span class="login-fields"> <label for="username">username
-							<input name="login-username">
-					</label> &nbsp; &nbsp; <label for="password">password <input
-							name="login-password">
+					<span> <label for="username" class="login-label">username
+							<input name="username" class="login-field">
+					</label> &nbsp; &nbsp; <label for="password" class="login-label">password <input
+							name="password" class="login-field">
 					</label>&nbsp; &nbsp; <input id="login-button" type="submit" value="Login">
 					</span>
 				</form>
