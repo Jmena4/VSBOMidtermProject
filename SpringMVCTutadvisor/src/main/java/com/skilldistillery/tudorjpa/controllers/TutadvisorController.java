@@ -14,8 +14,13 @@ import com.skilldistillery.tudorjpa.data.TutDAO;
 import com.skilldistillery.tudorjpa.data.TutDAOUser;
 import com.skilldistillery.tudorjpa.data.TutDaoSkills;
 import com.skilldistillery.tudorjpa.entities.LearnableSkill;
+import com.skilldistillery.tudorjpa.entities.Proposal;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
 import com.skilldistillery.tudorjpa.entities.User;
+
+
+
+
 
 @Controller
 public class TutadvisorController {
@@ -72,16 +77,28 @@ public class TutadvisorController {
 
 		if (type.equals("1")) {
 
+		List<LearnableSkill> learnable = null;
+		List<TeachableSkill> teachable = null;
 //		TODO: create method to get list of learnable suggestions and
 //		list of teachable suggestions and add them to the model
-		} else if (type.equals("2")) {
 
+		mv.addObject("learnable", learnable);
+		mv.addObject("teachable", teachable);
+			
+			
+		} else if (type.equals("2")) {
+		List<Proposal> proposals = null;
 //		TODO: create method to get list of pending proposals and add it to the model
+		
+		mv.addObject("proposals", proposals);
 		}
 
 		else if (type.equals("3")) {
-
-//		TODO: create method to get list of proposals not pending and add it to the model
+		List<Proposal> history = null;
+//		TODO: create method to get list of actioned proposals (not pending) 
+//		and add it to the model
+		mv.addObject("history", history);
+			
 		}
 
 		mv.setViewName("WEB-INF/home.jsp");
@@ -114,6 +131,15 @@ public class TutadvisorController {
 //		TODO: create method to update the user, address, teachable & learnable skills
 
 		mv.setViewName("WEB-INF/profile.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path= "registration.do", method = RequestMethod.GET)
+	public ModelAndView registerDo() {
+		ModelAndView mv = new ModelAndView();
+		boolean reg = true;
+		mv.addObject("reg", reg);
+		mv.setViewName("WEB-INF/landing.jsp");		
 		return mv;
 	}
 

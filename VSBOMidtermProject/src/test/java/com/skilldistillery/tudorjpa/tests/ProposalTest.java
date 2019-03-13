@@ -1,7 +1,6 @@
 package com.skilldistillery.tudorjpa.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -48,8 +47,8 @@ class ProposalTest {
 	@Test
 	void test_proposal_mapping() {
 		assertEquals(1, proposal.getId());
-		assertEquals(3, proposal.getTeacherId());
-		assertEquals(1, proposal.getStudentId());
+		assertEquals(3, proposal.getTeacher().getId());
+		assertEquals(1, proposal.getStudent().getId());
 		assertEquals(3, proposal.getLearnableId());
 		assertEquals(3, proposal.getTeachableId());
 		assertEquals("8.0", proposal.getOfferAmount().toString());
@@ -59,14 +58,14 @@ class ProposalTest {
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(pattern);
 		java.text.SimpleDateFormat sdf2 = new java.text.SimpleDateFormat(pattern2);
 
-//		assertEquals("2019-03-20 12:15:00",
-//				sdf.format(proposal.getDateTimeProposed()) + " " + sdf2.format(proposal.getDateTimeProposed()));
+		assertEquals("2019-03-20 12:15:00",
+				sdf.format(proposal.getDateTimeProposed()) + " " + sdf2.format(proposal.getDateTimeProposed()));
 		assertEquals("60", proposal.getDuration().toString());
 		assertEquals("I really need help", proposal.getComment());
 		assertEquals("1", proposal.getProposalStatusId().toString());
 		assertEquals(3, proposal.getRouting());
-//		assertEquals("2019-03-15 23:08:00",
-//				sdf.format(proposal.getDateTimeCreated()) + " " + sdf2.format(proposal.getDateTimeCreated()));
+		assertEquals("2019-03-15 23:08:00",
+				sdf.format(proposal.getDateTimeCreated()) + " " + sdf2.format(proposal.getDateTimeCreated()));
 
 	}
 

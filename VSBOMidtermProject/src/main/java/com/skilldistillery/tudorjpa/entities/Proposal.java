@@ -1,6 +1,6 @@
 package com.skilldistillery.tudorjpa.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,11 +18,13 @@ public class Proposal {
 	@Column(name = "proposal_id")
 	private int id;
 
-	@Column(name = "teacher_id")
-	private int teacherId;
+	@OneToOne
+	@JoinColumn(name = "teacher_id")
+	private User teacher;
 
-	@Column(name = "student_id")
-	private int studentId;
+	@OneToOne
+	@JoinColumn(name = "student_id")
+	private User student;
 
 	@Column(name = "learnable_id")
 	private int learnableId;
@@ -33,6 +35,7 @@ public class Proposal {
 	@Column(name = "offer_amount")
 	private Double offerAmount;
 
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_time_proposed")
 	private Date dateTimeProposed;
 
@@ -52,6 +55,7 @@ public class Proposal {
 	@Column(name = "routing")
 	private int routing;
 
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_time_created")
 	private Date dateTimeCreated;
 
@@ -63,20 +67,20 @@ public class Proposal {
 		this.id = id;
 	}
 
-	public int getTeacherId() {
-		return teacherId;
+	public User getTeacher() {
+		return teacher;
 	}
 
-	public void setTeacherId(int teacherId) {
-		this.teacherId = teacherId;
+	public void setTeacher(User teacher) {
+		this.teacher = teacher;
 	}
 
-	public int getStudentId() {
-		return studentId;
+	public User getStudent() {
+		return student;
 	}
 
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
+	public void setStudent(User student) {
+		this.student = student;
 	}
 
 	public int getLearnableId() {
@@ -161,35 +165,11 @@ public class Proposal {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Proposal [id=");
-		builder.append(id);
-		builder.append(", teacherId=");
-		builder.append(teacherId);
-		builder.append(", studentId=");
-		builder.append(studentId);
-		builder.append(", learnableId=");
-		builder.append(learnableId);
-		builder.append(", teachableId=");
-		builder.append(teachableId);
-		builder.append(", offerAmount=");
-		builder.append(offerAmount);
-		builder.append(", dateTimeProposed=");
-		builder.append(dateTimeProposed);
-		builder.append(", duration=");
-		builder.append(duration);
-		builder.append(", addressId=");
-		builder.append(addressId);
-		builder.append(", comment=");
-		builder.append(comment);
-		builder.append(", proposalStatusId=");
-		builder.append(proposalStatusId);
-		builder.append(", routing=");
-		builder.append(routing);
-		builder.append(", dateTimeCreated=");
-		builder.append(dateTimeCreated);
-		builder.append("]");
-		return builder.toString();
+		return "Proposal [id=" + id + ", teacher=" + teacher + ", student=" + student + ", learnableId=" + learnableId
+				+ ", teachableId=" + teachableId + ", offerAmount=" + offerAmount + ", dateTimeProposed="
+				+ dateTimeProposed + ", duration=" + duration + ", addressId=" + addressId + ", comment=" + comment
+				+ ", proposalStatusId=" + proposalStatusId + ", routing=" + routing + ", dateTimeCreated="
+				+ dateTimeCreated + "]";
 	}
 
 	@Override
@@ -206,9 +186,9 @@ public class Proposal {
 		result = prime * result + ((offerAmount == null) ? 0 : offerAmount.hashCode());
 		result = prime * result + ((proposalStatusId == null) ? 0 : proposalStatusId.hashCode());
 		result = prime * result + routing;
-		result = prime * result + studentId;
+		result = prime * result + ((student == null) ? 0 : student.hashCode());
 		result = prime * result + teachableId;
-		result = prime * result + teacherId;
+		result = prime * result + ((teacher == null) ? 0 : teacher.hashCode());
 		return result;
 	}
 
@@ -262,11 +242,17 @@ public class Proposal {
 			return false;
 		if (routing != other.routing)
 			return false;
-		if (studentId != other.studentId)
+		if (student == null) {
+			if (other.student != null)
+				return false;
+		} else if (!student.equals(other.student))
 			return false;
 		if (teachableId != other.teachableId)
 			return false;
-		if (teacherId != other.teacherId)
+		if (teacher == null) {
+			if (other.teacher != null)
+				return false;
+		} else if (!teacher.equals(other.teacher))
 			return false;
 		return true;
 	}

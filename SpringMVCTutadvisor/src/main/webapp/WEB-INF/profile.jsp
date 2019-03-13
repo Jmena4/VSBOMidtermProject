@@ -65,40 +65,41 @@
 					</ul>
 				</nav>
 				<section id="info">
+					<form action="modify_profile.do" method="POST" name="">
 					<p>Your info:</p>
 					<p class="setting">
-						<span>First Name </span> ${user.firstName }
+						<span>First Name </span> <input class="text" name="firstName" value="${user.firstName }"/>
 					</p>
 					<p class="setting">
-						<span>Last Name </span> ${user.lastName }
+						<span>Last Name </span> <input class="text" name="lastName" value="${user.lastName }">
 					</p>
 					<p class="setting">
-						<span>Phone Number </span> ${user.phone }
+						<span>Phone Number </span> <input class="text" name="phone" value="${user.phone }">
 					</p>
 					<p class="setting">
-						<span>E-mail Address </span> ${user.email }
+						<span>E-mail Address </span> <input class="text" name="email" value="${user.email }">
 					</p>
 					<p class="setting">
-						<span>Street</span> ${user.addressId.address }
+						<span>Street</span> <input class="text" name="address" value="${user.addressId.address }">
 					</p>
 					<p class="setting">
-						<span></span> ${user.addressId.address2 }
-					</p>
-					<br>
-					<p class="setting">
-						<span>City</span> ${user.addressId.city }
+						<span>Street 2</span> <input class="text" name="address2" value="${user.addressId.address2 }">
 					</p>
 					<p class="setting">
-						<span>State</span> ${user.addressId.state }
+						<span>City</span> <input class="text" name="city" value="${user.addressId.city }">
 					</p>
 					<p class="setting">
-						<span>Zip/Postal code</span> ${user.addressId.postalCode}
+						<span>State</span>  <input class="text" name="state" value="${user.addressId.state }">
 					</p>
-
-					<form action="modify_profile.do" method="GET">
-
-						<input type="submit" action="modify_profile.do"
-							value="Edit Profile" />
+					<p class="setting">
+						<span>Zip/Postal code</span>  <input class="text" name="postalCode" value="${user.addressId.postalCode}">
+					</p>
+						<input type="submit"  name="modify_profile.do"
+							value="Save Changes" />
+					</form>
+					<form action="home.do" method="GET">
+						<input type="submit" 
+							value="Ruturn Home" />
 					</form>
 
 				</section>
@@ -152,7 +153,6 @@
 						</div>
 						<br> <input type="submit" value="Update Skills">
 					</form>
-					</br>
 				</section>
 
 				<section id="activity" class="hidden">
