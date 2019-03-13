@@ -229,7 +229,7 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 	public LearnableSkill updateLearnableToInactive(LearnableSkill learnableSkill) {
 
 		LearnableSkill managed = em.find(LearnableSkill.class, learnableSkill.getId());
-		managed.setActive(false);
+		managed.setIsActive(false);
 		em.persist(managed);
 		em.flush();
 		return managed;
