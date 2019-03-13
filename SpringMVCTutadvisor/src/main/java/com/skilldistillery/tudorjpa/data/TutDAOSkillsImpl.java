@@ -1,5 +1,6 @@
 package com.skilldistillery.tudorjpa.data;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -126,6 +127,7 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 	@Override
 	public TeachableSkill createTeachableSkill(TeachableSkill teachableSkill) {
 		em.persist(teachableSkill);
+		
 		em.flush();
 
 		return teachableSkill;
@@ -139,6 +141,8 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		managed.setSkillName(teachableSkill.getSkillName());
 		managed.setSkillLevel(teachableSkill.getSkillLevel());
 		managed.setUser(teachableSkill.getUser());
+		managed.setActive((teachableSkill.getIsActive()));
+
 		em.flush();
 		return managed;
 
@@ -158,6 +162,22 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 	@Override
 	public TeachableSkill findTeachableSkillById(int id) {
 		TeachableSkill result = em.find(TeachableSkill.class, id);
+		return result;
+	}
+
+	@Override
+	public List<TeachableSkill> findTeachableSkillsByUserId(int id) {
+		String query = "Select ts from TeachableSkill ts where ts.user.id= :userId";
+		List<TeachableSkill> result = em.createQuery(query, TeachableSkill.class).setParameter("userId", id)
+				.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<LearnableSkill> findLearnableableSkillsByUserId(int id) {
+		String query = "Select ls from learnableSkill ls where ls.user.id= :userId";
+		List<LearnableSkill> result = em.createQuery(query, LearnableSkill.class).setParameter("userId", id)
+				.getResultList();
 		return result;
 	}
 

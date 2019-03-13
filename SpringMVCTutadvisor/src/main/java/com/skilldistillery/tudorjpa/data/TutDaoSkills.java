@@ -34,6 +34,7 @@ public interface TutDaoSkills {
 	public TeachableSkill findTeachableSkillById(int id);
 	TeachableSkill updateTeachableToInactive(TeachableSkill teachableSkill);
 	public boolean deleteTeachableSkill(int id);
+	List<TeachableSkill> findTeachableSkillsByUserId(int id);
 	
 //	Learnable Skill
 	public List<LearnableSkill> findAllLearnableSkills();
@@ -42,4 +43,5 @@ public interface TutDaoSkills {
 	public LearnableSkill findLearnableSkillById(int id);
 	public boolean deleteLearnableSkill(int id);
 	LearnableSkill updateLearnableToInactive(LearnableSkill learnableSkill);
+	List<LearnableSkill> findLearnableableSkillsByUserId(int id);
 }

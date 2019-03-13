@@ -112,11 +112,11 @@
 				</section>
 				<section id="teachableSkill" class="hidden">
 					<p>Skills you can teach</p>
-					<form action="updateTeachableSkills.do" method="POST">
-						<div
-							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+					<c:if test="${!empty user.teachableSkills}">
+						<form action="updateTeachableSkills.do" method="POST">
+							<div
+								style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
 
-							<c:if test="${!empty user.teachableSkills}">
 								<c:forEach var="TeachableSkill" items="${user.teachableSkills }">
 									<c:if test="${TeachableSkill.isActive == true}">
 										<p>
@@ -137,19 +137,21 @@
 										</p>
 									</c:if>
 								</c:forEach>
-							</c:if>
-						</div>
-						<br>
-						<p>Can you teach any of these skills?</p>
+							</div>
+							<input type="submit" value="Update Skills">
+						</form>
+					</c:if>
+					<br>
+					<p>Can you teach any of these skills?</p>
+					<form action="addToTeachableSkills.do" method="POST">
 						<div
 							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
-							<c:if test="${!empty allTeachableSkills }">
-								<c:forEach var="newTeachableSkill"
-									items="${allTeachableSkills }">
+							<c:if test="${!empty allSkillNames }">
+								<c:forEach var="newTeachableSkill" items="${allSkillNames }">
 									<p>
 										<input type="checkbox" name="skillToAdd"
 											value="${newTeachableSkill.id }">
-										${newTeachableSkill.skillName.name } at a <select>
+										${newTeachableSkill.name } at a <select name="level">
 											<option value="1">NoExperience</option>
 											<option value="2">Novice</option>
 											<option value="3">Intermediate</option>
@@ -160,12 +162,13 @@
 								</c:forEach>
 							</c:if>
 						</div>
-						<br> <input type="submit" value="Update Skills">
+						<input type="submit" value="Add New Skills">
 					</form>
 				</section>
 
 				<section id="activity" class="hidden">
 					<p>Skills you want to learn</p>
+
 					<form action="updateLearnableSkills.do" method="POST">
 						<div
 							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
@@ -173,11 +176,11 @@
 							<c:if test="${!empty user.learnableSkills}">
 
 								<c:forEach var="LearnableSkill" items="${user.learnableSkills }">
-										<p>
-										<c:if test="${LearnableSkill.isActive == true }"></c:if>
+									<p>
+										<c:if test="${LearnableSkill.isActive == true }">
 											<input type="checkbox" name="learnableSkillsUpdate"
 												value=" ${LearnableSkill.id }" checked>
-											${LearnableSkill.skillName.name } at a <select name="level">
+										${LearnableSkill.skillName.name } at a <select name="level">
 												<option value="1"
 													<c:if test="${LearnableSkill.skillLevel.id ==1 }"> selected="selected"</c:if>>NoExperience</option>
 												<option value="2"
@@ -189,23 +192,27 @@
 												<option value="5"
 													<c:if test="${LearnableSkill.skillLevel.id ==5 }"> selected="selected"</c:if>>Master</option>
 											</select> level.
-										</p>
+										</c:if>
+									</p>
 								</c:forEach>
 							</c:if>
 						</div>
-						<br>
-						<p>What Skills are do you want to master?</p>
+						<input type="submit" value="Update Skills To Learn">
+					</form>
+					<br>
+					<p>Would you like tutoring in any of these skills?</p>
+					<form action="addToLearnableSkills.do" method="POST">
+
 						<div
 							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
 
 
-							<c:if test="${!empty allLearnableSkills }">
-								<c:forEach var="newLearnableSkill"
-									items="${allLearnableSkills }">
+							<c:if test="${!empty allSkillNames }">
+								<c:forEach var="newLearnableSkill" items="${allSkillNames }">
 									<p>
 										<input type="checkbox" name="skillToAdd"
 											value="${newLearnableSkill.id }">
-										${newLearnableSkill.skillName.name } at a <select>
+										${newLearnableSkill.name } at a <select name="level">
 											<option value="1">NoExperience</option>
 											<option value="2">Novice</option>
 											<option value="3">Intermediate</option>
@@ -216,7 +223,7 @@
 								</c:forEach>
 							</c:if>
 						</div>
-						<br> <input type="submit" value="Update skills to learn">
+						<input type="submit" value="Add Skills To Learn">
 					</form>
 				</section>
 
