@@ -48,6 +48,12 @@ body {
 	font-weight: normal;
 }
 
+#logged-in-as {
+	color: white;
+	font-size: 14px;
+	font-style: italic;
+}
+
 label {
 	font-weight: normal;
 }

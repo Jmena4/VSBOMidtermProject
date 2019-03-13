@@ -21,7 +21,9 @@
 <link rel="stylesheet" href="css/landing.css" />
 </head>
 <body>
-	<!-- Navigation -->
+
+	<!-- navbar -->
+	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
 		<div class="container-fluid">
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -42,19 +44,32 @@
 					</button>
 				</form>
 			</div>
-			<div class="navbar-nav ml-auto">
+			<div class="navbar-nav ml-auto">			
+					<span id="logged-in-as">
+		You are&nbsp;
+		<c:choose>
+		<c:when test="${not empty user.username}">
+		logged in as ${user.username}&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:when>
+		<c:otherwise>
+		not logged in&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:otherwise>
+		</c:choose>
+		</span>		
 				<form action="profile.do" method="GET">
 					<input id="profile-button" type="submit" value="My Profile">
 				</form>
 			</div>
 		</div>
 	</nav>
+	
+	<!-- end navbar -->
+	
 	<span class="float-right">
 		<form action="switch_cards.do" method="GET">
 			<select id="type" name="type">
 				<option value="1">My Suggestions</option>
-				<option value="2">My Proposals</option>
-				<option value="3">My History</option>
+					<option value="2">My History</option>
 			</select> &nbsp; <input id="show-cards" type="submit" value="Show Cards">
 			&nbsp; &nbsp; &nbsp; &nbsp;
 		</form>
@@ -62,6 +77,26 @@
 	<br>
 	<br>
 	<div id="card-container" class="container">
+	
+		<!-- mock data button -->
+		<% 
+		String id="5";
+		session.setAttribute("id",id);
+		String teachableSkill="2";
+		session.setAttribute("teachableSkill",teachableSkill);
+		String learnableSkill="2";
+		session.setAttribute("learnableSkill",learnableSkill);
+		String skillLevel="3";
+		session.setAttribute("skillLevel",skillLevel);
+		String teacherUser="1";
+		session.setAttribute("teacherUser",teacherUser);		
+		String studentUser="2";	
+		session.setAttribute("studentUser",studentUser);
+		%>
+		<form action="suggestionPage.do" method="POST">
+		<input  type="submit" value="Send Mock Suggestion Data">
+		</form>
+		<!--  end mock data button -->
 
 		<!-- check for skills -->
 		<c:if test="${(empty sug_learnable) and (empty sug_teachable)}">
@@ -72,8 +107,8 @@
 
 		<!-- learnable suggestion card factory -->
 
-		<c:if test="${not empty sug_learnable}">
-			<c:forEach var="suggestion" items="${sug_learnable}">
+		<c:if test="${not empty learnable_list}">
+			<c:forEach var="suggestion" items="${learnable_list}">
 				<form action="suggestion.do" method="GET">
 					<button id="card-button" type="submit">
 						<div id="suggestion-card" class="card">
@@ -84,7 +119,7 @@
 									</div>
 								</div>
 								<div id="card-column" class="column">
-									<div class="card-title">${suggestion.username}canteach
+									<div class="card-title">${suggestion.username}can teach
 										you ${suggestion.name}</div>
 									<div class="card-text">
 										Name: ${suggestion.userfirstname} &nbsp;
@@ -108,8 +143,8 @@
 
 		<!-- teachable suggestion card factory -->
 
-		<c:if test="${not empty sug_teachable}">
-			<c:forEach var="suggestion" items="${sug_teachable}">
+		<c:if test="${not empty teachable_list}">
+			<c:forEach var="suggestion" items="${teachable_list}">
 				<form action="suggestion.do" method="GET">
 					<button id="card-button" type="submit">
 						<div id="suggestion-card" class="card">
@@ -140,98 +175,6 @@
 		</c:if>
 
 		<!-- end teachable suggestion card factory -->
-
-
-		<!-- learnable proposal card factory -->
-
-		<c:if test="${not empty prop_learnable}">
-			<c:forEach var="proposal" items="${prop_learnable}">
-				<div id="suggestion-card" class="card">
-					<div class="row">
-						<div id="col-photo" class="column">
-							<div id="div-photo" class="float-right">
-								<img class="card-img-top" src=${suggestion.url}>
-							</div>
-						</div>
-						<div id="card-column" class="column">
-							<div class="card-title">${proposal.username}wants to teach you ${proposal.name}</div>
-							<div class="card-text">
-								Name: ${proposal.userfirstname} &nbsp; ${proposal.userlastname}
-								<br> Desired skill Level: ${proposal.level} <br>
-								Location: ${proposal.location} <br> Duration:
-								${proposal.duration} <br> Amount: ${proposal.amount}
-								<div class="card-comment">Comment: ${proposal.comment}</div>
-								<div class="button-div">
-									<form action="accept.do" method="POST">
-										<input type="hidden" name="id" value="${proposal.id}" /> <input
-											id="accept-button" type="submit" value="Accept Offer">
-									</form>
-									&nbsp; &nbsp;
-									<form action="decline.do" method="POST">
-										<input type="hidden" name="id" value="${proposal.id}" /> <input
-											id="decline-button" type="submit" value="Decline Offer">
-									</form>
-									&nbsp; &nbsp;
-									<form action="counter.do" method="POST">
-										<input type="hidden" name="id" value="${proposal.id}" /> <input
-											id="counter-button" type="submit" value="Counter Offer">
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br>
-			</c:forEach>
-		</c:if>
-
-		<!-- end learnable proposal card factory -->
-		
-		<!-- teachable proposal card factory -->
-
-		<c:if test="${not empty prop_teachable}">
-			<c:forEach var="proposal" items="${prop_teachable}">
-				<div id="suggestion-card" class="card">
-					<div class="row">
-						<div id="col-photo" class="column">
-							<div id="div-photo" class="float-right">
-								<img class="card-img-top" src=${suggestion.url}>
-							</div>
-						</div>
-						<div id="card-column" class="column">
-							<div class="card-title">${proposal.username}wants you to
-								teach them ${proposal.name}</div>
-							<div class="card-text">
-								Name: ${proposal.userfirstname} &nbsp; ${proposal.userlastname}
-								<br> Desired skill Level: ${proposal.level} <br>
-								Location: ${proposal.location} <br> Duration:
-								${proposal.duration} <br> Amount: ${proposal.amount}
-								<div class="card-comment">Comment: ${proposal.comment}</div>
-								<div class="button-div">
-									<form action="accept.do" method="POST">
-										<input type="hidden" name="id" value="${proposal.id}" /> <input
-											id="accept-button" type="submit" value="Accept Offer">
-									</form>
-									&nbsp; &nbsp;
-									<form action="decline.do" method="POST">
-										<input type="hidden" name="id" value="${proposal.id}" /> <input
-											id="decline-button" type="submit" value="Decline Offer">
-									</form>
-									&nbsp; &nbsp;
-									<form action="counter.do" method="POST">
-										<input type="hidden" name="id" value="${proposal.id}" /> <input
-											id="counter-button" type="submit" value="Counter Offer">
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br>
-			</c:forEach>
-		</c:if>
-
-		<!-- end teachable proposal card factory -->
 		
 		<!-- history card factory -->
 
