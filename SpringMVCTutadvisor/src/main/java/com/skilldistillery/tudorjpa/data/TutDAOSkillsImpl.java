@@ -87,12 +87,10 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 
 	@Override
 	public SkillName updateSkillName(int id, SkillName skillname) {
-		em.getTransaction().begin();
 		SkillName managed = em.find(SkillName.class, id);
 		managed.setId(skillname.getId());
 		managed.setName(skillname.getName());
 		em.flush();
-		em.getTransaction().commit();
 		return managed;
 	}
 
@@ -145,13 +143,16 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		return managed;
 
 	}
+
 	@Override
-	public TeachableSkill updateTeachableToInactive( TeachableSkill teachableSkill) {
-		TeachableSkill managed = teachableSkill;
+	public TeachableSkill updateTeachableToInactive(TeachableSkill teachableSkill) {
+
+		TeachableSkill managed = em.find(TeachableSkill.class, teachableSkill.getId());
 		managed.setActive(false);
+		em.persist(managed);
 		em.flush();
 		return managed;
-		
+
 	}
 
 	@Override
@@ -224,4 +225,14 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 		return result;
 	}
 
+	@Override
+	public LearnableSkill updateLearnableToInactive(LearnableSkill learnableSkill) {
+
+		LearnableSkill managed = em.find(LearnableSkill.class, learnableSkill.getId());
+		managed.setActive(false);
+		em.persist(managed);
+		em.flush();
+		return managed;
+
+	}
 }

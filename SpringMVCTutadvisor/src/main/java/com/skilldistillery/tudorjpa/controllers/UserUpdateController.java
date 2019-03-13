@@ -61,14 +61,50 @@ public class UserUpdateController {
 				newSkills.add(ts);
 			}
 
-			for (TeachableSkill teachacbleSkill : current) {
-				if (!newSkills.contains(teachacbleSkill)) {
-					skillDAO.updateTeachableToInactive(teachacbleSkill);
-					user.setTeachableSkills(newSkills);
+			for (TeachableSkill teachableSkill : current) {
+				if (!newSkills.contains(teachableSkill)) {
+					skillDAO.updateTeachableToInactive(teachableSkill);
 				}
 			}
 		}
 		return "redirect:profile.do";
 	}
 
+//	@RequestMapping(path = "updateTeachableSkills.do", method = RequestMethod.POST)
+//	public String deactivateUsersLastTeachableSkill(HttpSession session) {
+//		User user = (User) session.getAttribute("user");
+//		List<TeachableSkill> current = user.getTeachableSkills();
+//		if (current.size() == 1) {
+//			skillDAO.updateTeachableToInactive(current.get(0));
+//		}
+//		return "redirect:profile.do";
+//	}
+
+	@RequestMapping(path = "updateLearnableSkills.do", method = RequestMethod.POST)
+	public String updateLearnableSkills(@RequestParam(value = "learnableSkillsUpdate") String[] learnableFromForm,
+			@RequestParam(value = "level") String[] level, HttpSession session) {
+		System.out.println("00000000000000000000000000000000000000000000");
+		User user = (User) session.getAttribute("user");
+		List<LearnableSkill> current = user.getLearnableSkills();
+		List<LearnableSkill> newSkills = new ArrayList<LearnableSkill>();
+		if (learnableFromForm != null) {
+
+			System.out.println("1111111111111111111111111111111111111");
+			for (int i = 0; i < learnableFromForm.length; i++) {
+				LearnableSkill ls = skillDAO.findLearnableSkillById(Integer.parseInt((learnableFromForm[i].trim())));
+				System.out.println("22222222222222222222222222222");
+
+				ls.setSkillLevel(skillDAO.findSkillLevelById(Integer.parseInt((level[i]))));
+				skillDAO.updateLearnableSkill(ls.getId(), ls);
+				newSkills.add(ls);
+			}
+
+			for (LearnableSkill teachableSkill : current) {
+				if (!newSkills.contains(teachableSkill)) {
+					skillDAO.updateLearnableToInactive(teachableSkill);
+				}
+			}
+		}
+		return "redirect:profile.do";
+	}
 }
