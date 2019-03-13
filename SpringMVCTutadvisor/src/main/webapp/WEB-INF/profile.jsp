@@ -111,22 +111,24 @@
 
 							<c:if test="${!empty user.teachableSkills}">
 								<c:forEach var="TeachableSkill" items="${user.teachableSkills }">
-									<p>
-										<input type="checkbox" name="teachableSkillsUpdate"
-											value="${TeachableSkill.id }" checked>
-										${TeachableSkill.skillName.name } at a <select name="level">
-											<option value="1"
-												<c:if test="${TeachableSkill.skillLevel.id ==1 }"> selected="selected"</c:if>>NoExperience</option>
-											<option value="2"
-												<c:if test="${TeachableSkill.skillLevel.id ==2 }"> selected="selected"</c:if>>Novice</option>
-											<option value="3"
-												<c:if test="${TeachableSkill.skillLevel.id ==3 }"> selected="selected"</c:if>>Intermediate</option>
-											<option value="4"
-												<c:if test="${TeachableSkill.skillLevel.id ==4 }"> selected="selected"</c:if>>Expert</option>
-											<option value="5"
-												<c:if test="${TeachableSkill.skillLevel.id ==5 }"> selected="selected"</c:if>>Master</option>
-										</select> level.
-									</p>
+<%-- 									<c:if test="${TeachableSkill.isActive == true}">
+									</c:if> --%>
+										<p>
+											<input type="checkbox" name="teachableSkillsUpdate"
+												value="${TeachableSkill.id }" checked>
+											${TeachableSkill.skillName.name } at a <select name="level">
+												<option value="1"
+													<c:if test="${TeachableSkill.skillLevel.id ==1 }"> selected="selected"</c:if>>NoExperience</option>
+												<option value="2"
+													<c:if test="${TeachableSkill.skillLevel.id ==2 }"> selected="selected"</c:if>>Novice</option>
+												<option value="3"
+													<c:if test="${TeachableSkill.skillLevel.id ==3 }"> selected="selected"</c:if>>Intermediate</option>
+												<option value="4"
+													<c:if test="${TeachableSkill.skillLevel.id ==4 }"> selected="selected"</c:if>>Expert</option>
+												<option value="5"
+													<c:if test="${TeachableSkill.skillLevel.id ==5 }"> selected="selected"</c:if>>Master</option>
+											</select> level.
+										</p>
 								</c:forEach>
 							</c:if>
 						</div>

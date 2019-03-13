@@ -68,7 +68,6 @@ public class UserUpdateController {
 				}
 			}
 		}
-
 		return "redirect:profile.do";
 	}
 
