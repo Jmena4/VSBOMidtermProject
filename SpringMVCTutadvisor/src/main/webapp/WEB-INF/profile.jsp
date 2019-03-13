@@ -173,9 +173,8 @@
 							<c:if test="${!empty user.learnableSkills}">
 
 								<c:forEach var="LearnableSkill" items="${user.learnableSkills }">
-									<c:if test="${LearnableSkill.isActive == true}">
-
 										<p>
+										<c:if test="${LearnableSkill.isActive == true }"></c:if>
 											<input type="checkbox" name="learnableSkillsUpdate"
 												value=" ${LearnableSkill.id }" checked>
 											${LearnableSkill.skillName.name } at a <select name="level">
@@ -191,7 +190,6 @@
 													<c:if test="${LearnableSkill.skillLevel.id ==5 }"> selected="selected"</c:if>>Master</option>
 											</select> level.
 										</p>
-									</c:if>
 								</c:forEach>
 							</c:if>
 						</div>
