@@ -78,7 +78,7 @@
 	<br>
 	<div id="card-container" class="container">
 	
-		<!-- mock data button -->
+		<!-- mock data button
 		<% 
 		String id="5";
 		session.setAttribute("id",id);
@@ -96,7 +96,7 @@
 		<form action="suggestionPage.do" method="POST">
 		<input  type="submit" value="Send Mock Suggestion Data">
 		</form>
-		<!--  end mock data button -->
+		  end mock data button -->
 
 		<!-- check for skills -->
 		<c:if test="${(empty sug_learnable) and (empty sug_teachable)}">
