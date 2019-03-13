@@ -3,8 +3,6 @@ package com.skilldistillery.tudorjpa.data;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -37,6 +35,19 @@ public class TutDAOUserImpl implements TutDAOUser {
 		String query = "SELECT u from User u where u.isActive = false";
 		List<User> results = em.createQuery(query, User.class).getResultList();
 		return results;
+	}
+
+	@Override
+	public User validateUsernameAndPassword(String userName, String password) {
+		System.out.println(userName + " " + password);
+		String query = "SELECT u from User u where u.username = :uname and u.password = :pword";
+		User user = null;
+		try {
+			user = em.createQuery(query, User.class).setParameter("uname", userName).setParameter("pword", password)
+					.getSingleResult();
+		} catch (Exception e) {
+		}
+		return user;
 	}
 
 	@Override

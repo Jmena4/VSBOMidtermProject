@@ -2,12 +2,15 @@ package com.skilldistillery.tudorjpa.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.skilldistillery.tudorjpa.data.TutDAO;
 import com.skilldistillery.tudorjpa.data.TutDAOUser;
 import com.skilldistillery.tudorjpa.data.TutDaoSkills;
@@ -33,6 +36,8 @@ public class TutadvisorController {
 	@Autowired
 	private TutDaoSkills tutSkills;
 
+
+
 //	*************PLACE HOLDER FOR ACTUAL CONTROLLER**************
 //	@RequestMapping(path = { "/", "home.do" }, method = RequestMethod.GET)
 
@@ -43,6 +48,33 @@ public class TutadvisorController {
 
 		return "WEB-INF/landing.jsp";
 	}
+	
+	@RequestMapping(path = "login.do", method = RequestMethod.POST)
+	public ModelAndView loginDo(String username, String password, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User user = tutUser.validateUsernameAndPassword(username, password);
+		String result = null;
+		if(user != null) {
+			mv.setViewName("WEB-INF/home.jsp");
+			session.setAttribute("user", user);			
+		}
+		else {
+			mv.setViewName("WEB-INF/landing.jsp");
+			result = "Invalid username or password";
+			mv.addObject("result", result);
+		}
+		return mv;
+	}
+	
+
+//	public ModelAndView Login(@Valid User user, HttpSession session) {
+//	  ModelAndView mv = new ModelAndView();
+//	  LocalDateTime lt = LocalDateTime.now();
+//	  session.setAttribute("loginTime", lt);
+//	  mv.setViewName("WEB-INF/home.jsp");
+//	  return mv;
+//	}
+	
 
 //	mock mapping to see the profile page:
 	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
@@ -81,15 +113,16 @@ public class TutadvisorController {
 //		TODO: create method to get list of learnable suggestions and
 //		list of teachable suggestions and add them to the model
 
-		mv.addObject("learnable", learnable);
-		mv.addObject("teachable", teachable);
+//		mv.addObject("sug_learnable", sugLearnable);
+//		mv.addObject("sug_teachable", sugTeachable);
 			
 			
 		} else if (type.equals("2")) {
 		List<Proposal> proposals = null;
 //		TODO: create method to get list of pending proposals and add it to the model
 		
-		mv.addObject("proposals", proposals);
+//		mv.addObject("prop_learnable", propLearnable);
+//		mv.addObject("prop_teachable", propTeachable);
 		}
 
 		else if (type.equals("3")) {
@@ -115,7 +148,6 @@ public class TutadvisorController {
 //	}
 
 	@RequestMapping(path = "modify_profile.do", method = RequestMethod.GET)
-
 	public ModelAndView modifyProfilePage(User user) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("WEB-INF/edit_profile.jsp");
@@ -124,8 +156,7 @@ public class TutadvisorController {
 
 	@RequestMapping(path = "modify_profile.do", method = RequestMethod.POST)
 	public ModelAndView modifyProfileDo(String first, String last, String email, String phone, String url, String uname,
-			String password, String street, String street2, String city, String state, String zip,
-			String learnableSkills, String teachableSkills) {
+			String password, String street, String street2, String city, String state, String zip) {
 		ModelAndView mv = new ModelAndView();
 
 //		TODO: create method to update the user, address, teachable & learnable skills
@@ -144,11 +175,9 @@ public class TutadvisorController {
 	}
 
 	@RequestMapping(path = "logout.do", method = RequestMethod.POST)
-	public ModelAndView logoutDo() {
+	public ModelAndView logoutDo(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-
-//		TODO create method to terminate the user session
-
+		session.invalidate();
 		mv.setViewName("WEB-INF/landing.jsp");
 		return mv;
 	}

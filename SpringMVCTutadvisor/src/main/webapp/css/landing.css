@@ -3,6 +3,8 @@ body {
 }
 
 #reg-form {
+	top: 3%;
+	bottom: auto;
 	padding-left: 20px;
 	padding-left: 20px;
 	font-weight: normal;
@@ -34,7 +36,13 @@ body {
 	border: 2px solid black;
 }
 
-.login-fields {
+.login-field {
+	top: 25%;
+	color: black;
+	font-weight: normal;
+}
+
+.login-label {
 	top: 25%;
 	color: white;
 	font-weight: normal;
@@ -42,6 +50,11 @@ body {
 
 label {
 	font-weight: normal;
+}
+
+#login-fail {
+	color: red;
+	font-weight: bold;
 }
 
 #login-button {
@@ -161,4 +174,31 @@ label {
 
 #card-button {
 	width: 100%
+}
+
+#accept-button {
+	font-size: 14px;
+	color: black;
+	background-color: green;
+	border-style: solid;
+	border-width: medium;
+	border-color: black;
+}
+
+#decline-button {
+	font-size: 14px;
+	color: black;
+	background-color: red;
+	border-style: solid;
+	border-width: medium;
+	border-color: black;
+}
+
+#accept-button {
+	font-size: 14px;
+	color: black;
+	background-color: orange;
+	border-style: solid;
+	border-width: medium;
+	border-color: black;
 }
