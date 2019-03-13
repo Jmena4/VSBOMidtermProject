@@ -28,7 +28,9 @@
 <link rel="stylesheet" href="css/landing.css" />
 </head>
 <body>
-	<!-- Navigation -->
+	
+	<!-- navbar -->
+	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
 		<div class="container-fluid">
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -36,18 +38,39 @@
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="navbar-nav ml-auto">
-				<form>
-					<!-- <span class="login-fields"> <label for="username">username
-							<input name="username">
-					</label> &nbsp; &nbsp; <label for="password">password <input
-							name="password">
-					</label>&nbsp; &nbsp; <input id="login-button" type="submit" value="Login">
-					</span> -->
+			<div class="navbar-nav mr-auto">
+				<form action="home.do" method="GET">
+					<button id="home-button" type="submit">
+						<span class="glyphicon glyphicon-home"></span> Tütadvisor Home
+					</button>
+					&nbsp; &nbsp;
+				</form>
+				<form action="logout.do" method="POST">
+					<button id="logout-button" type="submit">
+						<span class="glyphicon glyphicon-log-out"></span> Logout
+					</button>
+				</form>
+			</div>
+			<div class="navbar-nav ml-auto">			
+					<span id="logged-in-as">
+		You are&nbsp;
+		<c:choose>
+		<c:when test="${not empty user.username}">
+		logged in as ${user.username}&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:when>
+		<c:otherwise>
+		not logged in&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:otherwise>
+		</c:choose>
+		</span>		
+				<form action="profile.do" method="GET">
+					<input id="profile-button" type="submit" value="My Profile">
 				</form>
 			</div>
 		</div>
 	</nav>
+	
+	<!-- end navbar -->
 	<div class="container" style="width: 75%">
 
 		<div id="w">
