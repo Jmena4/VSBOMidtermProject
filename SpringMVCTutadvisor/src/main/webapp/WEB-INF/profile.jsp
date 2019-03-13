@@ -66,40 +66,47 @@
 				</nav>
 				<section id="info">
 					<form action="modify_profile.do" method="POST" name="">
-					<p>Your info:</p>
-					<p class="setting">
-						<span>First Name </span> <input class="text" name="firstName" value="${user.firstName }"/>
-					</p>
-					<p class="setting">
-						<span>Last Name </span> <input class="text" name="lastName" value="${user.lastName }">
-					</p>
-					<p class="setting">
-						<span>Phone Number </span> <input class="text" name="phone" value="${user.phone }">
-					</p>
-					<p class="setting">
-						<span>E-mail Address </span> <input class="text" name="email" value="${user.email }">
-					</p>
-					<p class="setting">
-						<span>Street</span> <input class="text" name="address" value="${user.addressId.address }">
-					</p>
-					<p class="setting">
-						<span>Street 2</span> <input class="text" name="address2" value="${user.addressId.address2 }">
-					</p>
-					<p class="setting">
-						<span>City</span> <input class="text" name="city" value="${user.addressId.city }">
-					</p>
-					<p class="setting">
-						<span>State</span>  <input class="text" name="state" value="${user.addressId.state }">
-					</p>
-					<p class="setting">
-						<span>Zip/Postal code</span>  <input class="text" name="postalCode" value="${user.addressId.postalCode}">
-					</p>
-						<input type="submit"  name="modify_profile.do"
-							value="Save Changes" />
+						<p>Your info:</p>
+						<p class="setting">
+							<span>First Name </span> <input class="text" name="firstName"
+								value="${user.firstName }" />
+						</p>
+						<p class="setting">
+							<span>Last Name </span> <input class="text" name="lastName"
+								value="${user.lastName }">
+						</p>
+						<p class="setting">
+							<span>Phone Number </span> <input class="text" name="phone"
+								value="${user.phone }">
+						</p>
+						<p class="setting">
+							<span>E-mail Address </span> <input class="text" name="email"
+								value="${user.email }">
+						</p>
+						<p class="setting">
+							<span>Street</span> <input class="text" name="address"
+								value="${user.addressId.address }">
+						</p>
+						<p class="setting">
+							<span>Street 2</span> <input class="text" name="address2"
+								value="${user.addressId.address2 }">
+						</p>
+						<p class="setting">
+							<span>City</span> <input class="text" name="city"
+								value="${user.addressId.city }">
+						</p>
+						<p class="setting">
+							<span>State</span> <input class="text" name="state"
+								value="${user.addressId.state }">
+						</p>
+						<p class="setting">
+							<span>Zip/Postal code</span> <input class="text"
+								name="postalCode" value="${user.addressId.postalCode}">
+						</p>
+						<input type="submit" name="modify_profile.do" value="Save Changes" />
 					</form>
 					<form action="home.do" method="GET">
-						<input type="submit" 
-							value="Ruturn Home" />
+						<input type="submit" value="Ruturn Home" />
 					</form>
 
 				</section>
@@ -111,8 +118,7 @@
 
 							<c:if test="${!empty user.teachableSkills}">
 								<c:forEach var="TeachableSkill" items="${user.teachableSkills }">
-<%-- 									<c:if test="${TeachableSkill.isActive == true}">
-									</c:if> --%>
+									<c:if test="${TeachableSkill.isActive == true}">
 										<p>
 											<input type="checkbox" name="teachableSkillsUpdate"
 												value="${TeachableSkill.id }" checked>
@@ -129,6 +135,7 @@
 													<c:if test="${TeachableSkill.skillLevel.id ==5 }"> selected="selected"</c:if>>Master</option>
 											</select> level.
 										</p>
+									</c:if>
 								</c:forEach>
 							</c:if>
 						</div>
@@ -159,28 +166,32 @@
 
 				<section id="activity" class="hidden">
 					<p>Skills you want to learn</p>
-					<form action="updateLearnableSkills.do">
+					<form action="updateLearnableSkills.do" method="POST">
 						<div
 							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
 
 							<c:if test="${!empty user.learnableSkills}">
+
 								<c:forEach var="LearnableSkill" items="${user.learnableSkills }">
-									<p>
-										<input type="checkbox" name="learnableSkillsUpdate"
-											value=" ${LearnableSkill.id }" checked>
-										${LearnableSkill.skillName.name } at a <select>
-											<option value="1"
-												<c:if test="${LearnableSkill.skillLevel.id ==1 }"> selected="selcted"</c:if>>NoExperience</option>
-											<option value="2"
-												<c:if test="${LearnableSkill.skillLevel.id ==2 }"> selected="selcted"</c:if>>Novice</option>
-											<option value="3"
-												<c:if test="${LearnableSkill.skillLevel.id ==3 }"> selected="selcted"</c:if>>Intermediate</option>
-											<option value="4"
-												<c:if test="${LearnableSkill.skillLevel.id ==4 }"> selected="selcted"</c:if>>Expert</option>
-											<option value="5"
-												<c:if test="${LearnableSkill.skillLevel.id ==5 }"> selected="selcted"</c:if>>Master</option>
-										</select> level.
-									</p>
+									<c:if test="${LearnableSkill.isActive == true}">
+
+										<p>
+											<input type="checkbox" name="learnableSkillsUpdate"
+												value=" ${LearnableSkill.id }" checked>
+											${LearnableSkill.skillName.name } at a <select name="level">
+												<option value="1"
+													<c:if test="${LearnableSkill.skillLevel.id ==1 }"> selected="selected"</c:if>>NoExperience</option>
+												<option value="2"
+													<c:if test="${LearnableSkill.skillLevel.id ==2 }"> selected="selected"</c:if>>Novice</option>
+												<option value="3"
+													<c:if test="${LearnableSkill.skillLevel.id ==3 }"> selected="selected"</c:if>>Intermediate</option>
+												<option value="4"
+													<c:if test="${LearnableSkill.skillLevel.id ==4 }"> selected="selected"</c:if>>Expert</option>
+												<option value="5"
+													<c:if test="${LearnableSkill.skillLevel.id ==5 }"> selected="selected"</c:if>>Master</option>
+											</select> level.
+										</p>
+									</c:if>
 								</c:forEach>
 							</c:if>
 						</div>

@@ -33,19 +33,17 @@ public class LearnableSkill {
 	@JoinColumn(name = "skill_level_id")
 	private SkillLevel skillLevel;
 
+	@Column(name="is_active")
+	private boolean isActive;
+	
 	@Column(name = "comment")
 	private String comment;
 	
-	@Column(name="is_active")
-	private boolean isActive;
 
 // getters, setters, hash & equals
+	
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public boolean isActive() {
@@ -54,6 +52,10 @@ public class LearnableSkill {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public User getUser() {
@@ -87,6 +89,7 @@ public class LearnableSkill {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
 
 //	Hash & Equals
 
