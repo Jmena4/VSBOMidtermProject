@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 @Entity
 public class Proposal {
@@ -32,7 +37,8 @@ public class Proposal {
 	@Column(name = "teachable_id")
 	private int teachableId;
 
-//	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Generated(GenerationTime.INSERT)
 	@Column(name = "date_time_created")
 	private Date dateTimeCreated;
 
