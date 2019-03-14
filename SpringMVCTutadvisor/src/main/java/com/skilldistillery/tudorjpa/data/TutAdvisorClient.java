@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.tudorjpa.entities.LearnableSkill;
 import com.skilldistillery.tudorjpa.entities.Proposal;
+import com.skilldistillery.tudorjpa.entities.SkillLevel;
 import com.skilldistillery.tudorjpa.entities.SkillName;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
 import com.skilldistillery.tudorjpa.entities.User;
@@ -175,4 +176,76 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 		}
 		return displayTeachableList;
 	}
+
+
+	@Override
+	public Proposal SuggestionBySessionInformation(int id, Proposal managedSuggestion) {
+		managedSuggestion = em.find(Proposal.class, id);
+		Proposal proposal2 = new Proposal();
+		System.out.println("&&&&&&&&&&&&&&&&&&&");
+		managedSuggestion.setTeachableId(proposal2.getTeachableId());
+		managedSuggestion.setLearnableId(proposal2.getLearnableId());
+		managedSuggestion.setStudent(proposal2.getStudent());
+		managedSuggestion.setTeacher(proposal2.getTeacher());
+		String pattern = "yyyy-MM-dd";
+		String pattern2 = "HH:mm:ss";
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(pattern);
+		java.text.SimpleDateFormat sdf2 = new java.text.SimpleDateFormat(pattern2);
+		sdf.format(managedSuggestion.getDateTimeCreated() + " " + sdf2.format(managedSuggestion.getDateTimeCreated()));
+		em.persist(managedSuggestion);
+		em.flush();
+		return managedSuggestion;
+	}
+
+	@Override
+	public SkillLevel findSkillLevelById(int id) {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//	@Override
+//	public TeachableSkill findTeachableSkillById(int id) {
+//
+//		SkillLevel skillLevel = null;
+////		= em.find(SkillName.class, id);
+//		return skillLevel = em.find(SkillLevel.class, id);
+//	}
+//		SkillLevel skillLevel = null;
+//		= em.find(SkillName.class, id);
+//		return skillLevel = em.find(SkillLevel.class, id);
+//	}
+//		SkillLevel skillLevel = null;
+//		= em.find(SkillName.class, id);
+//		return skillLevel = em.find(SkillLevel.class, id);
+//	}
+//		SkillLevel skillLevel = null;
+////		= em.find(SkillName.class, id);
+//		return skillLevel = em.find(SkillLevel.class, id);
+//	}
+	
+	@Override
+	public TeachableSkill findTeachableSkillById(int id) {
+		TeachableSkill teachableSkill = null;
+		return teachableSkill = em.find(TeachableSkill.class, id);
+	}
+
+	@Override
+	public LearnableSkill findLearnableSkillById(int id) {
+		LearnableSkill learnableSkill = null;
+		return learnableSkill = em.find(LearnableSkill.class, id);
+	}
+
+	@Override
+	public User findTeacherUserById(int id) {
+		User teacherUser = null;
+		return teacherUser = em.find(User.class, id);
+	}
+
+	@Override
+	public User findStudentUserById(int id) {
+		User studentUser = null;
+		return studentUser = em.find(User.class, id);
+	}
+
 }
