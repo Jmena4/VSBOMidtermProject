@@ -176,4 +176,40 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 		}
 		return displayTeachableList;
 	}
+
+	@Override
+	public Proposal SuggestionBySessionInformation(int id, Proposal managedSuggestion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SkillLevel findSkillLevelById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TeachableSkill findTeachableSkillById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LearnableSkill findLearnableSkillById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User findTeacherUserById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User findStudentUserById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
