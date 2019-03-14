@@ -135,12 +135,12 @@
 				</section>
 				<section id="teachableSkill" class="hidden">
 					<p>Skills you can teach</p>
-					<c:if test="${!empty user.teachableSkills}">
+					<c:if test="${!empty usersTeachableSkills}">
 						<form action="updateTeachableSkills.do" method="POST">
 							<div
 								style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
 
-								<c:forEach var="TeachableSkill" items="${user.teachableSkills }">
+								<c:forEach var="TeachableSkill" items="${usersTeachableSkills }">
 									<c:if test="${TeachableSkill.isActive == true}">
 										<p>
 											<input type="checkbox" name="teachableSkillsUpdate"
@@ -196,9 +196,9 @@
 						<div
 							style="max-height: 300px; overflow: auto; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
 
-							<c:if test="${!empty user.learnableSkills}">
+							<c:if test="${!empty usersLaernableSkills}">
 
-								<c:forEach var="LearnableSkill" items="${user.learnableSkills }">
+								<c:forEach var="LearnableSkill" items="${usersLaernableSkills }">
 									<p>
 										<c:if test="${LearnableSkill.isActive == true }">
 											<input type="checkbox" name="learnableSkillsUpdate"
