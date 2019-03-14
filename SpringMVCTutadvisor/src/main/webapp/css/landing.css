@@ -134,7 +134,29 @@ label {
 	padding-top: 5px;
 }
 
-#suggestion-card {
+#learnable-card {
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	background-color: #f4be41;
+	border-style: solid;
+	border-width: medium;
+	border-color: black;
+}
+
+#teachable-card {
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	background-color: lightblue;
+	border-style: solid;
+	border-width: medium;
+	border-color: black;
+}
+
+#history-card {
 	padding-top: 5px;
 	padding-left: 5px;
 	padding-bottom: 5px;

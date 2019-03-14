@@ -91,7 +91,7 @@
 			<c:forEach var="learnable" items="${learnablelist}">
 				<form action="suggestionPage.do" method="POST">
 					<button id="card-button" type="submit">
-						<div id="suggestion-card" class="card">
+						<div id="learnable-card" class="card">
 							<div class="row">
 								<div id="col-photo" class="column">
 									<div id="div-photo" class="float-right">
@@ -128,7 +128,7 @@
 			<c:forEach var="teachable" items="${teachablelist}">
 				<form action="suggestionPage.do" method="POST">
 					<button id="card-button" type="submit">
-						<div id="suggestion-card" class="card">
+						<div id="teachable-card" class="card">
 							<div class="row">
 								<div id="col-photo" class="column">
 									<div id="div-photo" class="float-right">
