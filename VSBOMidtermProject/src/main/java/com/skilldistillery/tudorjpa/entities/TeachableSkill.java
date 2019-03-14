@@ -94,9 +94,7 @@ public class TeachableSkill {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((skillLevel == null) ? 0 : skillLevel.hashCode());
-		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 
@@ -109,20 +107,7 @@ public class TeachableSkill {
 		if (getClass() != obj.getClass())
 			return false;
 		TeachableSkill other = (TeachableSkill) obj;
-		if (skillLevel == null) {
-			if (other.skillLevel != null)
-				return false;
-		} else if (!skillLevel.equals(other.skillLevel))
-			return false;
-		if (skillName == null) {
-			if (other.skillName != null)
-				return false;
-		} else if (!skillName.equals(other.skillName))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
+		if (id != other.id)
 			return false;
 		return true;
 	}

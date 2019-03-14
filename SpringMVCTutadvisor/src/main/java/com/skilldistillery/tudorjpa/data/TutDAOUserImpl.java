@@ -52,9 +52,8 @@ public class TutDAOUserImpl implements TutDAOUser {
 
 	@Override
 	public User createUser(User user) {
-		em.getTransaction().begin();
 		em.persist(user);
-		em.getTransaction().commit();
+		em.flush();
 		return user;
 	}
 

@@ -9,24 +9,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.skilldistillery.tudorjpa.data.NewUserAndAddressDTO;
 import com.skilldistillery.tudorjpa.data.TutDAO;
+import com.skilldistillery.tudorjpa.data.TutDAOAddress;
 import com.skilldistillery.tudorjpa.data.TutDAOUser;
 import com.skilldistillery.tudorjpa.data.TutDaoSkills;
+import com.skilldistillery.tudorjpa.entities.Address;
 import com.skilldistillery.tudorjpa.entities.LearnableSkill;
 import com.skilldistillery.tudorjpa.entities.Proposal;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
 import com.skilldistillery.tudorjpa.entities.User;
 
-
-
-
-
 @Controller
 public class TutadvisorController {
 
-
+	@Autowired
+	private TutDAOAddress tutAddress;
 	@Autowired
 	private TutDAO tutDAO;
 	@Autowired
@@ -34,36 +35,33 @@ public class TutadvisorController {
 	@Autowired
 	private TutDaoSkills tutSkills;
 
-
-
 //	*************PLACE HOLDER FOR ACTUAL CONTROLLER**************
 //	@RequestMapping(path = { "/", "home.do" }, method = RequestMethod.GET)
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String index(Model model) {
+		model.addAttribute("newUser", new NewUserAndAddressDTO());
 
 //		model.addAttribute("addTudors", tutDAO.findALL());
 
 		return "WEB-INF/landing.jsp";
 	}
-	
+
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public ModelAndView loginDo(String username, String password, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = tutUser.validateUsernameAndPassword(username, password);
 		String result = null;
-		if(user != null) {
+		if (user != null) {
 			mv.setViewName("WEB-INF/home.jsp");
-			session.setAttribute("user", user);			
-		}
-		else {
+			session.setAttribute("user", user);
+		} else {
 			mv.setViewName("WEB-INF/landing.jsp");
 			result = "Invalid username or password";
 			mv.addObject("result", result);
 		}
 		return mv;
 	}
-	
 
 //	public ModelAndView Login(@Valid User user, HttpSession session) {
 //	  ModelAndView mv = new ModelAndView();
@@ -72,23 +70,21 @@ public class TutadvisorController {
 //	  mv.setViewName("WEB-INF/home.jsp");
 //	  return mv;
 //	}
-	
 
-//	mock mapping to see the profile page:
-//	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
-//	public ModelAndView mockProfile(HttpSession session) {
-//		ModelAndView mv = new ModelAndView();
-//		User user = tutUser.findUserById(2);
-//		session.setAttribute("user", user);
-//		List<TeachableSkill> allTeachableSkills = tutSkills.findAllTeachableSkills();
-//		List<LearnableSkill> allLearnableSkills = tutSkills.findAllLearnableSkills();
-//
-//		mv.setViewName("WEB-INF/profile.jsp");
-//		mv.addObject("user", user);
-//		mv.addObject("allLearnableSkills", allLearnableSkills);
-//		mv.addObject("allTeachableSkills", allTeachableSkills);
-//		return mv;
-//	}
+//	mapping to see the profile page:
+	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
+	public ModelAndView goToProfile(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User user = (User) session.getAttribute("user");
+		List<TeachableSkill> allTeachableSkills = tutSkills.findAllTeachableSkills();
+		List<LearnableSkill> allLearnableSkills = tutSkills.findAllLearnableSkills();
+
+		mv.setViewName("WEB-INF/profile.jsp");
+		mv.addObject("user", user);
+		mv.addObject("allLearnableSkills", allLearnableSkills);
+		mv.addObject("allTeachableSkills", allTeachableSkills);
+		return mv;
+	}
 
 	@RequestMapping(path = "home.do", method = RequestMethod.GET)
 	public ModelAndView homeDo() {
@@ -107,19 +103,18 @@ public class TutadvisorController {
 
 		if (type.equals("1")) {
 
-		List<LearnableSkill> learnable = null;
-		List<TeachableSkill> teachable = null;
+			List<LearnableSkill> learnable = null;
+			List<TeachableSkill> teachable = null;
 //		TODO: create method to get list of learnable suggestions and
 //		list of teachable suggestions and add them to the model
 
 //		mv.addObject("learnable_list", learnableList);
 //		mv.addObject("teachable_list", teachableList);
-			
-			
+
 		} else if (type.equals("2")) {
-		List<Proposal> historyList = null;
+			List<Proposal> historyList = null;
 //		TODO: create method to get list of pending proposals and add it to the model
-		mv.addObject("history_list", historyList);
+			mv.addObject("history_list", historyList);
 		}
 		mv.setViewName("WEB-INF/home.jsp");
 		return mv;
@@ -152,15 +147,49 @@ public class TutadvisorController {
 		mv.setViewName("WEB-INF/profile.jsp");
 		return mv;
 	}
-	
-	@RequestMapping(path= "registration.do", method = RequestMethod.GET)
-	public ModelAndView registerDo() {
+
+	@RequestMapping(path = "register.do", method = RequestMethod.POST)
+	public ModelAndView registerPOST(HttpSession session, NewUserAndAddressDTO dto) {
+		
+		
+		Address add = new Address();
+		add.setAddress(dto.getStreet());
+		add.setCity(dto.getCity());
+		add.setPostalCode(dto.getCity());
+		add = tutAddress.createAddresses(add);
+		
+		User user = new User();
+		user.setFirstName(dto.getFirstname());
+		user.setLastName(dto.getLastname());
+		user.setUsername(dto.getUsername());
+		user.setPassword(dto.getPassword());
+		user.setPhone(dto.getPhone());
+		user.setPictureURL(dto.getUrl());
+		user.setAddressId(add);
+		user.setIsActive(true);
+		user.setIsAdmin(false);
+		
+		tutUser.createUser(user);
+		session.setAttribute("user", user);
 		ModelAndView mv = new ModelAndView();
 		boolean reg = true;
 		mv.addObject("reg", reg);
-		mv.setViewName("WEB-INF/landing.jsp");		
+		mv.setViewName("WEB-INF/home.jsp");
 		return mv;
 	}
+	
+	@RequestMapping(path = "registration.do", method = RequestMethod.GET)
+	public ModelAndView registerRedirect() {
+		ModelAndView mv = new ModelAndView();
+		boolean reg = true;
+		mv.addObject("newUser", new NewUserAndAddressDTO());
+
+		mv.addObject("reg", reg);
+		mv.setViewName("WEB-INF/landing.jsp");
+		return mv;
+	}
+
+
 
 	@RequestMapping(path = "logout.do", method = RequestMethod.POST)
 	public ModelAndView logoutDo(HttpSession session) {
@@ -169,7 +198,7 @@ public class TutadvisorController {
 		mv.setViewName("WEB-INF/landing.jsp");
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "suggestionPage.do", method = RequestMethod.POST)
 	public ModelAndView suggestionPage(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
