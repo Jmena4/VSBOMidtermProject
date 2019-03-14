@@ -219,6 +219,10 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 //		= em.find(SkillName.class, id);
 //		return skillLevel = em.find(SkillLevel.class, id);
 //	}
+//		SkillLevel skillLevel = null;
+////		= em.find(SkillName.class, id);
+//		return skillLevel = em.find(SkillLevel.class, id);
+//	}
 	
 	@Override
 	public TeachableSkill findTeachableSkillById(int id) {
@@ -228,7 +232,6 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 
 	@Override
 	public LearnableSkill findLearnableSkillById(int id) {
-
 		LearnableSkill learnableSkill = null;
 		return learnableSkill = em.find(LearnableSkill.class, id);
 	}
