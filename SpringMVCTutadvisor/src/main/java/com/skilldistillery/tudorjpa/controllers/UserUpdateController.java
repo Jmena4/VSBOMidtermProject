@@ -36,7 +36,7 @@ public class UserUpdateController {
 	public String updateUsersTeachableSkills(@RequestParam(value = "teachableSkillsUpdate") String[] teachableFromForm,
 			@RequestParam(value = "level") String[] level, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		List<TeachableSkill> current = user.getTeachableSkills();
+		List<TeachableSkill> current = skillDAO.findTeachableSkillsByUserId(user.getId());
 		List<TeachableSkill> newSkills = new ArrayList<TeachableSkill>();
 		if (teachableFromForm != null) {
 
@@ -80,7 +80,7 @@ public class UserUpdateController {
 	public String updateLearnableSkills(@RequestParam(value = "learnableSkillsUpdate") String[] learnableFromForm,
 			@RequestParam(value = "level") String[] level, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		List<LearnableSkill> current = user.getLearnableSkills();
+		List<LearnableSkill> current = skillDAO.findLearnableableSkillsByUserId(user.getId());
 		List<LearnableSkill> newSkills = new ArrayList<LearnableSkill>();
 		if (learnableFromForm != null) {
 
