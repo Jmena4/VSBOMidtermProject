@@ -1,6 +1,7 @@
 package com.skilldistillery.tudorjpa.controllers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,13 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.tudorjpa.data.TutDAO;
 import com.skilldistillery.tudorjpa.data.TutDAOUser;
 import com.skilldistillery.tudorjpa.data.TutDaoSkills;
 import com.skilldistillery.tudorjpa.entities.LearnableSkill;
-import com.skilldistillery.tudorjpa.entities.SkillName;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
 import com.skilldistillery.tudorjpa.entities.User;
 
@@ -36,7 +35,7 @@ public class UserUpdateController {
 	public String updateUsersTeachableSkills(@RequestParam(value = "teachableSkillsUpdate") String[] teachableFromForm,
 			@RequestParam(value = "level") String[] level, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		List<TeachableSkill> current = skillDAO.findTeachableSkillsByUserId(user.getId());
+		HashSet<TeachableSkill> current = skillDAO.findTeachableSkillsByUserId(user.getId());
 		List<TeachableSkill> newSkills = new ArrayList<TeachableSkill>();
 		if (teachableFromForm != null) {
 
@@ -80,7 +79,7 @@ public class UserUpdateController {
 	public String updateLearnableSkills(@RequestParam(value = "learnableSkillsUpdate") String[] learnableFromForm,
 			@RequestParam(value = "level") String[] level, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		List<LearnableSkill> current = skillDAO.findLearnableableSkillsByUserId(user.getId());
+		HashSet<LearnableSkill> current = skillDAO.findLearnableableSkillsByUserId(user.getId());
 		List<LearnableSkill> newSkills = new ArrayList<LearnableSkill>();
 		if (learnableFromForm != null) {
 

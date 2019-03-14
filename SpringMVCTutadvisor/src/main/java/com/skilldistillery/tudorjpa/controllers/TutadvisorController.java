@@ -1,5 +1,6 @@
 package com.skilldistillery.tudorjpa.controllers;
 
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -93,16 +94,21 @@ public class TutadvisorController {
 	public ModelAndView goToProfile(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = (User) session.getAttribute("user");
-		List<TeachableSkill> allTeachableSkills = tutSkills.findAllTeachableSkills();
-		List<LearnableSkill> allLearnableSkills = tutSkills.findAllLearnableSkills();
-		List<SkillName> allSkillNames = tutSkills.findAllSkillNames();
+		System.out.println(user.getFirstName());
+//		HashSet<TeachableSkill> allTeachableSkills = tutSkills.findAllTeachableSkills();
+//		HashSet<LearnableSkill> allLearnableSkills = tutSkills.findAllLearnableSkills();
+		HashSet<SkillName> allSkillNames = tutSkills.findAllSkillNames();
+		HashSet<TeachableSkill> usersTeachableSkills = tutSkills.findTeachableSkillsByUserId(user.getId());
+		HashSet<LearnableSkill> usersLaernableSkills = tutSkills.findLearnableableSkillsByUserId(user.getId());
+		
 
 		mv.setViewName("WEB-INF/profile.jsp");
 		mv.addObject("user", user);
-		mv.addObject("allLearnableSkills", allLearnableSkills);
-		mv.addObject("allTeachableSkills", allTeachableSkills);
+//		mv.addObject("allLearnableSkills", allLearnableSkills);
+//		mv.addObject("allTeachableSkills", allTeachableSkills);
 		mv.addObject("allSkillNames", allSkillNames);
-
+		mv.addObject("usersLaernableSkills", usersLaernableSkills);
+		mv.addObject("usersTeachableSkills", usersTeachableSkills);
 
 		return mv;
 	}

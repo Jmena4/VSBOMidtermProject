@@ -1,5 +1,6 @@
 package com.skilldistillery.tudorjpa.data;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -71,10 +72,15 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 //	*** Skill Name methods***
 
 	@Override
-	public List<SkillName> findAllSkillNames() {
+	public HashSet<SkillName> findAllSkillNames() {
 		String query = "SELECT sn from SkillName sn";
-		List<SkillName> results = em.createQuery(query, SkillName.class).getResultList();
-
+		List<SkillName> answer = em.createQuery(query, SkillName.class).getResultList();
+		HashSet<SkillName> results = new HashSet<SkillName>();
+		
+		for (SkillName learnable : answer) {
+			results.add(learnable);
+			
+		}
 		return results;
 	}
 
@@ -117,9 +123,15 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 
 //	***Teachable Skill methods***
 	@Override
-	public List<TeachableSkill> findAllTeachableSkills() {
+	public HashSet<TeachableSkill> findAllTeachableSkills() {
 		String query = "SELECT ts from TeachableSkill ts";
-		List<TeachableSkill> results = em.createQuery(query, TeachableSkill.class).getResultList();
+		List<TeachableSkill> answer = em.createQuery(query, TeachableSkill.class).getResultList();
+		HashSet<TeachableSkill> results = new HashSet<TeachableSkill>();
+		
+		for (TeachableSkill teachableSkill : answer) {
+			results.add(teachableSkill);
+			
+		}
 
 		return results;
 	}
@@ -166,18 +178,28 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 	}
 
 	@Override
-	public List<TeachableSkill> findTeachableSkillsByUserId(int id) {
+	public HashSet<TeachableSkill> findTeachableSkillsByUserId(int id) {
 		String query = "Select ts from TeachableSkill ts where ts.user.id= :userId";
-		List<TeachableSkill> result = em.createQuery(query, TeachableSkill.class).setParameter("userId", id)
+		List<TeachableSkill> answer = em.createQuery(query, TeachableSkill.class)
+				.setParameter("userId", id)
 				.getResultList();
+		HashSet<TeachableSkill> result = new HashSet<TeachableSkill>();
+		for (TeachableSkill teachableSkill : answer) {
+			result.add(teachableSkill);
+		}
 		return result;
 	}
 
 	@Override
-	public List<LearnableSkill> findLearnableableSkillsByUserId(int id) {
-		String query = "Select ls from learnableSkill ls where ls.user.id= :userId";
-		List<LearnableSkill> result = em.createQuery(query, LearnableSkill.class).setParameter("userId", id)
+	public HashSet<LearnableSkill> findLearnableableSkillsByUserId(int id) {
+		String query = "Select ls from LearnableSkill ls where ls.user.id= :userId";
+		List<LearnableSkill> answer = em.createQuery(query, LearnableSkill.class)
+				.setParameter("userId", id)
 				.getResultList();
+		HashSet<LearnableSkill> result = new HashSet<LearnableSkill>();
+		for (LearnableSkill learnableSkill : answer) {
+			result.add(learnableSkill);
+		}
 		return result;
 	}
 
@@ -197,10 +219,15 @@ public class TutDAOSkillsImpl implements TutDaoSkills {
 
 //	***Learnable Skill methods***
 	@Override
-	public List<LearnableSkill> findAllLearnableSkills() {
+	public HashSet<LearnableSkill> findAllLearnableSkills() {
 		String query = "SELECT ls from LearnableSkill ls";
-		List<LearnableSkill> results = em.createQuery(query, LearnableSkill.class).getResultList();
-
+		List<LearnableSkill> answer = em.createQuery(query, LearnableSkill.class).getResultList();
+		HashSet<LearnableSkill> results = new HashSet<LearnableSkill>();
+		
+		for (LearnableSkill teachableSkill : answer) {
+			results.add(teachableSkill);
+			
+		}
 		return results;
 	}
 
