@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.tudorjpa.entities.LearnableSkill;
 import com.skilldistillery.tudorjpa.entities.Proposal;
+import com.skilldistillery.tudorjpa.entities.SkillLevel;
 import com.skilldistillery.tudorjpa.entities.SkillName;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
 import com.skilldistillery.tudorjpa.entities.User;
