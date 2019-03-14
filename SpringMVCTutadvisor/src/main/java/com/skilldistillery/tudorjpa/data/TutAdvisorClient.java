@@ -212,6 +212,10 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 ////		= em.find(SkillName.class, id);
 //		return skillLevel = em.find(SkillLevel.class, id);
 //	}
+//		SkillLevel skillLevel = null;
+//		= em.find(SkillName.class, id);
+//		return skillLevel = em.find(SkillLevel.class, id);
+//	}
 	
 	@Override
 	public TeachableSkill findTeachableSkillById(int id) {
@@ -231,16 +235,15 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 
 	@Override
 	public User findTeacherUserById(int id) {
-
 		User teacherUser = null;
 		return teacherUser = em.find(User.class, id);
 	}
 
 	@Override
 	public User findStudentUserById(int id) {
-		// TODO Auto-generated method stub
 		User studentUser = null;
 		return studentUser = em.find(User.class, id);
 	}
-	}
 
+
+}
