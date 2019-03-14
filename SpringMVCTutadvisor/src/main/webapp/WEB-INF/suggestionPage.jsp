@@ -51,23 +51,28 @@
 						<span> </span>
 
 					</p>
-					<p class="setting">
+					<%-- <p class="setting">
 						<span>Id: </span> ${id }
+					</p> --%>
+					<p class="setting">
+						<span> Student (Self): </span> ${studentUser.firstName } ${studentUser.lastName }
+						<br>
+						<span>Email: </span>${studentUser.email}
+						<br>
+						<span>Phone: </span>${studentUser.phone}
 					</p>
 					<p class="setting">
-						<span>Skill Level: </span> ${skilllevel.name}
+						<span>Tutor : </span> ${teacherUser.firstName } ${teacherUser.lastName }
+						<br>
+						<span>Email: </span>${teacherUser.email}
+						<br>
+						<span>Phone: </span>${teacherUser.phone}
 					</p>
 					<p class="setting">
-						<span>Teachable Skill: </span> ${teachableSkill }
+						<span>Skill tutor can teach you: </span> ${skillName }
 					</p>
 					<p class="setting">
-						<span>Learn-able Skill: </span> ${learnableSkill }
-					</p>
-					<p class="setting">
-						<span> Teacher: </span> ${teacherUser }
-					</p>
-					<p class="setting">
-						<span>Student:</span> ${studentUser }
+						<span>Skill Level tutor can teach you: </span> ${skillLevel}
 					</p>
 					<br>
 				</form>
