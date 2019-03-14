@@ -9,15 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import com.skilldistillery.tudorjpa.data.DisplayLearnable;
 import com.skilldistillery.tudorjpa.data.DisplayTeachable;
-import com.skilldistillery.tudorjpa.data.TutAdvisorClient;
-
 import com.skilldistillery.tudorjpa.data.NewUserAndAddressDTO;
+import com.skilldistillery.tudorjpa.data.TutAdvisorClient;
 import com.skilldistillery.tudorjpa.data.TutDAO;
 import com.skilldistillery.tudorjpa.data.TutDAOAddress;
 import com.skilldistillery.tudorjpa.data.TutDAOUser;
@@ -25,6 +22,7 @@ import com.skilldistillery.tudorjpa.data.TutDaoSkills;
 import com.skilldistillery.tudorjpa.entities.Address;
 import com.skilldistillery.tudorjpa.entities.LearnableSkill;
 import com.skilldistillery.tudorjpa.entities.Proposal;
+import com.skilldistillery.tudorjpa.entities.SkillLevel;
 import com.skilldistillery.tudorjpa.entities.SkillName;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
 import com.skilldistillery.tudorjpa.entities.User;
@@ -232,12 +230,28 @@ public class TutadvisorController {
 	}
 
 	@RequestMapping(path = "suggestionPage.do", method = RequestMethod.POST)
-	public ModelAndView suggestionPage(HttpSession session, String skill_level, String skill_id, String teacher_user, String student_user) {
+	public ModelAndView suggestionPage(HttpSession session, String skill_level, String skill_id, String teacher_user, String student_user, String learnable_id) {
 		ModelAndView mv = new ModelAndView();
+		SkillLevel sl = tac.findSkillLevelById(Integer.parseInt(skill_level));
+		mv.addObject("skillLevel", sl);
+		
+		SkillName sn = tac.findSkillNameById(Integer.parseInt(skill_id));
+		mv.addObject("skillName", sn);
+		
+		
+		User tu = tac.findTeacherUserById(Integer.parseInt(teacher_user));
+		mv.addObject("teacherUser", tu);
+		
+		User su = tac.findStudentUserById(Integer.parseInt(student_user));
+		mv.addObject("studentUser", su);
+		int ls = Integer.parseInt(learnable_id);
+
 		System.out.println(skill_level);
 		System.out.println(skill_id);
 		System.out.println(teacher_user);
 		System.out.println(student_user);
+		tac.createProposalFromSession(skill_level, skill_id, teacher_user, student_user, learnable_id);
+		
 		mv.setViewName("WEB-INF/suggestionPage.jsp");
 		return mv;
 	}
