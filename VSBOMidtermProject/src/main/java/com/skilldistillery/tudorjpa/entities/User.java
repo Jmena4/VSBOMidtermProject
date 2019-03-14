@@ -2,6 +2,7 @@ package com.skilldistillery.tudorjpa.entities;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,10 +40,10 @@ public class User {
 	private Address addressId;
 
 	@OneToMany(mappedBy = "user")
-	private List<LearnableSkill> learnableSkills;
+	private Set<LearnableSkill> learnableSkills;
 
 	@OneToMany(mappedBy = "user")
-	private List<TeachableSkill> teachableSkills;
+	private Set<TeachableSkill> teachableSkills;
 
 	@Column(name = "user_name")
 	private String username;
@@ -138,19 +139,19 @@ public class User {
 		this.addressId = addressId;
 	}
 
-	public List<LearnableSkill> getLearnableSkills() {
+	public Set<LearnableSkill> getLearnableSkills() {
 		return learnableSkills;
 	}
 
-	public void setLearnableSkills(List<LearnableSkill> learnableSkills) {
+	public void setLearnableSkills(Set<LearnableSkill> learnableSkills) {
 		this.learnableSkills = learnableSkills;
 	}
 
-	public List<TeachableSkill> getTeachableSkills() {
+	public Set<TeachableSkill> getTeachableSkills() {
 		return teachableSkills;
 	}
 
-	public void setTeachableSkills(List<TeachableSkill> teachableSkills) {
+	public void setTeachableSkills(Set<TeachableSkill> teachableSkills) {
 		this.teachableSkills = teachableSkills;
 	}
 
