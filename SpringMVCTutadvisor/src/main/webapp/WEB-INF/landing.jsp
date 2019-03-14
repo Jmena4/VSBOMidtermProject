@@ -1,7 +1,8 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +40,8 @@
 				<form action="login.do" method="POST">
 					<span> <label for="username" class="login-label">username
 							<input name="username" class="login-field">
-					</label> &nbsp; &nbsp; <label for="password" class="login-label">password <input
-							name="password" class="login-field">
+					</label> &nbsp; &nbsp; <label for="password" class="login-label">password
+							<input type="password" name="password" class="login-field">
 					</label>&nbsp; &nbsp; <input id="login-button" type="submit" value="Login">
 					</span>
 				</form>
@@ -59,97 +60,111 @@
 							<div id="reg-form" class="carousel-caption d-none d-md-block">
 								<div id="reg-header">User Registration</div>
 								<br>
-								<form:form action="register.do" method="POST" modelAttribute="newUser">
+								<form:form action="register.do" method="POST"
+									modelAttribute="newUser">
 									<div class="row" style="width: 100%">
 										<div class="col">
-											 <table>
-											 <tr><td>
-											<form:label path = "username">Username:<br></form:label>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "username" /><br>
-											</td></tr>
-											 <tr><td>
-											<form:label path = "password">Password:<br></form:label>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "password" /><br>
-											</td></tr>
-											 <tr><td>
-											<form:label path = "firstname">First Name:<br> </form:label>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "firstname" /><br>
-											</td></tr>
-											 <tr><td>
-											<form:label path = "lastname">Last Name:<br></form:label> 
-											</td></tr>
-											 <tr><td>
-											<form:input path = "lastname" /><br>
-											</td></tr>
-											 <tr><td>
-											<form:label path = "url">Photo URL:<br> </form:label>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "url" /><br>
-											</td></tr>
-											 <tr><td>
-											<form:label path = "email">Email:   <br> </form:label>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "email" /><br>
-											</td></tr>
-											 </table>
+											<table>
+												<tr>
+													<td><form:label path="username">Username:<br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="username" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="password">Password:<br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="password" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="firstname">First Name:<br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="firstname" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="lastname">Last Name:<br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="lastname" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="url">Photo URL:<br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="url" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="email">Email:   <br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="email" /><br></td>
+												</tr>
+											</table>
 										</div>
 										<div class="col">
-										<table>
-											 <tr><td>
-											<form:label path = "phone">Phone:<br> </form:label>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "phone" /><br>
-											</td></tr>
-											 <tr><td>
-											<form:label path = "street">Street Address:<br> </form:label>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "street" /><br>
-											</td></tr>
-											 <tr><td>
-											<form:label path = "street2">Address 2 (optional):<br> </form:label>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "street2" /><br> 
-											</td></tr>
-											 <tr><td>
-											<form:label path = "city">City: </form:label><br>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "city" /><br> 
-											</td></tr>
-											 <tr><td>
-											<form:label path  ="state">State:       <br> </form:label>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "state" /><br> 
-											</td></tr>
-											 <tr><td>
-											<form:label path = "zip">ZIP code:<br></form:label>
-											</td></tr>
-											 <tr><td>
-											</td></tr>
-											 <tr><td>
-											<form:input path = "zip" /><br>
-											</td></tr>
-										</table>
-											
+											<table>
+												<tr>
+													<td><form:label path="phone">Phone:<br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="phone" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="street">Street Address:<br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="street" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="street2">Address 2 (optional):<br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="street2" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="city">City: </form:label><br>
+													</td>
+												</tr>
+												<tr>
+													<td><form:input path="city" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="state">State:       <br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td><form:input path="state" /><br></td>
+												</tr>
+												<tr>
+													<td><form:label path="zip">ZIP code:<br>
+														</form:label></td>
+												</tr>
+												<tr>
+													<td></td>
+												</tr>
+												<tr>
+													<td><form:input path="zip" /><br></td>
+												</tr>
+											</table>
+
 										</div>
 									</div>
 									<br>
 									<div id="reg-submit">
 										<input id="submit-button" type="submit" value="Submit" />
 									</div>
-									</form:form>
+								</form:form>
 							</div>
 						</div>
 					</div>
