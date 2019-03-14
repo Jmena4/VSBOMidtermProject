@@ -30,19 +30,7 @@ public class UserUpdateController {
 	@Autowired
 	private TutDaoSkills skillDAO;
 
-//	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
-//	public ModelAndView mockProfile(HttpSession session) {
-//		ModelAndView mv = new ModelAndView();
-//		User user = tutUser.findUserById(2);
-//		mv.addObject("user", user);
-//		session.setAttribute("user", user);
-//
-//		List<SkillName> allSkillNames = skillDAO.findAllSkillNames();
-//
-//		mv.setViewName("WEB-INF/profile.jsp");
-//		mv.addObject("allSkillNames", allSkillNames);
-//		return mv;
-//	}
+
 
 	@RequestMapping(path = "updateTeachableSkills.do", method = RequestMethod.POST)
 	public String updateUsersTeachableSkills(@RequestParam(value = "teachableSkillsUpdate") String[] teachableFromForm,
@@ -67,9 +55,10 @@ public class UserUpdateController {
 			}
 		}
 		return "redirect:profile.do";
-
 	}
 
+	
+	
 	@RequestMapping(path = "addToTeachableSkills.do", method = RequestMethod.POST)
 	public String addToTeachableSkills(@RequestParam(value = "skillToAdd") String[] skillToAdd,
 			@RequestParam(value = "level") String[] level, HttpSession session) {

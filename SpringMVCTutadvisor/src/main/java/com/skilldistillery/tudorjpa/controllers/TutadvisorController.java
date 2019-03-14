@@ -25,6 +25,7 @@ import com.skilldistillery.tudorjpa.data.TutDaoSkills;
 import com.skilldistillery.tudorjpa.entities.Address;
 import com.skilldistillery.tudorjpa.entities.LearnableSkill;
 import com.skilldistillery.tudorjpa.entities.Proposal;
+import com.skilldistillery.tudorjpa.entities.SkillName;
 import com.skilldistillery.tudorjpa.entities.TeachableSkill;
 import com.skilldistillery.tudorjpa.entities.User;
 
@@ -94,11 +95,15 @@ public class TutadvisorController {
 		User user = (User) session.getAttribute("user");
 		List<TeachableSkill> allTeachableSkills = tutSkills.findAllTeachableSkills();
 		List<LearnableSkill> allLearnableSkills = tutSkills.findAllLearnableSkills();
+		List<SkillName> allSkillNames = tutSkills.findAllSkillNames();
 
 		mv.setViewName("WEB-INF/profile.jsp");
 		mv.addObject("user", user);
 		mv.addObject("allLearnableSkills", allLearnableSkills);
 		mv.addObject("allTeachableSkills", allTeachableSkills);
+		mv.addObject("allSkillNames", allSkillNames);
+
+
 		return mv;
 	}
 
