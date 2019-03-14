@@ -75,44 +75,44 @@ public class SkillsController {
 	}
 
 //	mock mapping to see the suggestion page:
-	@RequestMapping(path = "suggestionPage.do", method = RequestMethod.GET)
-	public ModelAndView buildSuggetion(int id, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-
-		session.getAttribute("id");
-		session.getAttribute("teachableSkill");
-		session.getAttribute("learnableSkill");
-		session.getAttribute("skillLevel");
-		session.getAttribute("teacherUser");
-		session.getAttribute("studentUser");
-		
-		int Id = Integer.parseInt("id");
-		mv.addObject("Id", Id);
-		
-		int skillLevelId = Integer.parseInt("skillLevel");
-		SkillLevel skillLevel = taclient.findSkillLevelById(skillLevelId);
-		mv.addObject("skilllevel", skillLevel.toString());
-		
-		int teachableSkillId = Integer.parseInt("teachableSkill");
-		TeachableSkill teachableSkill = taclient.findTeachableSkillById(teachableSkillId);
-		mv.addObject("teachableSkill", teachableSkill);
-		
-		int learnableSkillId = Integer.parseInt("learnableSkill");
-		LearnableSkill learnableSkill = taclient.findLearnableSkillById(learnableSkillId);
-		mv.addObject("learnableSkill", learnableSkill);
-		
-		int teacherUserId = Integer.parseInt("teacherUser");
-		User teacherUser = taclient.findTeacherUserById(teacherUserId);
-		mv.addObject("teacherUser", teacherUser.getEmail());
-		
-		int studentUserId = Integer.parseInt("studentUser");
-		User studentUser = taclient.findStudentUserById(studentUserId);
-		mv.addObject("studentUser", studentUser);
-
-		
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@");
-		mv.setViewName("WEB-INF/suggestionPage.jsp");
-
-		return mv;
-	}
+//	@RequestMapping(path = "suggestionPage.do", method = RequestMethod.GET)
+//	public ModelAndView buildSuggetion(int id, HttpSession session) {
+//		ModelAndView mv = new ModelAndView();
+//
+//		session.getAttribute("id");
+//		session.getAttribute("teachableSkill");
+//		session.getAttribute("learnableSkill");
+//		session.getAttribute("skillLevel");
+//		session.getAttribute("teacherUser");
+//		session.getAttribute("studentUser");
+//		
+//		int Id = Integer.parseInt("id");
+//		mv.addObject("Id", Id);
+//		
+//		int skillLevelId = Integer.parseInt("skillLevel");
+//		SkillLevel skillLevel = taclient.findSkillLevelById(skillLevelId);
+//		mv.addObject("skilllevel", skillLevel.toString());
+//		
+//		int teachableSkillId = Integer.parseInt("teachableSkill");
+//		TeachableSkill teachableSkill = taclient.findTeachableSkillById(teachableSkillId);
+//		mv.addObject("teachableSkill", teachableSkill);
+//		
+//		int learnableSkillId = Integer.parseInt("learnableSkill");
+//		LearnableSkill learnableSkill = taclient.findLearnableSkillById(learnableSkillId);
+//		mv.addObject("learnableSkill", learnableSkill);
+//		
+//		int teacherUserId = Integer.parseInt("teacherUser");
+//		User teacherUser = taclient.findTeacherUserById(teacherUserId);
+//		mv.addObject("teacherUser", teacherUser.getEmail());
+//		
+//		int studentUserId = Integer.parseInt("studentUser");
+//		User studentUser = taclient.findStudentUserById(studentUserId);
+//		mv.addObject("studentUser", studentUser);
+//
+//		
+//		System.out.println("@@@@@@@@@@@@@@@@@@@@@");
+//		mv.setViewName("WEB-INF/suggestionPage.jsp");
+//
+//		return mv;
+//	}
 }
