@@ -195,7 +195,6 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 		em.persist(managedSuggestion);
 		em.flush();
 		return managedSuggestion;
-
 	}
 
 	@Override
@@ -216,21 +215,22 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 //		= em.find(SkillName.class, id);
 //		return skillLevel = em.find(SkillLevel.class, id);
 //	}
+//		SkillLevel skillLevel = null;
+//		= em.find(SkillName.class, id);
+//		return skillLevel = em.find(SkillLevel.class, id);
+//	}
 	
 	@Override
 	public TeachableSkill findTeachableSkillById(int id) {
 		TeachableSkill teachableSkill = null;
 		return teachableSkill = em.find(TeachableSkill.class, id);
-
 	}
 
 	@Override
 	public LearnableSkill findLearnableSkillById(int id) {
 
-
 		LearnableSkill learnableSkill = null;
 		return learnableSkill = em.find(LearnableSkill.class, id);
-
 	}
 
 	@Override
@@ -244,6 +244,5 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 		User studentUser = null;
 		return studentUser = em.find(User.class, id);
 	}
-
 
 }
