@@ -178,8 +178,8 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 	}
 
 	@Override
-	public Proposal SuggestionBySessionInformation(int id, Proposal managedSuggestion) {
-		managedSuggestion = em.find(Proposal.class, id);
+	public Proposal SuggestionBySessionInformation(int id) {
+		Proposal managedSuggestion = em.find(Proposal.class, id);
 		Proposal proposal2 = new Proposal();
 		System.out.println("&&&&&&&&&&&&&&&&&&&");
 		managedSuggestion.setTeachableId(proposal2.getTeachableId());
@@ -225,6 +225,38 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 	public User findStudentUserById(int id) {
 		User studentUser = null;
 		return studentUser = em.find(User.class, id);
+	}
+
+	@Override
+	public SkillName findSkillNameById(int id) {
+		SkillName skillName = null;
+		return skillName = em.find(SkillName.class, id);
+	}
+
+	@Override
+	public Proposal createProposalFromSession(String skill_level, String skill_id, String teacher_user,
+			String student_user, String learnable_id) {
+		SkillLevel sl = findSkillLevelById(Integer.parseInt(skill_level));
+		int ls = Integer.parseInt(learnable_id);
+		SkillName sn = findSkillNameById(Integer.parseInt(skill_id));
+		User tu = findTeacherUserById(Integer.parseInt(teacher_user));
+		User su = findStudentUserById(Integer.parseInt(student_user));
+		String query ="SELECT ts FROM TeachableSkill ts WHERE ts.user.id = :tid";
+		List<TeachableSkill> teachableSkills = em.createQuery(query, TeachableSkill.class).setParameter("tid", tu.getId()).getResultList();
+		Proposal managedProposal = new Proposal();
+		
+		for (TeachableSkill teachableSkill : teachableSkills) {
+			if (teachableSkill.getSkillName().getId() == sn.getId()) {
+				 managedProposal.setTeachableId(teachableSkill.getId());
+				 break;
+			}
+		}
+		managedProposal.setStudent(su);
+		managedProposal.setTeacher(tu);
+		managedProposal.setLearnableId(ls);
+		em.persist(managedProposal);
+		em.flush();
+		return managedProposal;
 	}
 
 }
