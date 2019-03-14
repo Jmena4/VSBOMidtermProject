@@ -8,7 +8,8 @@ One member of the team was selected to act as Scrum Master, One as a GitHub owne
 The team held regular Stand-Up Scrum Meetings in which they discussed their progress and shifted tasks to fit conditions.
 
 ### How to log in
-Admin: Username Q and password Q
+Admin: Username Q and password Q.
+
 User: Spocker_the_rocker password Logical
 
 ### Technologies Used
