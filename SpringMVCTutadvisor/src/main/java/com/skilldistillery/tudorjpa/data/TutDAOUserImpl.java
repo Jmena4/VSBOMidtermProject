@@ -39,7 +39,6 @@ public class TutDAOUserImpl implements TutDAOUser {
 
 	@Override
 	public User validateUsernameAndPassword(String userName, String password) {
-		System.out.println(userName + " " + password);
 		String query = "SELECT u from User u where u.username = :uname and u.password = :pword";
 		User user = null;
 		try {

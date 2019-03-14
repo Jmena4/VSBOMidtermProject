@@ -36,7 +36,7 @@ public class TeachableSkill {
 	private String comment;
 	
 	@Column(name="is_active")
-	private boolean isActive;
+	private Boolean isActive;
 
 	// Getters and setters
 
@@ -82,11 +82,11 @@ public class TeachableSkill {
 	
 //	Hash & Equals
 
-	public boolean getIsActive() {
+	public Boolean getIsActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
 

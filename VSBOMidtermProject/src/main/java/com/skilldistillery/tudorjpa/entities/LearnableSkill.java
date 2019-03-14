@@ -34,7 +34,7 @@ public class LearnableSkill {
 	private SkillLevel skillLevel;
 
 	@Column(name="is_active")
-	private boolean isActive;
+	private Boolean isActive;
 	
 	@Column(name = "comment")
 	private String comment;
@@ -45,6 +45,12 @@ public class LearnableSkill {
 	public int getId() {
 		return id;
 	}
+
+// 	public Boolean isActive() {
+// 		return isActive;
+// 	}
+
+// 	public void setActive(Boolean isActive) {
 
 	public boolean getIsActive() {
 		return isActive;

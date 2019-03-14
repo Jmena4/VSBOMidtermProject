@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import com.skilldistillery.tudorjpa.data.DisplayLearnable;
+import com.skilldistillery.tudorjpa.data.DisplayTeachable;
+import com.skilldistillery.tudorjpa.data.TutAdvisorClient;
+
 import com.skilldistillery.tudorjpa.data.NewUserAndAddressDTO;
 import com.skilldistillery.tudorjpa.data.TutDAO;
 import com.skilldistillery.tudorjpa.data.TutDAOAddress;
@@ -34,6 +39,8 @@ public class TutadvisorController {
 	private TutDAOUser tutUser;
 	@Autowired
 	private TutDaoSkills tutSkills;
+	@Autowired
+	private TutAdvisorClient tac;
 
 //	*************PLACE HOLDER FOR ACTUAL CONTROLLER**************
 //	@RequestMapping(path = { "/", "home.do" }, method = RequestMethod.GET)
@@ -50,12 +57,21 @@ public class TutadvisorController {
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public ModelAndView loginDo(String username, String password, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		List<DisplayTeachable> learnablelist = null;
+		List<DisplayLearnable> teachablelist = null;
 		User user = tutUser.validateUsernameAndPassword(username, password);
 		String result = null;
 		if (user != null) {
 			mv.setViewName("WEB-INF/home.jsp");
 			session.setAttribute("user", user);
-		} else {
+
+			learnablelist = tac.getLearnableMatches(session);
+			teachablelist = tac.getTeachableMatches(session);
+			mv.addObject("learnablelist", learnablelist);
+			mv.addObject("teachablelist", teachablelist);
+		}
+		else {
+
 			mv.setViewName("WEB-INF/landing.jsp");
 			result = "Invalid username or password";
 			mv.addObject("result", result);
@@ -87,13 +103,24 @@ public class TutadvisorController {
 	}
 
 	@RequestMapping(path = "home.do", method = RequestMethod.GET)
-	public ModelAndView homeDo() {
+	public ModelAndView homeDo(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-
-//		TODO: create method to get list of learnable suggestions and
-//		list of teachable suggestions and add them to the model
-
-		mv.setViewName("WEB-INF/home.jsp");
+		List<DisplayTeachable> learnablelist = null;
+		List<DisplayLearnable> teachablelist = null;
+		User user = (User)(session.getAttribute("user"));
+		String result = null;
+		if(user != null) {
+			mv.setViewName("WEB-INF/home.jsp");
+			learnablelist = tac.getLearnableMatches(session);
+			teachablelist = tac.getTeachableMatches(session);
+			mv.addObject("learnablelist", learnablelist);
+			mv.addObject("teachablelist", teachablelist);
+		}
+		else {
+			mv.setViewName("WEB-INF/landing.jsp");
+			result = "Invalid username or password";
+			mv.addObject("result", result);
+		}
 		return mv;
 	}
 
@@ -200,14 +227,12 @@ public class TutadvisorController {
 	}
 
 	@RequestMapping(path = "suggestionPage.do", method = RequestMethod.POST)
-	public ModelAndView suggestionPage(HttpSession session) {
+	public ModelAndView suggestionPage(HttpSession session, String skill_level, String skill_id, String teacher_user, String student_user) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(session.getAttribute("id"));
-		System.out.println(session.getAttribute("teachableSkill"));
-		System.out.println(session.getAttribute("learnableSkill"));
-		System.out.println(session.getAttribute("skillLevel"));
-		System.out.println(session.getAttribute("teacherUser"));
-		System.out.println(session.getAttribute("studentUser"));
+		System.out.println(skill_level);
+		System.out.println(skill_id);
+		System.out.println(teacher_user);
+		System.out.println(student_user);
 		mv.setViewName("WEB-INF/suggestionPage.jsp");
 		return mv;
 	}
