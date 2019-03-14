@@ -23,9 +23,9 @@ public class Suggestion {
 
 	private Address recommendationAddress;
 
-	private List<TeachableSkill> teachableSkills;
+	private TeachableSkill teachableSkills;
 
-	private List<LearnableSkill> learnableSkills;
+	private LearnableSkill learnableSkills;
 
 	public int getId() {
 		return id;
@@ -75,19 +75,19 @@ public class Suggestion {
 		this.recommendationAddress = recommendationAddress;
 	}
 
-	public List<TeachableSkill> getTeachableSkills() {
+	public TeachableSkill getTeachableSkills() {
 		return teachableSkills;
 	}
 
-	public void setTeachableSkills(List<TeachableSkill> teachableSkills) {
+	public void setTeachableSkills(TeachableSkill teachableSkills) {
 		this.teachableSkills = teachableSkills;
 	}
 
-	public List<LearnableSkill> getLearnableSkills() {
+	public LearnableSkill getLearnableSkills() {
 		return learnableSkills;
 	}
 
-	public void setLearnableSkills(List<LearnableSkill> learnableSkills) {
+	public void setLearnableSkills(LearnableSkill learnableSkills) {
 		this.learnableSkills = learnableSkills;
 	}
 
@@ -157,25 +157,9 @@ public class Suggestion {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Suggestion [id=");
-		builder.append(id);
-		builder.append(", skillName=");
-		builder.append(skillName);
-		builder.append(", skillLevel=");
-		builder.append(skillLevel);
-		builder.append(", teacherUser=");
-		builder.append(teacherUser);
-		builder.append(", studentUser=");
-		builder.append(studentUser);
-		builder.append(", recommendationAddress=");
-		builder.append(recommendationAddress);
-		builder.append(", teachableSkills=");
-		builder.append(teachableSkills);
-		builder.append(", learnableSkills=");
-		builder.append(learnableSkills);
-		builder.append("]");
-		return builder.toString();
+		return "Suggestion [id=" + id + ", skillName=" + skillName + ", skillLevel=" + skillLevel + ", teacherUser="
+				+ teacherUser + ", studentUser=" + studentUser + ", recommendationAddress=" + recommendationAddress
+				+ ", teachableSkills=" + teachableSkills + ", learnableSkills=" + learnableSkills + "]";
 	}
 
 	public Suggestion() {

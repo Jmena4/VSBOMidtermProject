@@ -32,29 +32,6 @@ public class Proposal {
 	@Column(name = "teachable_id")
 	private int teachableId;
 
-	@Column(name = "offer_amount")
-	private Double offerAmount;
-
-//	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "date_time_proposed")
-	private Date dateTimeProposed;
-
-	@Column(name = "duration")
-	private Integer duration;
-
-	@OneToOne
-	@JoinColumn(name = "address_id")
-	private Address addressId;
-
-	@Column(name = "comment")
-	private String comment;
-
-	@Column(name = "proposal_status_id")
-	private Integer proposalStatusId;
-
-	@Column(name = "routing")
-	private int routing;
-
 //	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_time_created")
 	private Date dateTimeCreated;
@@ -99,62 +76,6 @@ public class Proposal {
 		this.teachableId = teachableId;
 	}
 
-	public Double getOfferAmount() {
-		return offerAmount;
-	}
-
-	public void setOfferAmount(Double offerAmount) {
-		this.offerAmount = offerAmount;
-	}
-
-	public Date getDateTimeProposed() {
-		return dateTimeProposed;
-	}
-
-	public void setDateTimeProposed(Date dateTimeProposed) {
-		this.dateTimeProposed = dateTimeProposed;
-	}
-
-	public Integer getDuration() {
-		return duration;
-	}
-
-	public void setDuration(Integer duration) {
-		this.duration = duration;
-	}
-
-	public Address getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(Address addressId) {
-		this.addressId = addressId;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public Integer getProposalStatusId() {
-		return proposalStatusId;
-	}
-
-	public void setProposalStatusId(Integer proposalStatusId) {
-		this.proposalStatusId = proposalStatusId;
-	}
-
-	public int getRouting() {
-		return routing;
-	}
-
-	public void setRouting(int routing) {
-		this.routing = routing;
-	}
-
 	public Date getDateTimeCreated() {
 		return dateTimeCreated;
 	}
@@ -163,29 +84,14 @@ public class Proposal {
 		this.dateTimeCreated = dateTimeCreated;
 	}
 
-	@Override
-	public String toString() {
-		return "Proposal [id=" + id + ", teacher=" + teacher + ", student=" + student + ", learnableId=" + learnableId
-				+ ", teachableId=" + teachableId + ", offerAmount=" + offerAmount + ", dateTimeProposed="
-				+ dateTimeProposed + ", duration=" + duration + ", addressId=" + addressId + ", comment=" + comment
-				+ ", proposalStatusId=" + proposalStatusId + ", routing=" + routing + ", dateTimeCreated="
-				+ dateTimeCreated + "]";
-	}
-
+// Has Code and Equals
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((dateTimeCreated == null) ? 0 : dateTimeCreated.hashCode());
-		result = prime * result + ((dateTimeProposed == null) ? 0 : dateTimeProposed.hashCode());
-		result = prime * result + ((duration == null) ? 0 : duration.hashCode());
 		result = prime * result + id;
 		result = prime * result + learnableId;
-		result = prime * result + ((offerAmount == null) ? 0 : offerAmount.hashCode());
-		result = prime * result + ((proposalStatusId == null) ? 0 : proposalStatusId.hashCode());
-		result = prime * result + routing;
 		result = prime * result + ((student == null) ? 0 : student.hashCode());
 		result = prime * result + teachableId;
 		result = prime * result + ((teacher == null) ? 0 : teacher.hashCode());
@@ -201,46 +107,14 @@ public class Proposal {
 		if (getClass() != obj.getClass())
 			return false;
 		Proposal other = (Proposal) obj;
-		if (addressId == null) {
-			if (other.addressId != null)
-				return false;
-		} else if (!addressId.equals(other.addressId))
-			return false;
-		if (comment == null) {
-			if (other.comment != null)
-				return false;
-		} else if (!comment.equals(other.comment))
-			return false;
 		if (dateTimeCreated == null) {
 			if (other.dateTimeCreated != null)
 				return false;
 		} else if (!dateTimeCreated.equals(other.dateTimeCreated))
 			return false;
-		if (dateTimeProposed == null) {
-			if (other.dateTimeProposed != null)
-				return false;
-		} else if (!dateTimeProposed.equals(other.dateTimeProposed))
-			return false;
-		if (duration == null) {
-			if (other.duration != null)
-				return false;
-		} else if (!duration.equals(other.duration))
-			return false;
 		if (id != other.id)
 			return false;
 		if (learnableId != other.learnableId)
-			return false;
-		if (offerAmount == null) {
-			if (other.offerAmount != null)
-				return false;
-		} else if (!offerAmount.equals(other.offerAmount))
-			return false;
-		if (proposalStatusId == null) {
-			if (other.proposalStatusId != null)
-				return false;
-		} else if (!proposalStatusId.equals(other.proposalStatusId))
-			return false;
-		if (routing != other.routing)
 			return false;
 		if (student == null) {
 			if (other.student != null)
@@ -256,9 +130,15 @@ public class Proposal {
 			return false;
 		return true;
 	}
+//	ToString
+
+	@Override
+	public String toString() {
+		return "Proposal [id=" + id + ", teacher=" + teacher + ", student=" + student + ", learnableId=" + learnableId
+				+ ", teachableId=" + teachableId + ", dateTimeCreated=" + dateTimeCreated + "]";
+	}
 
 	public Proposal() {
 		super();
 	}
-
 }

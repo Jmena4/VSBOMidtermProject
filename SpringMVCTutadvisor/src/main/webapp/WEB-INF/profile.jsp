@@ -73,7 +73,7 @@
 	<!-- end navbar -->
 	<div class="container" style="width: 75%">
 
-		<div id="w">
+		<div id="f">
 			<div id="content" class="clearfix">
 				<div id="userphoto">
 					<img src="${user.pictureURL }" alt="default avatar" width="100">
