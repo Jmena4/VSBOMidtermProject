@@ -29,6 +29,7 @@ public class TutDAOAddressImpl implements TutDAOAddress {
 	@Override
 	public Address createAddresses(Address add) {
 		em.persist(add);
+		em.flush();
 		return add;
 	}
 

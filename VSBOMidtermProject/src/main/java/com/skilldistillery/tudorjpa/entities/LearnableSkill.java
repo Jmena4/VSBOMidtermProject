@@ -46,11 +46,17 @@ public class LearnableSkill {
 		return id;
 	}
 
-	public Boolean isActive() {
+// 	public Boolean isActive() {
+// 		return isActive;
+// 	}
+
+// 	public void setActive(Boolean isActive) {
+
+	public boolean getIsActive() {
 		return isActive;
 	}
 
-	public void setActive(Boolean isActive) {
+	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 
@@ -97,11 +103,7 @@ public class LearnableSkill {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((skillLevel == null) ? 0 : skillLevel.hashCode());
-		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -114,27 +116,7 @@ public class LearnableSkill {
 		if (getClass() != obj.getClass())
 			return false;
 		LearnableSkill other = (LearnableSkill) obj;
-		if (comment == null) {
-			if (other.comment != null)
-				return false;
-		} else if (!comment.equals(other.comment))
-			return false;
 		if (id != other.id)
-			return false;
-		if (skillLevel == null) {
-			if (other.skillLevel != null)
-				return false;
-		} else if (!skillLevel.equals(other.skillLevel))
-			return false;
-		if (skillName == null) {
-			if (other.skillName != null)
-				return false;
-		} else if (!skillName.equals(other.skillName))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
