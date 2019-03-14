@@ -113,6 +113,7 @@
 						<input type="hidden" name="skill_id" value="${learnable.teachableSkill.skillName.id}" />
 						<input type="hidden" name="teacher_user" value="${learnable.teachableSkill.user.id}" />
 						<input type="hidden" name="student_user" value="${user.id}" />
+						<input type="hidden" name="learnable_id" value="${learnable.teachableSkill.user.id}" />
 					</button>
 				</form>
 				<br>
