@@ -177,7 +177,6 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 		return displayTeachableList;
 	}
 
-
 	@Override
 	public Proposal SuggestionBySessionInformation(int id, Proposal managedSuggestion) {
 		managedSuggestion = em.find(Proposal.class, id);
@@ -199,30 +198,10 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 
 	@Override
 	public SkillLevel findSkillLevelById(int id) {
-
-		// TODO Auto-generated method stub
-		return null;
+		SkillLevel skillLevel = null;
+		return skillLevel = em.find(SkillLevel.class, id);
 	}
 
-//	@Override
-//	public TeachableSkill findTeachableSkillById(int id) {
-//
-//		SkillLevel skillLevel = null;
-////		= em.find(SkillName.class, id);
-//		return skillLevel = em.find(SkillLevel.class, id);
-//	}
-//		SkillLevel skillLevel = null;
-//		= em.find(SkillName.class, id);
-//		return skillLevel = em.find(SkillLevel.class, id);
-//	}
-//		SkillLevel skillLevel = null;
-//		= em.find(SkillName.class, id);
-//		return skillLevel = em.find(SkillLevel.class, id);
-//	}
-//		SkillLevel skillLevel = null;
-////		= em.find(SkillName.class, id);
-//		return skillLevel = em.find(SkillLevel.class, id);
-//	}
 	
 	@Override
 	public TeachableSkill findTeachableSkillById(int id) {
