@@ -33,8 +33,8 @@ public class LearnableSkill {
 	@JoinColumn(name = "skill_level_id")
 	private SkillLevel skillLevel;
 
-	@Column(name="is_active")
-	private boolean isActive;
+//	@Column(name="is_active")
+//	private boolean isActive;
 	
 	@Column(name = "comment")
 	private String comment;
@@ -45,14 +45,14 @@ public class LearnableSkill {
 	public int getId() {
 		return id;
 	}
-
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+//
+//	public boolean isActive() {
+//		return isActive;
+//	}
+//
+//	public void setActive(boolean isActive) {
+//		this.isActive = isActive;
+//	}
 
 	public void setId(int id) {
 		this.id = id;

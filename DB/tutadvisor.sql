@@ -59,6 +59,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `proposal_status`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `proposal_status` ;
+
+CREATE TABLE IF NOT EXISTS `proposal_status` (
+  `proposal_status_id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`proposal_status_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `skill_name`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `skill_name` ;
@@ -93,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `learnable_skill` (
   `skill_name_id` INT NOT NULL,
   `skill_level_id` INT NOT NULL,
   `comment` VARCHAR(250) NULL,
-  `is_active` TINYINT NOT NULL DEFAULT 1,
+  `is_active` TINYINT NULL,
   PRIMARY KEY (`learnable_id`),
   INDEX `user_id_idx` (`user_id` ASC),
   INDEX `skill_name_id_idx` (`skill_name_id` ASC),
@@ -127,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `teachable_skill` (
   `skill_name_id` INT NOT NULL,
   `skill_level_id` INT NOT NULL,
   `comment` VARCHAR(250) NULL,
-  `is_active` TINYINT NOT NULL DEFAULT 1,
+  `is_active` TINYINT NULL,
   PRIMARY KEY (`teachable_id`),
   INDEX `user_id_idx` (`user_id` ASC),
   INDEX `skill_name_id_idx` (`skill_name_id` ASC),
@@ -161,12 +173,26 @@ CREATE TABLE IF NOT EXISTS `proposal` (
   `student_id` INT NULL,
   `learnable_id` INT NOT NULL,
   `teachable_id` INT NOT NULL,
+  `offer_amount` DECIMAL(6,2) NULL,
+  `date_time_proposed` DATETIME NULL,
+  `duration` INT NULL,
+  `address_id` INT NOT NULL,
+  `comment` VARCHAR(250) NULL,
+  `proposal_status_id` INT NULL,
+  `routing` INT NOT NULL,
   `date_time_created` DATETIME NULL,
+  INDEX `proposal_status_id_idx` (`proposal_status_id` ASC),
   INDEX `learnable_id_idx` (`learnable_id` ASC),
   INDEX `teachable_id_idx` (`teachable_id` ASC),
+  INDEX `address_id_idx` (`address_id` ASC),
   INDEX `student_id_idx` (`student_id` ASC),
   INDEX `teacher_id_idx` (`teacher_id` ASC),
   PRIMARY KEY (`proposal_id`),
+  CONSTRAINT `fk_prop_proposal_status_id`
+    FOREIGN KEY (`proposal_status_id`)
+    REFERENCES `proposal_status` (`proposal_status_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_prop_learnable_id`
     FOREIGN KEY (`learnable_id`)
     REFERENCES `learnable_skill` (`learnable_id`)
@@ -175,6 +201,11 @@ CREATE TABLE IF NOT EXISTS `proposal` (
   CONSTRAINT `fk_prop_teachable_id`
     FOREIGN KEY (`teachable_id`)
     REFERENCES `teachable_skill` (`teachable_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_prop_address_id`
+    FOREIGN KEY (`address_id`)
+    REFERENCES `address` (`address_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_prop_student_id`
@@ -187,18 +218,6 @@ CREATE TABLE IF NOT EXISTS `proposal` (
     REFERENCES `user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `proposal_status`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `proposal_status` ;
-
-CREATE TABLE IF NOT EXISTS `proposal_status` (
-  `proposal_status_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`proposal_status_id`))
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -240,6 +259,19 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `proposal_status`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `tutadvisordb`;
+INSERT INTO `proposal_status` (`proposal_status_id`, `name`) VALUES (1, 'PENDING');
+INSERT INTO `proposal_status` (`proposal_status_id`, `name`) VALUES (2, 'ACCEPTED');
+INSERT INTO `proposal_status` (`proposal_status_id`, `name`) VALUES (3, 'DECLINED');
+INSERT INTO `proposal_status` (`proposal_status_id`, `name`) VALUES (4, 'CANCELLED BY ADMIN');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `skill_name`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -270,9 +302,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tutadvisordb`;
-INSERT INTO `learnable_skill` (`learnable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (1, 1, 3, 1, 'This will be more fun than licking cold door knobs!', DEFAULT);
-INSERT INTO `learnable_skill` (`learnable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (2, 2, 1, 1, 'Can I feed them after midnight?', DEFAULT);
-INSERT INTO `learnable_skill` (`learnable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (3, 3, 2, 1, 'I cried during Jerry McGuire', DEFAULT);
+INSERT INTO `learnable_skill` (`learnable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (1, 1, 3, 1, 'This will be more fun than licking cold door knobs!', NULL);
+INSERT INTO `learnable_skill` (`learnable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (2, 2, 1, 1, 'Can I feed them after midnight?', NULL);
+INSERT INTO `learnable_skill` (`learnable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (3, 3, 2, 1, 'I cried during Jerry McGuire', NULL);
 
 COMMIT;
 
@@ -282,10 +314,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tutadvisordb`;
-INSERT INTO `teachable_skill` (`teachable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (1, 1, 1, 1, 'I grow my own', DEFAULT);
-INSERT INTO `teachable_skill` (`teachable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (2, 2, 2, 2, 'So... illogical', DEFAULT);
-INSERT INTO `teachable_skill` (`teachable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (3, 3, 3, 3, 'PhD from StarFleet Academy', DEFAULT);
-INSERT INTO `teachable_skill` (`teachable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (4, 2, 3, 4, 'test?', DEFAULT);
+INSERT INTO `teachable_skill` (`teachable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (1, 1, 1, 1, 'I grow my own', NULL);
+INSERT INTO `teachable_skill` (`teachable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (2, 2, 2, 2, 'So... illogical', NULL);
+INSERT INTO `teachable_skill` (`teachable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (3, 3, 3, 3, 'PhD from StarFleet Academy', NULL);
+INSERT INTO `teachable_skill` (`teachable_id`, `user_id`, `skill_name_id`, `skill_level_id`, `comment`, `is_active`) VALUES (4, 2, 3, 4, 'test?', NULL);
 
 COMMIT;
 
@@ -295,22 +327,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tutadvisordb`;
-INSERT INTO `proposal` (`proposal_id`, `teacher_id`, `student_id`, `learnable_id`, `teachable_id`, `date_time_created`) VALUES (1, 3, 1, 3, 3, '2019-03-15 23:08:00');
-INSERT INTO `proposal` (`proposal_id`, `teacher_id`, `student_id`, `learnable_id`, `teachable_id`, `date_time_created`) VALUES (2, 2, 3, 2, 2, '2019-03-10 01:02:00');
-INSERT INTO `proposal` (`proposal_id`, `teacher_id`, `student_id`, `learnable_id`, `teachable_id`, `date_time_created`) VALUES (3, 1, 2, 1, 1, '2019-03-13 15:15:00');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `proposal_status`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `tutadvisordb`;
-INSERT INTO `proposal_status` (`proposal_status_id`, `name`) VALUES (1, 'PENDING');
-INSERT INTO `proposal_status` (`proposal_status_id`, `name`) VALUES (2, 'ACCEPTED');
-INSERT INTO `proposal_status` (`proposal_status_id`, `name`) VALUES (3, 'DECLINED');
-INSERT INTO `proposal_status` (`proposal_status_id`, `name`) VALUES (4, 'CANCELLED BY ADMIN');
+INSERT INTO `proposal` (`proposal_id`, `teacher_id`, `student_id`, `learnable_id`, `teachable_id`, `offer_amount`, `date_time_proposed`, `duration`, `address_id`, `comment`, `proposal_status_id`, `routing`, `date_time_created`) VALUES (1, 3, 1, 3, 3, 8, '2019-03-20 12:15:00', 60, 4, 'I really need help', 1, 3, '2019-03-15 23:08:00');
+INSERT INTO `proposal` (`proposal_id`, `teacher_id`, `student_id`, `learnable_id`, `teachable_id`, `offer_amount`, `date_time_proposed`, `duration`, `address_id`, `comment`, `proposal_status_id`, `routing`, `date_time_created`) VALUES (2, 2, 3, 2, 2, 99.95, '2019-03-21 13:15:00', 30, 5, 'Don\'t be late', 1, 2, '2019-03-10 01:02:00');
+INSERT INTO `proposal` (`proposal_id`, `teacher_id`, `student_id`, `learnable_id`, `teachable_id`, `offer_amount`, `date_time_proposed`, `duration`, `address_id`, `comment`, `proposal_status_id`, `routing`, `date_time_created`) VALUES (3, 1, 2, 1, 1, 1.63, '2019-03-22 14:15:00', 90, 6, 'The dog ate my homework', 1, 1, '2019-03-13 15:15:00');
 
 COMMIT;
 

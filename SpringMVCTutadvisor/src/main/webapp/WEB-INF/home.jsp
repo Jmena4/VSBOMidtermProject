@@ -78,28 +78,8 @@
 	<br>
 	<div id="card-container" class="container">
 	
-		<!-- mock data button -->
-		<% 
-		String id="5";
-		session.setAttribute("id",id);
-		String teachableSkill="2";
-		session.setAttribute("teachableSkill",teachableSkill);
-		String learnableSkill="2";
-		session.setAttribute("learnableSkill",learnableSkill);
-		String skillLevel="3";
-		session.setAttribute("skillLevel",skillLevel);
-		String teacherUser="1";
-		session.setAttribute("teacherUser",teacherUser);		
-		String studentUser="2";	
-		session.setAttribute("studentUser",studentUser);
-		%>
-		<form action="suggestionPage.do" method="POST">
-		<input  type="submit" value="Send Mock Suggestion Data">
-		</form>
-		<!--  end mock data button -->
-
 		<!-- check for skills -->
-		<c:if test="${(empty sug_learnable) and (empty sug_teachable)}">
+		<c:if test="${(empty learnablelist) and (empty teachablelist)}">
 			<span id="empty-warning"> You have not picked any skills to
 				learn or teach!<br> Edit your profile to receive suggestions.
 			</span>
@@ -107,31 +87,32 @@
 
 		<!-- learnable suggestion card factory -->
 
-		<c:if test="${not empty learnable_list}">
-			<c:forEach var="suggestion" items="${learnable_list}">
-				<form action="suggestion.do" method="GET">
+		<c:if test="${not empty learnablelist}">
+			<c:forEach var="learnable" items="${learnablelist}">
+				<form action="suggestionPage.do" method="POST">
 					<button id="card-button" type="submit">
 						<div id="suggestion-card" class="card">
 							<div class="row">
 								<div id="col-photo" class="column">
 									<div id="div-photo" class="float-right">
-										<img class="card-img-top" src=${suggestion.url}>
+									<img class="card-img-top" src=${learnable.teachableSkill.user.pictureURL}>
 									</div>
 								</div>
 								<div id="card-column" class="column">
-									<div class="card-title">${suggestion.username}can teach
-										you ${suggestion.name}</div>
+									<div class="card-title">${learnable.teachableSkill.user.username}&nbsp;can teach
+										you ${learnable.teachableSkill.skillName}</div>
 									<div class="card-text">
-										Name: ${suggestion.userfirstname} &nbsp;
-										${suggestion.userlastname} <br> Skill:
-										${suggestion.skillname} <br> Skill Level:
-										${suggestion.level} <br> Location: ${suggestion.location}
-										<div class="card-comment">Comment: ${suggestion.comment}</div>
-										<input type="hidden" name="id" value="${suggestion.id}" />
+										 Skill: &nbsp;${learnable.teachableSkill.skillName} 
+										 <br> Skill Level: &nbsp; ${learnable.teachableSkill.skillLevel} <br> 
+										<div class="card-comment">Comment: ${learnable.teachableSkill.comment}</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<input type="hidden" name="skill_level" value="${learnable.teachableSkill.skillLevel.id}" />
+						<input type="hidden" name="skill_id" value="${learnable.teachableSkill.skillName.id}" />
+						<input type="hidden" name="teacher_user" value="${learnable.teachableSkill.user.id}" />
+						<input type="hidden" name="student_user" value="${user.id}" />
 					</button>
 				</form>
 				<br>
@@ -143,31 +124,32 @@
 
 		<!-- teachable suggestion card factory -->
 
-		<c:if test="${not empty teachable_list}">
-			<c:forEach var="suggestion" items="${teachable_list}">
-				<form action="suggestion.do" method="GET">
+		<c:if test="${not empty teachablelist}">
+			<c:forEach var="teachable" items="${teachablelist}">
+				<form action="suggestionPage.do" method="POST">
 					<button id="card-button" type="submit">
 						<div id="suggestion-card" class="card">
 							<div class="row">
 								<div id="col-photo" class="column">
 									<div id="div-photo" class="float-right">
-										<img class="card-img-top" src=${suggestion.url}>
+									<img class="card-img-top" src=${teachable.learnableSkill.user.pictureURL}>
 									</div>
 								</div>
 								<div id="card-column" class="column">
-									<div class="card-title">${suggestion.username}wantsto
-										learn ${suggestion.name}</div>
+									<div class="card-title">${teachable.learnableSkill.user.username}&nbsp;wants to learn
+										 ${teachable.learnableSkill.skillName}</div>
 									<div class="card-text">
-										Name: ${suggestion.userfirstname} &nbsp;
-										${suggestion.userlastname} <br> Skill:
-										${suggestion.skillname} <br> Skill Level:
-										${suggestion.level} <br> Location: ${suggestion.location}
-										<div class="card-comment">Comment: ${suggestion.comment}</div>
-										<input type="hidden" name="id" value="${suggestion.id}" />
+										 Skill: &nbsp;${teachable.learnableSkill.skillName} 
+										 <br> Skill Level: &nbsp; ${teachable.learnableSkill.skillLevel} <br> 
+										<div class="card-comment">Comment: ${teachable.learnableSkill.comment}</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<input type="hidden" name="skill_level" value="${teachable.learnableSkill.skillLevel.id}" />
+						<input type="hidden" name="skill_id" value="${teachable.learnableSkill.skillName.id}" />
+						<input type="hidden" name="teacher_user" value="${user.id}" />
+						<input type="hidden" name="student_user" value="${teachable.learnableSkill.user.id}" />
 					</button>
 				</form>
 				<br>
