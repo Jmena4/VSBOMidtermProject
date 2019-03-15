@@ -97,93 +97,126 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 		return availableStudents;
 	}
 
-//	public List<TeachableSkill> getLearnableMatches(HttpSession session) {
-//		user = (User) (session.getAttribute("user"));
-//		List<SkillName> myLearnableSkills = null;
-//		List<TeachableSkill> matches = null;
-//		List<TeachableSkill> learnableList = new ArrayList();
-//		String query = "SELECT l.skillName FROM LearnableSkill l WHERE l.user.id = :id";
-//		String query2 = "SELECT t from TeachableSkill t where t.skillName = :skillName";
-//		myLearnableSkills = em.createQuery(query, SkillName.class).setParameter("id", user.getId()).getResultList();
-//
-//		for (SkillName skillName : myLearnableSkills) {
-//			matches = em.createQuery(query2, TeachableSkill.class).setParameter("skillName", skillName).getResultList();
-//			learnableList.addAll(matches);
-//		}
-//		return learnableList;
-//	}
-
-//public List<LearnableSkill> getTeachableMatches(HttpSession session) {
-//	user = (User) (session.getAttribute("user"));
-//	List<SkillName> myTeachableSkills = null;
-//	List<LearnableSkill> matches = null;
-//	List<LearnableSkill> teachableList = new ArrayList();
-//	String query = "SELECT t.skillName FROM TeachableSkill t WHERE t.user.id = :id";
-//	String query2 = "SELECT l from LearnableSkill l where l.skillName = :skillName";
-//	myTeachableSkills = em.createQuery(query, SkillName.class).setParameter("id", user.getId()).getResultList();
-//
-//	for (SkillName skillName : myTeachableSkills) {
-//		matches = em.createQuery(query2, LearnableSkill.class).setParameter("skillName", skillName).getResultList();
-//		teachableList.addAll(matches);
-//	}
-//	return teachableList;
-//}
-
 	public List<DisplayTeachable> getLearnableMatches(HttpSession session) {
-		  user = (User) (session.getAttribute("user"));
-		  List<LearnableSkill> myLearnableSkills = null;
-		  List<TeachableSkill> matches = null;
-		  List<TeachableSkill> learnableList = new ArrayList();
-		  List<DisplayTeachable> displayLearnableList = new ArrayList();
-		  String url = null;
-		  String query = "SELECT l FROM LearnableSkill l WHERE l.user.id = :id";
-		  String query2 = "SELECT t from TeachableSkill t where t.skillName = :skillName and t.skillLevel.id > :level";
-		  String query3 = "SELECT u.pictureURL from User u where u.id = :id";
-		  myLearnableSkills = em.createQuery(query, LearnableSkill.class).setParameter("id", user.getId()).getResultList();
+		user = (User) (session.getAttribute("user"));
+		List<LearnableSkill> myLearnableSkills = null;
+		List<TeachableSkill> matches = null;
+		List<DisplayTeachable> learnableList = new ArrayList();
+		String url = null;
+		int lsid = 0;
+		String query = "SELECT l FROM LearnableSkill l WHERE l.user.id = :id";
+		String query2 = "SELECT t from TeachableSkill t where t.skillName = :skillName and t.skillLevel.id > :level";
+		String query3 = "SELECT u.pictureURL from User u where u.id = :id";
+		myLearnableSkills = em.createQuery(query, LearnableSkill.class)
+				.setParameter("id", user.getId())
+				.getResultList();
+		for (LearnableSkill learnableSkill : myLearnableSkills) {
+			lsid = learnableSkill.getId();
+			matches = em.createQuery(query2, TeachableSkill.class)
+					.setParameter("skillName", learnableSkill.getSkillName())
+					.setParameter("level", learnableSkill.getSkillLevel().getId())
+					.getResultList();
+			for (TeachableSkill teachableSkill : matches) {
+				learnableList.add(new DisplayTeachable(teachableSkill, lsid));
+			}
+		}
+		for (DisplayTeachable displayTeachable : learnableList) {
+			em.createQuery(query3, String.class)
+					.setParameter("id", displayTeachable.getTeachableSkill().getUser().getId())
+					.getSingleResult();
+			displayTeachable.setUrl(url);
+		}
+		return learnableList;
+	}
 
-		  for (LearnableSkill learnableSkill : myLearnableSkills) {
-		    matches = em.createQuery(query2, TeachableSkill.class)
-		        .setParameter("skillName", learnableSkill.getSkillName())
-		        .setParameter("level", learnableSkill.getSkillLevel().getId())
-		        .getResultList();
-		    learnableList.addAll(matches);
-		  }
+	public List<DisplayLearnable> getTeachableMatches(HttpSession session) {
+		user = (User) (session.getAttribute("user"));
+		List<TeachableSkill> myTeachableSkills = null;
+		List<LearnableSkill> matches = null;
+		List<DisplayLearnable> teachableList = new ArrayList();
+		String url = null;
+		int tsid = 0;
+		String query = "SELECT t FROM TeachableSkill t WHERE t.user.id = :id";
+		String query2 = "SELECT l from LearnableSkill l where l.skillName = :skillName and l.skillLevel.id < :level";
+		String query3 = "SELECT u.pictureURL from User u where u.id = :id";
+		myTeachableSkills = em.createQuery(query, TeachableSkill.class)
+				.setParameter("id", user.getId())
+				.getResultList();
 
-		  for (TeachableSkill teachableSkill : learnableList) {
-		    em.createQuery(query3, String.class).setParameter("id", teachableSkill.getUser().getId()).getSingleResult();
-		    displayLearnableList.add(new DisplayTeachable(teachableSkill, url));
-		  }
-
-		  return displayLearnableList;
+		for (TeachableSkill teachableSkill : myTeachableSkills) {
+			tsid = teachableSkill.getId();
+			matches = em.createQuery(query2, LearnableSkill.class)
+					.setParameter("skillName", teachableSkill.getSkillName())
+					.setParameter("level", teachableSkill.getSkillLevel().getId())
+					.getResultList();
+			for (LearnableSkill learnableSkill : matches) {
+				teachableList.add(new DisplayLearnable(learnableSkill, tsid));
+			}
 		}
 
-		public List<DisplayLearnable> getTeachableMatches(HttpSession session) {
-		  user = (User) (session.getAttribute("user"));
-		  List<TeachableSkill> myTeachableSkills = null;
-		  List<LearnableSkill> matches = null;
-		  List<LearnableSkill> teachableList = new ArrayList();
-		  List<DisplayLearnable> displayTeachableList = new ArrayList();
-		  String url = null;
-		  String query = "SELECT t FROM TeachableSkill t WHERE t.user.id = :id";
-		  String query2 = "SELECT l from LearnableSkill l where l.skillName = :skillName and l.skillLevel.id < :level";
-		  String query3 = "SELECT u.pictureURL from User u where u.id = :id";
-		  myTeachableSkills = em.createQuery(query, TeachableSkill.class).setParameter("id", user.getId()).getResultList();
-
-		  for (TeachableSkill teachableSkill : myTeachableSkills) {
-		    matches = em.createQuery(query2, LearnableSkill.class)
-		        .setParameter("skillName", teachableSkill.getSkillName())
-		        .setParameter("level", teachableSkill.getSkillLevel().getId())
-		        .getResultList();
-		    teachableList.addAll(matches);
-		  }
-		  for (LearnableSkill learnableSkill : teachableList) {
-		    em.createQuery(query3, String.class).setParameter("id", learnableSkill.getUser().getId()).getSingleResult();
-		    displayTeachableList.add(new DisplayLearnable(learnableSkill, url));
-		  }
-		  return displayTeachableList;
+		for (DisplayLearnable displayLearnable : teachableList) {
+			em.createQuery(query3, String.class)
+					.setParameter("id", displayLearnable.getLearnableSkill().getUser().getId())
+					.getSingleResult();
+			displayLearnable.setUrl(url);
 		}
-		
 
+		return teachableList;
+	}
+
+//		public List<DisplayTeachable> getLearnableMatches(HttpSession session) {
+//			  user = (User) (session.getAttribute("user"));
+//			  List<LearnableSkill> myLearnableSkills = null;
+//			  List<TeachableSkill> matches = null;
+//			  List<TeachableSkill> learnableList = new ArrayList();
+//			  List<DisplayTeachable> displayLearnableList = new ArrayList();
+//			  String url = null;
+//			  String query = "SELECT l FROM LearnableSkill l WHERE l.user.id = :id";
+//			  String query2 = "SELECT t from TeachableSkill t where t.skillName = :skillName and t.skillLevel.id > :level";
+//			  String query3 = "SELECT u.pictureURL from User u where u.id = :id";
+//			  myLearnableSkills = em.createQuery(query, LearnableSkill.class).setParameter("id", user.getId()).getResultList();
+//
+//			  for (LearnableSkill learnableSkill : myLearnableSkills) {
+//			    matches = em.createQuery(query2, TeachableSkill.class)
+//			        .setParameter("skillName", learnableSkill.getSkillName())
+//			        .setParameter("level", learnableSkill.getSkillLevel().getId())
+//			        .getResultList();
+//			    learnableList.addAll(matches);
+//			  }
+//
+//			  for (TeachableSkill teachableSkill : learnableList) {
+//			    em.createQuery(query3, String.class).setParameter("id", teachableSkill.getUser().getId()).getSingleResult();
+//			    displayLearnableList.add(new DisplayTeachable(teachableSkill, url));
+//			  }
+//
+//			  return displayLearnableList;
+//			}
+//
+//			public List<DisplayLearnable> getTeachableMatches(HttpSession session) {
+//			  user = (User) (session.getAttribute("user"));
+//			  List<TeachableSkill> myTeachableSkills = null;
+//			  List<LearnableSkill> matches = null;
+//			  List<LearnableSkill> teachableList = new ArrayList();
+//			  List<DisplayLearnable> displayTeachableList = new ArrayList();
+//			  String url = null;
+//			  String query = "SELECT t FROM TeachableSkill t WHERE t.user.id = :id";
+//			  String query2 = "SELECT l from LearnableSkill l where l.skillName = :skillName and l.skillLevel.id < :level";
+//			  String query3 = "SELECT u.pictureURL from User u where u.id = :id";
+//			  myTeachableSkills = em.createQuery(query, TeachableSkill.class).setParameter("id", user.getId()).getResultList();
+//
+//			  for (TeachableSkill teachableSkill : myTeachableSkills) {
+//			    matches = em.createQuery(query2, LearnableSkill.class)
+//			        .setParameter("skillName", teachableSkill.getSkillName())
+//			        .setParameter("level", teachableSkill.getSkillLevel().getId())
+//			        .getResultList();
+//			    teachableList.addAll(matches);
+//			  }
+//			  for (LearnableSkill learnableSkill : teachableList) {
+//			    em.createQuery(query3, String.class).setParameter("id", learnableSkill.getUser().getId()).getSingleResult();
+//			    displayTeachableList.add(new DisplayLearnable(learnableSkill, url));
+//			  }
+//			  return displayTeachableList;
+//			}
 
 	@Override
 	public Proposal SuggestionBySessionInformation(int id) {
@@ -210,7 +243,6 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 		return skillLevel = em.find(SkillLevel.class, id);
 	}
 
-	
 	@Override
 	public TeachableSkill findTeachableSkillById(int id) {
 		TeachableSkill teachableSkill = null;
@@ -243,28 +275,82 @@ public class TutAdvisorClient implements TutAdvisorClientDAO {
 
 	@Override
 	public Proposal createProposalFromSession(String skill_level, String skill_id, String teacher_user,
-			String student_user, String learnable_id) {
+			String student_user, String learnable_id, String teachable_id) {
 		SkillLevel sl = findSkillLevelById(Integer.parseInt(skill_level));
 		int ls = Integer.parseInt(learnable_id);
+		int ts = Integer.parseInt(teachable_id);
 		SkillName sn = findSkillNameById(Integer.parseInt(skill_id));
 		User tu = findTeacherUserById(Integer.parseInt(teacher_user));
 		User su = findStudentUserById(Integer.parseInt(student_user));
-		String query ="SELECT ts FROM TeachableSkill ts WHERE ts.user.id = :tid";
-		List<TeachableSkill> teachableSkills = em.createQuery(query, TeachableSkill.class).setParameter("tid", tu.getId()).getResultList();
+		String query = "SELECT ts FROM TeachableSkill ts WHERE ts.user.id = :tid";
+		List<TeachableSkill> teachableSkills = em.createQuery(query, TeachableSkill.class)
+				.setParameter("tid", tu.getId()).getResultList();
 		Proposal managedProposal = new Proposal();
-		
-		for (TeachableSkill teachableSkill : teachableSkills) {
-			if (teachableSkill.getSkillName().getId() == sn.getId()) {
-				 managedProposal.setTeachableId(teachableSkill.getId());
-				 break;
-			}
-		}
 		managedProposal.setStudent(su);
 		managedProposal.setTeacher(tu);
 		managedProposal.setLearnableId(ls);
+		managedProposal.setTeachableId(ts);
 		em.persist(managedProposal);
 		em.flush();
 		return managedProposal;
 	}
 
+	public List<DisplayTeachable> getLearnableHistory(int userId) {
+		List<Proposal> learnables = new ArrayList();
+		List<TeachableSkill> matches = new ArrayList();
+		List<DisplayTeachable> learnableHistoryList = new ArrayList();
+		int lsid = 0;
+		String url = "";
+		String query = "SELECT p FROM Proposal p WHERE p.student.id = :id";
+		String query2 = "SELECT t FROM TeachableSkill t WHERE t.id = :id";
+		String query3 = "SELECT u.pictureURL from User u where u.id = :id";
+		learnables = em.createQuery(query, Proposal.class)
+				.setParameter("id", userId)
+				.getResultList();
+		for (Proposal proposal : learnables) {
+			lsid = proposal.getLearnableId();
+			matches = em.createQuery(query2, TeachableSkill.class)
+					.setParameter("id", proposal.getTeachableId())
+					.getResultList();
+				for (TeachableSkill teachableSkill : matches) {
+					learnableHistoryList.add(new DisplayTeachable(teachableSkill, url, lsid));
+				}
+		}
+		for (DisplayTeachable displayTeachable : learnableHistoryList) {
+			url = em.createQuery(query3, String.class)
+					.setParameter("id", displayTeachable.getTeachableSkill().getUser().getId())
+					.getSingleResult();
+					displayTeachable.setUrl(url);		}
+		return learnableHistoryList;
+	}
+
+	public List<DisplayLearnable> getTeachableHistory(int userId) {
+		List<Proposal> teachables = new ArrayList();
+		List<LearnableSkill> matches = new ArrayList();
+		List<DisplayLearnable> teachableHistoryList = new ArrayList();
+		int tsid = 0;
+		String url = "";
+		String query = "SELECT p FROM Proposal p WHERE p.teacher.id = :id";
+		String query2 = "SELECT l FROM LearnableSkill l WHERE l.id = :id";
+		String query3 = "SELECT u.pictureURL from User u where u.id = :id";
+		teachables = em.createQuery(query, Proposal.class)
+				.setParameter("id", userId)
+				.getResultList();
+		for (Proposal proposal : teachables) {
+			tsid = proposal.getTeachableId();
+			matches = em.createQuery(query2, LearnableSkill.class)
+					.setParameter("id", proposal.getLearnableId())
+					.getResultList();
+				for (LearnableSkill learnableSkill : matches) {
+					teachableHistoryList.add(new DisplayLearnable(learnableSkill, url, tsid));
+				}
+		}
+		for (DisplayLearnable displayLearnable : teachableHistoryList) {
+			url = em.createQuery(query3, String.class)
+					.setParameter("id", displayLearnable.getLearnableSkill().getUser().getId())
+					.getSingleResult();
+					displayLearnable.setUrl(url);		}
+		return teachableHistoryList;
+
+	}
 }

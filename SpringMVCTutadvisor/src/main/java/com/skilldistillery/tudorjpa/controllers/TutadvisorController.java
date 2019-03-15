@@ -41,6 +41,7 @@ public class TutadvisorController {
 	private TutDaoSkills tutSkills;
 	@Autowired
 	private TutAdvisorClient tac;
+	@Autowired TutadvisorController tacon;
 
 //	*************PLACE HOLDER FOR ACTUAL CONTROLLER**************
 //	@RequestMapping(path = { "/", "home.do" }, method = RequestMethod.GET)
@@ -134,25 +135,31 @@ public class TutadvisorController {
 	}
 
 	@RequestMapping(path = "switch_cards.do", method = RequestMethod.GET)
-	public ModelAndView switchCardsDo(String type) {
+	public ModelAndView switchCardsDo(HttpSession session, String type) {
 		ModelAndView mv = new ModelAndView();
+		User user = (User)session.getAttribute("user");
 
 		if (type.equals("1")) {
-
-			List<LearnableSkill> learnable = null;
-			List<TeachableSkill> teachable = null;
-//		TODO: create method to get list of learnable suggestions and
-//		list of teachable suggestions and add them to the model
-
-//		mv.addObject("learnable_list", learnableList);
-//		mv.addObject("teachable_list", teachableList);
-
+			List<DisplayTeachable> learnablelist = null;
+			List<DisplayLearnable> teachablelist = null;
+			String result = null;
+				mv.setViewName("WEB-INF/home.jsp");
+				learnablelist = tac.getLearnableMatches(session);
+				teachablelist = tac.getTeachableMatches(session);
+				mv.addObject("learnablelist", learnablelist);
+				mv.addObject("teachablelist", teachablelist);
 		} else if (type.equals("2")) {
-			List<Proposal> historyList = null;
-//		TODO: create method to get list of pending proposals and add it to the model
-			mv.addObject("history_list", historyList);
+			Boolean history = true;
+			mv.addObject("history", history);
+			List<DisplayTeachable> learnableHistoryList = null;
+			List<DisplayLearnable> teachableHistoryList = null;
+			learnableHistoryList = tac.getLearnableHistory(user.getId());
+			teachableHistoryList = tac.getTeachableHistory(user.getId());
+			mv.addObject("learnable_history_list", learnableHistoryList);
+			mv.addObject("teachable_history_list", teachableHistoryList);
+			mv.setViewName("WEB-INF/home.jsp");
 		}
-		mv.setViewName("WEB-INF/home.jsp");
+
 		return mv;
 	}
 
@@ -236,7 +243,7 @@ public class TutadvisorController {
 	}
 
 	@RequestMapping(path = "suggestionPage.do", method = RequestMethod.POST)
-	public ModelAndView suggestionPage(HttpSession session, String skill_level, String skill_id, String teacher_user, String student_user, String learnable_id) {
+	public ModelAndView suggestionPage(HttpSession session, String skill_level, String skill_id, String teacher_user, String student_user, String learnable_id, String teachable_id, String is_history) {
 		ModelAndView mv = new ModelAndView();
 		SkillLevel sl = tac.findSkillLevelById(Integer.parseInt(skill_level));
 		mv.addObject("skillLevel", sl);
@@ -252,12 +259,16 @@ public class TutadvisorController {
 		mv.addObject("studentUser", su);
 		int ls = Integer.parseInt(learnable_id);
 
-		System.out.println(skill_level);
-		System.out.println(skill_id);
-		System.out.println(teacher_user);
-		System.out.println(student_user);
-		tac.createProposalFromSession(skill_level, skill_id, teacher_user, student_user, learnable_id);
+//		System.out.println("skill level: " + skill_level);
+//		System.out.println("skill ID: " + skill_id);
+//		System.out.println("teacher: " + teacher_user);
+//		System.out.println("student: " + student_user);
+//		System.out.println("learnable ID: " + learnable_id);
+//		System.out.println("teachable ID: " + teachable_id);		
 		
+		if(!(is_history.equals("true"))) {
+		tac.createProposalFromSession(skill_level, skill_id, teacher_user, student_user, learnable_id, teachable_id);
+		}
 		mv.setViewName("WEB-INF/suggestionPage.jsp");
 		return mv;
 	}

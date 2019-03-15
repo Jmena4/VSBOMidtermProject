@@ -77,12 +77,24 @@
 			&nbsp; &nbsp; &nbsp; &nbsp;
 		</form>
 	</span>
-	<br>
-	<br>
+	<br><br>
+
 	<div id="card-container" class="container">
+	
+		<div id="suggestion-history" class="float-center">
+		<c:choose>
+				<c:when test="${history}">
+					Your Match History
+				</c:when>
+				<c:otherwise>
+					Your Match Suggestions
+				</c:otherwise>
+		</c:choose>
+		</div>
 
 		<!-- check for skills -->
-		<c:if test="${(empty learnablelist) and (empty teachablelist)}">
+
+		<c:if test="${(empty learnablelist) and (empty teachablelist) and (!history)}">
 			<span id="empty-warning"> You have not picked any skills to
 				learn or teach!<br> Edit your profile to receive suggestions.
 			</span>
@@ -114,15 +126,12 @@
 								</div>
 							</div>
 						</div>
-						<input type="hidden" name="skill_level"
-							value="${learnable.teachableSkill.skillLevel.id}" /> <input
-							type="hidden" name="skill_id"
-							value="${learnable.teachableSkill.skillName.id}" /> <input
-							type="hidden" name="teacher_user"
-							value="${learnable.teachableSkill.user.id}" /> <input
-							type="hidden" name="student_user" value="${user.id}" /> <input
-							type="hidden" name="learnable_id"
-							value="${learnable.teachableSkill.user.id}" />
+						<input type="hidden" name="skill_level" value="${learnable.teachableSkill.skillLevel.id}" />
+							<input type="hidden" name="skill_id" value="${learnable.teachableSkill.skillName.id}" />
+							<input type="hidden" name="teacher_user" value="${learnable.teachableSkill.user.id}" />
+							<input type="hidden" name="student_user" value="${user.id}" />
+							<input type="hidden" name="learnable_id" value="${learnable.matchLSId}" />
+						<input type="hidden" name="teachable_id" value="${learnable.teachableSkill.id}" />
 					</button>
 				</form>
 				<br>
@@ -158,13 +167,13 @@
 								</div>
 							</div>
 						</div>
-						<input type="hidden" name="skill_level"
-							value="${teachable.learnableSkill.skillLevel.id}" /> <input
-							type="hidden" name="skill_id"
-							value="${teachable.learnableSkill.skillName.id}" /> <input
-							type="hidden" name="teacher_user" value="${user.id}" /> <input
-							type="hidden" name="student_user"
-							value="${teachable.learnableSkill.user.id}" />
+							<input type="hidden" name="skill_level" value="${teachable.learnableSkill.skillLevel.id}" />
+							<input type="hidden" name="skill_id" value="${teachable.learnableSkill.skillName.id}" />
+							<input type="hidden" name="teacher_user" value="${user.id}" />
+							<input type="hidden" name="student_user" value="${teachable.learnableSkill.user.id}" />
+							<input type="hidden" name="teachable_id" value="${teachable.matchTSId}" />
+							<input type="hidden" name="learnable_id" value="${teachable.learnableSkill.id}" />
+
 					</button>
 				</form>
 				<br>
@@ -173,40 +182,86 @@
 
 		<!-- end teachable suggestion card factory -->
 
-		<!-- history card factory -->
+		<!-- learnable history card factory -->
 
-		<c:if test="${not empty history}">
-			<c:forEach var="suggestion" items="${history}">
-				<form action="suggestion.do" method="GET">
+		<c:if test="${not empty learnable_history_list}">
+			<c:forEach var="learnable" items="${learnable_history_list}">
+				<form action="suggestionPage.do" method="POST">
 					<button id="card-button" type="submit">
-						<div id="suggestion-card" class="card">
+						<div id="learnable-card" class="card">
 							<div class="row">
 								<div id="col-photo" class="column">
 									<div id="div-photo" class="float-right">
-										<img class="card-img-top" src=${suggestion.url}>
+										<img class="card-img-top"
+											src=${learnable.teachableSkill.user.pictureURL}>
 									</div>
 								</div>
 								<div id="card-column" class="column">
-									<div class="card-title">${suggestion.username}offeredto
-										teach you ${suggestion.name}</div>
+									<div class="card-title">${learnable.teachableSkill.user.username}&nbsp;can
+										teach you ${learnable.teachableSkill.skillName}</div>
 									<div class="card-text">
-										Name: ${suggestion.userfirstname} &nbsp;
-										${suggestion.userlastname} <br> Skill:
-										${suggestion.skillname} <br> Skill Level:
-										${suggestion.level} <br> Location: ${suggestion.location}
-										<div class="card-comment">Comment: ${suggestion.comment}</div>
-										<input type="hidden" name="id" value="${suggestion.id}" />
+										Skill: &nbsp;${learnable.teachableSkill.skillName} <br>
+										Skill Level: &nbsp; ${learnable.teachableSkill.skillLevel} <br>
+										<div class="card-comment">Comment:
+											${learnable.teachableSkill.comment}</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<input type="hidden" name="skill_level" value="${learnable.teachableSkill.skillLevel.id}" />
+							<input type="hidden" name="skill_id" value="${learnable.teachableSkill.skillName.id}" />
+							<input type="hidden" name="teacher_user" value="${learnable.teachableSkill.user.id}" />
+							<input type="hidden" name="student_user" value="${user.id}" />
+							<input type="hidden" name="learnable_id" value="${learnable.matchLSId}" />
+							<input type="hidden" name="teachable_id" value="${learnable.teachableSkill.id}" />
+							<input type="hidden" name="is_history" value="true" />
 					</button>
 				</form>
 				<br>
 			</c:forEach>
 		</c:if>
 
-		<!-- end history card factory -->
+		<!-- end learnable history card factory -->
+		
+		<!-- teachable history card factory -->
+
+		<c:if test="${not empty teachable_history_list}">
+			<c:forEach var="teachable" items="${teachable_history_list}">
+				<form action="suggestionPage.do" method="POST">
+					<button id="card-button" type="submit">
+						<div id="teachable-card" class="card">
+							<div class="row">
+								<div id="col-photo" class="column">
+									<div id="div-photo" class="float-right">
+										<img class="card-img-top"
+											src=${teachable.learnableSkill.user.pictureURL}>
+									</div>
+								</div>
+								<div id="card-column" class="column">
+									<div class="card-title">${teachable.learnableSkill.user.username}&nbsp;wants
+										to learn ${teachable.learnableSkill.skillName}</div>
+									<div class="card-text">
+										Skill: &nbsp;${teachable.learnableSkill.skillName} <br>
+										Skill Level: &nbsp; ${teachable.learnableSkill.skillLevel} <br>
+										<div class="card-comment">Comment:
+											${teachable.learnableSkill.comment}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+							<input type="hidden" name="skill_level" value="${teachable.learnableSkill.skillLevel.id}" />
+							<input type="hidden" name="skill_id" value="${teachable.learnableSkill.skillName.id}" />
+							<input type="hidden" name="teacher_user" value="${user.id}" />
+							<input type="hidden" name="student_user" value="${teachable.learnableSkill.user.id}" />
+							<input type="hidden" name="teachable_id" value="${teachable.matchTSId}" />
+							<input type="hidden" name="learnable_id" value="${teachable.learnableSkill.id}" />
+							<input type="hidden" name="is_history" value="true" />
+					</button>
+				</form>
+				<br>
+			</c:forEach>
+		</c:if>
+		<!-- end teachable history card factory -->
 
 	</div>
 	<div id="VSBO" class="container">
