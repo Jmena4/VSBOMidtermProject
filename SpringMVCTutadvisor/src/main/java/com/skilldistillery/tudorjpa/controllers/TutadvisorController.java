@@ -266,7 +266,7 @@ public class TutadvisorController {
 //		System.out.println("learnable ID: " + learnable_id);
 //		System.out.println("teachable ID: " + teachable_id);		
 		
-		if(is_history !=null && !(is_history.equals("true"))) {
+		if(is_history == null) {
 		tac.createProposalFromSession(skill_level, skill_id, teacher_user, student_user, learnable_id, teachable_id);
 		}
 		mv.setViewName("WEB-INF/suggestionPage.jsp");
