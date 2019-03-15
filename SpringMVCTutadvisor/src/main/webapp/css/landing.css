@@ -63,6 +63,10 @@ label {
 	font-weight: bold;
 }
 
+#empty-warning{
+	font-size: 18px;
+}
+
 #login-button {
 	color: black;
 	font-size: 18px;
