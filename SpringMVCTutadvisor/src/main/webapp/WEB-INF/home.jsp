@@ -43,6 +43,11 @@
 						<span class="glyphicon glyphicon-log-out"></span> Logout
 					</button>
 				</form>
+				<c:if test="${user.isAdmin == true }">
+					<form action="admin.do" method="GET">
+						<button id="logout-button" type="submit">Admin Page</button>
+					</form>
+				</c:if>
 			</div>
 			<div class="navbar-nav ml-auto">
 				<span id="logged-in-as"> You are&nbsp; <c:choose>
@@ -168,6 +173,7 @@
 							<input type="hidden" name="student_user" value="${teachable.learnableSkill.user.id}" />
 							<input type="hidden" name="teachable_id" value="${teachable.matchTSId}" />
 							<input type="hidden" name="learnable_id" value="${teachable.learnableSkill.id}" />
+
 					</button>
 				</form>
 				<br>
