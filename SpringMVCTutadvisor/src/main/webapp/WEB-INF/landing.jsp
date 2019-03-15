@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <title>Tütadvisor</title>
 <!-- Bootstrap core CSS -->
-<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
@@ -22,7 +22,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
 	
 </script>
-<link rel="stylesheet" href="css/landing.css" />
+<link rel="stylesheet" href="../css/landing.css" />
 </head>
 <body>
 	<!-- Navigation -->
@@ -56,7 +56,7 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner">
 						<div class="item active">
-							<img src="/images/1.jpg" alt="1" style="width: 100%;">
+							<img src="../images/1.jpg" alt="1" style="width: 100%;">
 							<div id="reg-form" class="carousel-caption d-none d-md-block">
 								<div id="reg-header">User Registration</div>
 								<br>
@@ -184,7 +184,7 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner">
 						<div class="item active">
-							<img src="/images/1.jpg" alt="1" style="width: 100%;">
+							<img src="../images/1.jpg" alt="1" style="width: 100%;">
 							<div id="carousel-caption"
 								class="carousel-caption d-none d-md-block">
 								<p>Thousands of Skilled Tutors.</p>
@@ -195,7 +195,7 @@
 							</div>
 						</div>
 						<div class="item">
-							<img src="/images/2.jpg" alt="2" style="width: 100%;">
+							<img src="../images/2.jpg" alt="2" style="width: 100%;">
 							<div id="carousel-caption"
 								class="carousel-caption d-none d-md-block">
 								<p>Ready to teach you any subject.</p>
@@ -206,7 +206,7 @@
 							</div>
 						</div>
 						<div class="item">
-							<img src="/images/3.jpg" alt="3" style="width: 100%;">
+							<img src="../images/3.jpg" alt="3" style="width: 100%;">
 							<div id="carousel-caption"
 								class="carousel-caption d-none d-md-block">
 								<p>Start learning today!</p>
@@ -217,7 +217,7 @@
 							</div>
 						</div>
 						<div class="item">
-							<img src="/images/4.jpg" alt="4" style="width: 100%;">
+							<img src="../images/4.jpg" alt="4" style="width: 100%;">
 							<div id="carousel-caption"
 								class="carousel-caption d-none d-md-block">
 								<p>

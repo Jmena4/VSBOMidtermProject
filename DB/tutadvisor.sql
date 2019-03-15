@@ -235,6 +235,7 @@ USE `tutadvisordb`;
 INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address_id`, `picture_url`, `user_name`, `password`, `is_admin`, `is_active`) VALUES (1, 'James', 'Kirk', 'james.t.kirk@ufop.net', '3347659876', 1, 'https://www.writeups.org/wp-content/uploads/James-Tiberius-Kirk-Star-Trek-William-Shatner.jpg', 'Jimmy', 'enterprise', 1, 1);
 INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address_id`, `picture_url`, `user_name`, `password`, `is_admin`, `is_active`) VALUES (2, 'Mr', 'Spock', 'spocker@ufop.net', '8764327890', 2, 'https://cdn1.thr.com/sites/default/files/imagecache/scale_crop_768_433/2018/02/star_trek_tv_spock_3_copy_-_h_2018.jpg', 'Spocker_The_Rocker', 'logical', 0, 1);
 INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address_id`, `picture_url`, `user_name`, `password`, `is_admin`, `is_active`) VALUES (3, 'Montgomery', 'Scott', 'scotty@ufop.net', '5676543456', 3, 'https://vignette.wikia.nocookie.net/liberapedia/images/2/23/20151030_062827.jpg/revision/latest?cb=20151030132845', 'Scotty', 'warpdrive', 0, 1);
+INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address_id`, `picture_url`, `user_name`, `password`, `is_admin`, `is_active`) VALUES (4, 'Q', 'Q', 'Q@continum.all', '1234567890', 1, 'https://upload.wikimedia.org/wikipedia/en/3/3a/Q_portrait.jpg', 'Q', 'Q', 1, 1);
 
 COMMIT;
 

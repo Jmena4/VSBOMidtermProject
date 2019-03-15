@@ -15,8 +15,8 @@
 <meta name="author" content="">
 <title>My Profile</title>
 <!-- Bootstrap core CSS -->
-<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="css/profilecss.css" rel="stylesheet">
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/profilecss.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
@@ -183,11 +183,11 @@
 								</c:forEach>
 							</c:if>
 							<br />
-							<p>Add a skill to the library?</p>
 							<br>
-						</div>
 						<input type="submit" value="Add New Skills">
+						</div>
 					</form>
+					<p>Add a skill to the library?</p>
 					<form action="addToSkills.do" method="POST">
 						<input type="text" name="newSkillName"> <input
 							type="submit"  value="Add Skill to Library">
