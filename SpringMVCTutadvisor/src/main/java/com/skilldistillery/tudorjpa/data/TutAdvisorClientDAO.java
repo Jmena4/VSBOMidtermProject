@@ -37,5 +37,5 @@ public interface TutAdvisorClientDAO {
 
 	public User findStudentUserById(int id);
 
-	public Proposal createProposalFromSession(String skill_level, String skill_id, String teacher_user, String student_user, String learnable_id);
+	public Proposal createProposalFromSession(String skill_level, String skill_id, String teacher_user, String student_user, String learnable_id, String teachable_id);
 }

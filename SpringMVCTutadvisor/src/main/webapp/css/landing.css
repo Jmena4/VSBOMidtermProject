@@ -89,9 +89,17 @@ label {
 
 #VSBO {
 	width: 100%;
+	font-size: 12px;
 	text-align: center;
 	font-style: italic;
 	text-align: center;
+}
+
+#suggestion-history {
+	width: 100%;
+	font-size: 18px;
+	text-align: center;
+	font-weight: bold;
 }
 
 #show-cards {
@@ -125,6 +133,7 @@ label {
 
 #card-container {
 	overflow: scroll;
+	font-size: 8px;
 	background-color: lightgray;
 	width: 80%;
 	height: 500px;
