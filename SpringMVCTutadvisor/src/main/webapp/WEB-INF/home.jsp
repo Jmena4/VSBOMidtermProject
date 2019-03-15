@@ -42,6 +42,7 @@
 					<button id="logout-button" type="submit">
 						<span class="glyphicon glyphicon-log-out"></span> Logout
 					</button>
+					&nbsp; &nbsp;
 				</form>
 				<c:if test="${user.isAdmin == true }">
 					<form action="admin.do" method="GET">
